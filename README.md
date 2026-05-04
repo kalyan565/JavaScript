@@ -14,4 +14,4 @@ This repository contains my journey of learning JavaScript from basics to advanc
       4.Check output in browser console
 
 🌐 Live Demo
-You can view the project live here: https://kalyan565.github.io/JavaScript/
+You can view the project live here: https://kalyan565.github.io/JavaScript/js-traning/
