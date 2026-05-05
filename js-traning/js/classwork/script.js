@@ -2,7 +2,9 @@ import "./day8.js"
 import "./day7.js"
 import "./day 6.js"
 import "./day5.js"
-import "./day4.js"
+ import "./day4.js"
+import "./day9.js"
+import "../exercises/day9-exercise.js";
 
 
 // const marks = 65;
@@ -20,12 +22,12 @@ import "./day4.js"
 
 // }
 
-console.log(false);
-console.log(0);
-console.log("");
-console.log(null);
-console.log(undefined);
-console.log(NaN);
-console.log([]);
-console.log({});
-console.log(" ");
+// console.log(false);
+// console.log(0);
+// console.log("");
+// console.log(null);
+// console.log(undefined);
+// //console.log(NaN);
+// console.log([]);
+// console.log({});
+// console.log(" ");
