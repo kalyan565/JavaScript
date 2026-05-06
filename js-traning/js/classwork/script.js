@@ -1,10 +1,11 @@
-import "./day8.js"
-import "./day7.js"
-import "./day 6.js"
-import "./day5.js"
- import "./day4.js"
-import "./day9.js"
-import "../exercises/day9-exercise.js";
+// import "./day8.js"
+// import "./day7.js"
+// import "./day 6.js"
+// import "./day5.js"
+//  import "./day4.js"
+// import "./day9.js"
+// import "../exercises/day9-exercise.js";
+import "./day10.js"
 
 
 // const marks = 65;
