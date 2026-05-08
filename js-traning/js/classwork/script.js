@@ -5,7 +5,14 @@
 //  import "./day4.js"
 // import "./day9.js"
 // import "../exercises/day9-exercise.js";
-import "./day10.js"
+// import "./day10.js"
+//import "./day11.js"
+//import "../exercises/day11-exercise.js";
+//import "../homework/day11-hw.js";
+//import "./day12.js"
+//import "./app.js"
+//import "../exercises/day12-exercise.js"
+import "../homework/day12-hw.js"
 
 
 // const marks = 65;
