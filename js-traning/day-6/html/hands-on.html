@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 6 — declarations, arrows, defaults — Hands-on</title>
+    <link rel="preload" href="../../shared/css/style.css" as="style">
+    <link rel="stylesheet" href="../../shared/css/style.css">
+</head>
+<body>
+    <div class="page-shell">
+        <main class="page-main" id="main-content">
+            <header class="page-title">
+                <p class="lesson-label">Day 6 — declarations, arrows, defaults</p>
+                <h1>Hands-on</h1>
+            </header>
+
+            <details class="exercise" open>
+                <summary>
+                    <span class="lesson-task__tag">Topic 1</span>
+                    <span class="lesson-task__title">Part 1</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <pre class="code-sample"><code>function area(length, width) {
+  return length * width;
+}</code></pre>
+                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
+                </div>
+            </details>
+
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">Section 2</span>
+                    <span class="lesson-task__title">Part 2</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <pre class="code-sample"><code>console.log(area(10, 5));
+console.log(area(7, 3));
+console.log(area(15, 4));</code></pre>
+                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
+                </div>
+            </details>
+
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">Section 3</span>
+                    <span class="lesson-task__title">Part 3</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <pre class="code-sample"><code>const areaArrow = (length, width) =&gt; length * width;</code></pre>
+                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
+                </div>
+            </details>
+
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">Section 4</span>
+                    <span class="lesson-task__title">Part 4</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <pre class="code-sample"><code>console.log(areaArrow(8, 2));</code></pre>
+                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
+                </div>
+            </details>
+
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">Section 5</span>
+                    <span class="lesson-task__title">Part 5</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <pre class="code-sample"><code>function greet(name = &quot;Guest&quot;) {
+  return `Hello, ${name}!`;
+}</code></pre>
+                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
+                </div>
+            </details>
+
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">Section 6</span>
+                    <span class="lesson-task__title">Part 6</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <pre class="code-sample"><code>console.log(greet(&quot;Priya&quot;));
+console.log(greet(&quot;Aarav&quot;));
+console.log(greet());</code></pre>
+                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
+                </div>
+            </details>
+
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">Section 7</span>
+                    <span class="lesson-task__title">Bonus</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <pre class="code-sample"><code>// Bonus</code></pre>
+                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
+                </div>
+            </details>
+
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">Section 8</span>
+                    <span class="lesson-task__title">Part 8</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <pre class="code-sample"><code>console.log(greet(null));</code></pre>
+                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
+                </div>
+            </details>
+
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">Section 9</span>
+                    <span class="lesson-task__title">Part 9</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <pre class="code-sample"><code>const cToF = celsius =&gt; (celsius * 9) / 5 + 32;</code></pre>
+                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
+                </div>
+            </details>
+
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">Section 10</span>
+                    <span class="lesson-task__title">Part 10</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <pre class="code-sample"><code>console.log(cToF(0));   // 32
+console.log(cToF(100)); // 212
+console.log(cToF(37));  // 98.6
+console.log(cToF(45));  // 113</code></pre>
+                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
+                </div>
+            </details>
+
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">Section 11</span>
+                    <span class="lesson-task__title">Part 11</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <pre class="code-sample"><code>function double(n) {
+  return n * 2;
+}</code></pre>
+                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
+                </div>
+            </details>
+
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">Section 12</span>
+                    <span class="lesson-task__title">Part 12</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <pre class="code-sample"><code>console.log(double(2));
+console.log(double(5));
+console.log(double(10));</code></pre>
+                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
+                </div>
+            </details>
+
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">Section 13</span>
+                    <span class="lesson-task__title">Part 13</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <pre class="code-sample"><code>let total = 0;</code></pre>
+                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
+                </div>
+            </details>
+
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">Section 14</span>
+                    <span class="lesson-task__title">Part 14</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <pre class="code-sample"><code>function addToTotal(n) {
+  total += n;
+  return total;
+}</code></pre>
+                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
+                </div>
+            </details>
+
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">Section 15</span>
+                    <span class="lesson-task__title">Part 15</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <pre class="code-sample"><code>console.log(addToTotal(5));  // 5
+console.log(addToTotal(5));  // 10
+console.log(addToTotal(5));  // 15</code></pre>
+                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
+                </div>
+            </details>
+        </main>
+        <aside class="site-outline" aria-label="Curriculum outline">
+            <p class="site-outline-title">Curriculum</p>
+            <ul class="site-outline-tree">
+                <li class="site-outline-item"><a href="../../index.html">Overview</a></li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 1 — Introduction to JavaScript</summary>
+                        <ul>
+                            <li><a href="../../day-1/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-1/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-1/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 2 — Data Types & the Type System</summary>
+                        <ul>
+                            <li><a href="../../day-2/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-2/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-2/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 3 — Operators & Expressions</summary>
+                        <ul>
+                            <li><a href="../../day-3/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-3/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-3/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 4 — Control Flow</summary>
+                        <ul>
+                            <li><a href="../../day-4/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-4/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-4/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 5 — Loops & Iteration</summary>
+                        <ul>
+                            <li><a href="../../day-5/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-5/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-5/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details" open>
+                        <summary>Day 6 — Functions</summary>
+                        <ul>
+                            <li><a href="lesson.html">Lesson</a></li>
+                            <li><a href="hands-on.html" aria-current="page">Hands-on</a></li>
+                            <li><a href="homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 7 — Arrays</summary>
+                        <ul>
+                            <li><a href="../../day-7/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-7/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-7/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 8 — Objects</summary>
+                        <ul>
+                            <li><a href="../../day-8/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-8/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-8/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 9 — ES6+ Essentials</summary>
+                        <ul>
+                            <li><a href="../../day-9/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-9/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-9/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 10 — DOM Manipulation Basics</summary>
+                        <ul>
+                            <li><a href="../../day-10/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-10/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-10/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 11 — Events & Event Handling</summary>
+                        <ul>
+                            <li><a href="../../day-11/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-11/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-11/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 12 — Error Handling & Module Basics</summary>
+                        <ul>
+                            <li><a href="../../day-12/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-12/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-12/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 13 — Objects</summary>
+                        <ul>
+                            <li><a href="../../day-13/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-13/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-13/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 14 — Objects</summary>
+                        <ul>
+                            <li><a href="../../day-14/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-14/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-14/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+            </ul>
+        </aside>
+    </div>
+    <script defer src="../js/hands-on.js"></script>
+    <script src="../../shared/js/nav-lock.js"></script>
+</body>
+</html>

@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 13 — Execution context &amp; hoisting — Lesson</title>
+    <link rel="preload" href="../../shared/css/style.css" as="style">
+    <link rel="stylesheet" href="../../shared/css/style.css">
+</head>
+<body>
+    <div class="page-shell">
+        <main class="page-main" id="main-content">
+            <header class="page-title">
+                <p class="lesson-label">Day 13 — Execution context &amp; hoisting</p>
+                <h1>Lesson</h1>
+            </header>
+
+            <details class="exercise" open>
+                <summary>
+                    <span class="lesson-task__tag">Topic 1</span>
+                    <span class="lesson-task__title">Part 1</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <pre class="code-sample"><code>console.log(a);        
+var a = 1;</code></pre>
+                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
+                </div>
+            </details>
+
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">Section 2</span>
+                    <span class="lesson-task__title">console.log(b);</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <pre class="code-sample"><code>//console.log(b);        
+//let b = 2;</code></pre>
+                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
+                </div>
+            </details>
+
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">Section 3</span>
+                    <span class="lesson-task__title">console.log(c);</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <pre class="code-sample"><code>// console.log(c);       
+// const c = 3;</code></pre>
+                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
+                </div>
+            </details>
+
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">Section 4</span>
+                    <span class="lesson-task__title">Part 4</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <pre class="code-sample"><code>greet();              
+function greet() { console.log(&quot;Hi&quot;); }</code></pre>
+                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
+                </div>
+            </details>
+
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">Section 5</span>
+                    <span class="lesson-task__title">Part 5</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <pre class="code-sample"><code>// console.log(score);    // undefined            ← no error, but probably not what you wanted
+// var score = 90;</code></pre>
+                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
+                </div>
+            </details>
+
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">Section 6</span>
+                    <span class="lesson-task__title">let — TDZ catches the bug for you</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <pre class="code-sample"><code>// let — TDZ catches the bug for you
+// console.log(level);    // ReferenceError       ← TDZ — Cannot access 'level' before initialization
+// let level = 5;</code></pre>
+                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
+                </div>
+            </details>
+
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">Section 7</span>
+                    <span class="lesson-task__title">The TDZ &quot;ends&quot; exactly when the let/const line runs:</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <pre class="code-sample"><code>// The TDZ &quot;ends&quot; exactly when the let/const line runs:
+{
+  // &lt;-- start of block. 'mark' is in TDZ here
+  // console.log(mark);  // would throw
+  let mark = 87;
+  console.log(mark);    // 87  ← TDZ has ended, mark is initialised
+}</code></pre>
+                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
+                </div>
+            </details>
+
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">Section 8</span>
+                    <span class="lesson-task__title">Function declaration — works BEFORE its definition</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <pre class="code-sample"><code>// Function declaration — works BEFORE its definition
+sayHi();           // &quot;Hi&quot;      ← full body hoisted
+function sayHi() {
+  console.log(&quot;Hi&quot;);
+}</code></pre>
+                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
+                </div>
+            </details>
+
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">Section 9</span>
+                    <span class="lesson-task__title">Function expression with var — TypeError</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <pre class="code-sample"><code>// Function expression with var — TypeError
+// greet1();           // TypeError: greet is not a function
+//                    //   ↑ greet was hoisted with value 'undefined'.
+//                    //     Calling undefined() throws TypeError.
+// var greet1 = function () {
+//   console.log(&quot;Hello&quot;);
+// };</code></pre>
+                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
+                </div>
+            </details>
+
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">Section 10</span>
+                    <span class="lesson-task__title">Function expression with const — ReferenceError (TDZ)</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <pre class="code-sample"><code>// Function expression with const — ReferenceError (TDZ)
+// welcome();         // ReferenceError: Cannot access 'welcome' before initialization
+// const welcome = function () {
+//   console.log(&quot;Welcome&quot;);
+// };</code></pre>
+                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
+                </div>
+            </details>
+
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">Section 11</span>
+                    <span class="lesson-task__title">Arrow function — same as const above (always TDZ if let/const)</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <pre class="code-sample"><code>// Arrow function — same as const above (always TDZ if let/const)
+const shout = () =&gt; console.log(&quot;HEY&quot;);
+shout();           // ReferenceError</code></pre>
+                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
+                </div>
+            </details>
+
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">Section 12</span>
+                    <span class="lesson-task__title">Part 12</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <pre class="code-sample"><code>let item = &quot;Laptop&quot;
+const price = 60000;
+const tax = 0.18;</code></pre>
+                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
+                </div>
+            </details>
+
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">Section 13</span>
+                    <span class="lesson-task__title">Part 13</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <pre class="code-sample"><code>const singleLine = `The ${item} costs ${price} + ${price * tax} GST = ${price + (price * tax)}`;</code></pre>
+                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
+                </div>
+            </details>
+
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">Section 14</span>
+                    <span class="lesson-task__title">Part 14</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <pre class="code-sample"><code>const multiline = `
+The ${item} costs:
+Base Price: ${price}
+GST 18%: ${price * tax}
+Total: ${price + (price * tax)}
+`;
+console.log(singleLine)
+console.log(multiline);</code></pre>
+                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
+                </div>
+            </details>
+        </main>
+        <aside class="site-outline" aria-label="Curriculum outline">
+            <p class="site-outline-title">Curriculum</p>
+            <ul class="site-outline-tree">
+                <li class="site-outline-item"><a href="../../index.html">Overview</a></li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 1 — Introduction to JavaScript</summary>
+                        <ul>
+                            <li><a href="../../day-1/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-1/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-1/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 2 — Data Types & the Type System</summary>
+                        <ul>
+                            <li><a href="../../day-2/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-2/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-2/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 3 — Operators & Expressions</summary>
+                        <ul>
+                            <li><a href="../../day-3/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-3/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-3/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 4 — Control Flow</summary>
+                        <ul>
+                            <li><a href="../../day-4/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-4/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-4/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 5 — Loops & Iteration</summary>
+                        <ul>
+                            <li><a href="../../day-5/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-5/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-5/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 6 — Functions</summary>
+                        <ul>
+                            <li><a href="../../day-6/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-6/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-6/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 7 — Arrays</summary>
+                        <ul>
+                            <li><a href="../../day-7/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-7/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-7/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 8 — Objects</summary>
+                        <ul>
+                            <li><a href="../../day-8/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-8/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-8/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 9 — ES6+ Essentials</summary>
+                        <ul>
+                            <li><a href="../../day-9/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-9/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-9/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 10 — DOM Manipulation Basics</summary>
+                        <ul>
+                            <li><a href="../../day-10/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-10/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-10/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 11 — Events & Event Handling</summary>
+                        <ul>
+                            <li><a href="../../day-11/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-11/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-11/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 12 — Error Handling & Module Basics</summary>
+                        <ul>
+                            <li><a href="../../day-12/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-12/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-12/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details" open>
+                        <summary>Day 13 — Objects</summary>
+                        <ul>
+                            <li><a href="lesson.html" aria-current="page">Lesson</a></li>
+                            <li><a href="hands-on.html">Hands-on</a></li>
+                            <li><a href="homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 14 — Objects</summary>
+                        <ul>
+                            <li><a href="../../day-14/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-14/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-14/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+            </ul>
+        </aside>
+    </div>
+    <script defer src="../js/lesson.js"></script>
+    <script src="../../shared/js/nav-lock.js"></script>
+</body>
+</html>

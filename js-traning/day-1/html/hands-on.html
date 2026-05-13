@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 1 — Welcome &amp; Variables — Hands-on</title>
+    <link rel="preload" href="../../shared/css/style.css" as="style">
+    <link rel="stylesheet" href="../../shared/css/style.css">
+</head>
+<body>
+    <div class="page-shell">
+        <main class="page-main" id="main-content">
+            <header class="page-title">
+                <p class="lesson-label">Day 1 · Welcome &amp; Variables</p>
+                <h1>Hands-on</h1>
+            </header>
+
+            <details class="exercise" open>
+                <summary>
+                    <span class="lesson-task__tag">Task 1</span>
+                    <span class="lesson-task__title">Hello World</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <ul class="task-spec">
+                        <li>Print <code>"Hello, World!"</code> with <code>console.log</code>.</li>
+                        <li>Declare a <code>const</code> for your name and log it.</li>
+                        <li>Log one line that uses <code>+</code> to build: <code>name + " is learning JS"</code>.</li>
+                    </ul>
+                    <div class="lesson-task__body">
+                    <pre id="topic1Code" class="code-sample"><code>
+console.log("Hello, World!");
+
+const name = "Kalyan"; // replace with your name
+console.log(name);
+
+console.log(name + " is learning JS");
+
+                    </code></pre>
+                </div>
+                    <p class="output-label">Check the browser console (F12 → Console) when you run <code>day-1/js/hands-on.js</code> via this page.</p>
+                </div>
+            </details>
+
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">Task 2</span>
+                    <span class="lesson-task__title"><code>let</code> vs <code>const</code></span>
+                </summary>
+                <div class="lesson-task__body">
+                    <ul class="task-spec">
+                        <li>Create  <code>let age = 25</code>. Log it.</li>
+                        <li>Reassign <code>age = 26</code> Log it again. Confirm the new value.</li>
+                        <li>create <code>const PI = 3.14</code> Try to reassign <code>PI = 3.15</code>. Note the error.</li>
+                        <li>Create <code>let cityName </code>(no value yet). Log it. Then assign <code>"Jaipur"</code> . Log again.</li>
+                    </ul>
+                    <div class="lesson-task__body">
+                    <pre id="topic1Code" class="code-sample"><code>
+let age = 25;
+console.log(age); // 25
+
+age = 26;
+console.log(age); // 26 (updated)
+
+// const cannot be reassigned
+const PI = 3.14;
+console.log(PI);
+
+
+// declare without value
+let cityName;
+console.log(cityName); // undefined
+
+cityName = "Jaipur";
+console.log(cityName); // Jaipur
+
+                    </code></pre>
+                </div>
+                    <p class="output-label">Reference behaviour is implemented in <code>../js/hands-on.js</code> (loaded below).</p>
+                </div>
+            </details>
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">Task 3</span>
+                    <span class="lesson-task__title">Block Scope</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <ul class="task-spec">
+                        <li>Create a block <code>{ let x = 10; console.log(x); } </code>. Run it</li>
+                        <li>Now try to log x AFTER the block. Note the error.</li>
+                        <li>Inside an <code>if (true) { ... } </code>block, declare <code>let inside = "hi" </code>and log it.</li>
+                        <li>Try logging inside outside the if. Note the error.</li>
+                    </ul>
+                     <div class="lesson-task__body">
+                    <pre id="topic1Code" class="code-sample"><code>
+                     
+{
+  let x = 10;
+  console.log(x); // 10
+}
+
+
+
+if (true) {
+  let inside = "hi";
+  console.log(inside); // hi
+}
+
+                    </code></pre>
+                </div>
+                    <p class="output-label">Reference behaviour is implemented in <code>../js/hands-on.js</code> (loaded below).</p>
+                </div>
+            </details>
+
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">Bonus</span>
+                    <span class="lesson-task__title"><code>var</code> Pitfall </span>
+                </summary>
+                <div class="lesson-task__body">
+                    <ul class="task-spec">
+                        <li>Inside a <code>for (var i = 0; i < 3; i++) { } </code>loop, log i AFTER the loop ends.</li>
+                        <li>Note that i is still accessible — it leaked out!</li>
+                        <li>Now do the same with <code>let i</code> . Try logging i after — note the error</li>
+                        <li>In a comment, write WHY this matters.</li>
+                    </ul>
+                    <div class="lesson-task__body">
+                    <pre id="topic1Code" class="code-sample"><code>
+for (var i = 0; i < 3; i++) {}
+
+console.log(i); 
+
+
+                    </code></pre>
+                </div>
+                </div>
+            </details>
+        </main>
+        <aside class="site-outline" aria-label="Curriculum outline">
+            <p class="site-outline-title">Curriculum</p>
+            <ul class="site-outline-tree">
+               <li class="site-outline-item"><a href="../../index.html">Overview</a></li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details" open>
+                        <summary>Day 1 - Introduction to JavaScript</summary>
+                        <ul>
+                            <li><a href="lesson.html">Lesson</a></li>
+                            <li><a href="hands-on.html" aria-current="page">Hands-on</a></li>
+                            <li><a href="homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details" open>
+                        <summary>Day 2 - Data Types & the Type System</summary>
+                        <ul>
+                            <li><a href="../../day-2/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-2/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-2/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details" open>
+                        <summary>Day 3 - Operators & Expressions</summary>
+                        <ul>
+                            <li><a href="../../day-3/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-3/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-3/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details" open>
+                        <summary>Day 4 - Control Flow</summary>
+                        <ul>
+                            <li><a href="../../day-4/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-4/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-4/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details" open>
+                        <summary>Day 5 - Loops & Iteration</summary>
+                        <ul>
+                            <li><a href="../../day-5/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-5/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-5/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details" open>
+                        <summary>Day 6 - Functions</summary>
+                        <ul>
+                            <li><a href="../../day-6/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-6/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-6/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 7 - Arrays</summary>
+                        <ul>
+                            <li><a href="../../day-7/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-7/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-7/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 8 - Objects</summary>
+                        <ul>
+                            <li><a href="../../day-8/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-8/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-8/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 9 - ES6+ Essentials</summary>
+                        <ul>
+                            <li><a href="../../day-9/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-9/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-9/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 10 - DOM Manipulation Basics</summary>
+                        <ul>
+                            <li><a href="../../day-10/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-10/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-10/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 11 - Events & Event Handling</summary>
+                        <ul>
+                            <li><a href="../../day-11/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-11/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-11/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 12 - Error Handling & Module Basics</summary>
+                        <ul>
+                            <li><a href="../../day-12/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-12/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-12/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 13 - Objects</summary>
+                        <ul>
+                            <li><a href="../../day-13/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-13/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-13/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 14 - Objects</summary>
+                        <ul>
+                            <li><a href="../../day-14/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-14/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-14/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 15 - Objects</summary>
+                        <ul>
+                            <li><a href="../../day-8/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-8/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-8/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+            </ul>
+        </aside>
+    </div>
+    <script defer src="../js/hands-on.js"></script>
+    <script src="../../shared/js/nav-lock.js"></script>
+</body>
+</html>

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 3 — Operators, coercion, and logic — Hands-on</title>
+    <link rel="preload" href="../../shared/css/style.css" as="style">
+    <link rel="stylesheet" href="../../shared/css/style.css">
+</head>
+<body>
+    <div class="page-shell">
+        <main class="page-main" id="main-content">
+            <header class="page-title">
+                <p class="lesson-label">Day 3 — Operators, coercion, and logic</p>
+                <h1>Hands-on</h1>
+            </header>
+
+            <details class="exercise" open>
+                <summary>
+                    <span class="lesson-task__tag">Task 1</span>
+                    <span class="lesson-task__title">GST calculator</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <ul class="task-spec">
+                        <li>Use <code>const price = 850</code>. Compute GST at <strong>18%</strong> and the <strong>total</strong> (<code>price + GST</code>).</li>
+                        <li>Use a <strong>template literal</strong> to log exactly: <code>Price: ₹850, GST: ₹153, Total: ₹1003</code>.</li>
+                        <li>Repeat with <code>price = 1234.50</code>. Watch the console for any <strong>floating-point</strong> oddness (long decimals or <code>===</code> surprises). The sample script also rounds one total for comparison.</li>
+                    </ul>
+                    <pre class="code-sample"><code>const GST_RATE = 18;
+
+let price = 850;
+let gst = (price * GST_RATE) / 100;
+let total = price + gst;
+console.log(`Price: ₹${price}, GST: ₹${gst}, Total: ₹${total}`);
+
+price = 1234.50;
+gst = (price * GST_RATE) / 100;
+total = price + gst;
+console.log(`Price: ₹${price}, GST: ₹${gst}, Total: ₹${total}`);
+console.log(
+  "Rounded total:",
+  Math.round((price + (price * GST_RATE) / 100) * 100) / 100
+);
+console.log("0.1 + 0.2 === 0.3 ?", 0.1 + 0.2 === 0.3, "(value:", 0.1 + 0.2, ")");</code></pre>
+                    <p class="output-label">Reference: <code>../js/hands-on.js</code> (loaded below).</p>
+                </div>
+            </details>
+
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">Task 2</span>
+                    <span class="lesson-task__title"><code>==</code> vs <code>===</code></span>
+                </summary>
+                <div class="lesson-task__body">
+                    <ul class="task-spec">
+                        <li>Compare each pair with <strong>both</strong> <code>==</code> and <code>===</code>. Predict before you run:
+                            <ul>
+                                <li><code>5</code> and <code>"5"</code></li>
+                                <li><code>0</code> and <code>false</code></li>
+                                <li><code>null</code> and <code>undefined</code></li>
+                                <li><code>""</code> and <code>false</code></li>
+                                <li><code>"abc"</code> and <code>"abc"</code></li>
+                            </ul>
+                        </li>
+                        <li>For each <strong>surprising</strong> result, add a <strong>comment</strong> explaining the coercion (see reference script).</li>
+                    </ul>
+                    <pre class="code-sample"><code>// Task 2 — == vs === (predict each result before running)
+// 5 vs "5" — == coerces string to number; === forbids mixed types
+console.log(5 == "5", 5 === "5");
+
+// 0 vs false — == coerces boolean to number (false → 0)
+console.log(0 == false, 0 === false);
+
+// null vs undefined — == treats them as "same absence"; === keeps types apart
+console.log(null == undefined, null === undefined);
+
+// "" vs false — ==: both coerce toward falsy/0; === different types
+console.log("" == false, "" === false);
+
+// "abc" vs "abc" — same string: both true (no coercion needed)
+console.log("abc" == "abc", "abc" === "abc");</code></pre>
+                    <p class="output-label">Reference: <code>../js/hands-on.js</code>.</p>
+                </div>
+            </details>
+
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">Task 3</span>
+                    <span class="lesson-task__title">Logical operators</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <ul class="task-spec">
+                        <li><code>const age = 22</code>, <code>const hasEmail = true</code>. Build <code>canRegister</code> with <code>&amp;&amp;</code> — <code>true</code> only if age ≥ 18 <strong>and</strong> has email.</li>
+                        <li><code>const userName = ""</code> (empty string). Use <code>||</code> to default display name to <code>"Guest"</code>.</li>
+                        <li>Use <code>!</code>: <code>const isLoggedIn = false;</code> then <code>const isLoggedOut = !isLoggedIn</code>.</li>
+                        <li>Log all three results.</li>
+                    </ul>
+                    <pre class="code-sample"><code>const age = 22;
+const hasEmail = true;
+const canRegister = age >= 18 && hasEmail;
+
+const userName = "";
+const displayName = userName || "Guest";
+
+const isLoggedIn = false;
+const isLoggedOut = !isLoggedIn;
+
+console.log("canRegister:", canRegister);
+console.log("displayName:", displayName);
+console.log("isLoggedOut:", isLoggedOut);</code></pre>
+                    <p class="output-label">Reference: <code>../js/hands-on.js</code>.</p>
+                </div>
+            </details>
+
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">Bonus</span>
+                    <span class="lesson-task__title">Ternary practice</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <ul class="task-spec">
+                        <li><code>const fee = age &gt;= 65 ? 0 : 100</code> — try mentally with age <strong>70</strong> and age <strong>30</strong> (reference uses two explicit expressions).</li>
+                        <li>Inside a template literal: <code>`Discount: ${age &gt;= 65 ? "Yes" : "No"}`</code> (try with 70 and 30).</li>
+                        <li>Write a ternary chain for <code>"high"</code>, <code>"medium"</code>, or <code>"low"</code> from a <code>score</code> variable (nested ternary — keep it readable).</li>
+                    </ul>
+                    <pre class="code-sample"><code>const feeAt70 = 70 >= 65 ? 0 : 100;
+const feeAt30 = 30 >= 65 ? 0 : 100;
+console.log("fee (age 70):", feeAt70);
+console.log("fee (age 30):", feeAt30);
+
+console.log(`Discount: ${70 >= 65 ? "Yes" : "No"}`);
+console.log(`Discount: ${30 >= 65 ? "Yes" : "No"}`);
+
+const score = 67;
+const level =
+  score >= 80 ? "high" : score >= 50 ? "medium" : "low";
+console.log("score", score, "→", level);</code></pre>
+                    <p class="output-label">Reference: <code>../js/hands-on.js</code>.</p>
+                </div>
+            </details>
+        </main>
+        <aside class="site-outline" aria-label="Curriculum outline">
+            <p class="site-outline-title">Curriculum</p>
+            <ul class="site-outline-tree">
+                <li class="site-outline-item"><a href="../../index.html">Overview</a></li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 1 — Introduction to JavaScript</summary>
+                        <ul>
+                            <li><a href="../../day-1/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-1/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-1/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 2 — Data Types & the Type System</summary>
+                        <ul>
+                            <li><a href="../../day-2/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-2/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-2/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details" open>
+                        <summary>Day 3 — Operators & Expressions</summary>
+                        <ul>
+                            <li><a href="lesson.html">Lesson</a></li>
+                            <li><a href="hands-on.html" aria-current="page">Hands-on</a></li>
+                            <li><a href="homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 4 — Control Flow</summary>
+                        <ul>
+                            <li><a href="../../day-4/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-4/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-4/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 5 — Loops & Iteration</summary>
+                        <ul>
+                            <li><a href="../../day-5/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-5/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-5/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 6 — Functions</summary>
+                        <ul>
+                            <li><a href="../../day-6/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-6/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-6/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 7 — Arrays</summary>
+                        <ul>
+                            <li><a href="../../day-7/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-7/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-7/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 8 — Objects</summary>
+                        <ul>
+                            <li><a href="../../day-8/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-8/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-8/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 9 — ES6+ Essentials</summary>
+                        <ul>
+                            <li><a href="../../day-9/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-9/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-9/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 10 — DOM Manipulation Basics</summary>
+                        <ul>
+                            <li><a href="../../day-10/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-10/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-10/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 11 — Events & Event Handling</summary>
+                        <ul>
+                            <li><a href="../../day-11/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-11/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-11/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 12 — Error Handling & Module Basics</summary>
+                        <ul>
+                            <li><a href="../../day-12/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-12/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-12/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 13 — Objects</summary>
+                        <ul>
+                            <li><a href="../../day-13/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-13/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-13/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 14 — Objects</summary>
+                        <ul>
+                            <li><a href="../../day-14/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-14/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-14/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+            </ul>
+        </aside>
+    </div>
+    <script defer src="../js/hands-on.js"></script>
+    <script src="../../shared/js/nav-lock.js"></script>
+</body>
+</html>

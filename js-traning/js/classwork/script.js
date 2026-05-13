@@ -12,8 +12,12 @@
 //import "./day12.js"
 //import "./app.js"
 //import "../exercises/day12-exercise.js"
-import "../homework/day12-hw.js"
-
+// import "../homework/day12-hw.js"
+//import "./app.js"
+//import "./day13.js"
+//import "./day14.js"
+//import "../exercises/day14-exercise.js"
+import "../../day-16/day16.js"
 
 // const marks = 65;
 // if(marks >= 90) {
