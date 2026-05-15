@@ -1,32 +1,30 @@
+// 1 — Book object; title via bracket + variable key
 const book = {
-    title : "abc",
-    author : "xyz",
-    year : 2002,
-    pages : 1000,
+  title: "The Guide",
+  author: "R.K. Narayan",
+  year: 1958,
+  pages: 224,
+  summary() {
+    return `${this.title} by ${this.author} (${this.year})`;
+  },
+};
 
-    summary() {
-        return `${this.title} by ${this.author} (${this.year})`
-    }
-}
+const titleKey = "title";
+console.log("1 — title with bracket + variable:", book[titleKey]);
 
-console.log(book["title"])
-console.log(book.summary())
+// 2 — summary() uses this + template literal
+console.log("2 — summary():", book.summary());
 
-Object.entries(book).forEach(([key,value]) => {
-   console.log(`${key} : ${value}`) 
+// 3 — Object.entries + forEach on any object
+const inventory = { sku: "A12", qty: 40, zone: "North" };
+Object.entries(inventory).forEach(([key, value]) => {
+  console.log(`3 — ${key}: ${value}`);
 });
 
-console.log("------------------------------------------------------")
-const obj = {...book};
-obj.title = 'kal';
+// 4 — Shallow copy with spread; change copy; original unchanged
+const bookCopy = { ...book };
+bookCopy.title = "A Different Title";
+bookCopy.pages = 999;
 
-
-Object.entries(obj).forEach(([key,value]) => {
-    console.log(`${key} : ${value}`) 
-});
-
-console.log("------------------------------------------------------")
-
-Object.entries(book).forEach(([key,value]) => {
-   console.log(`${key} : ${value}`) 
-});
+console.log("4 — original title:", book.title, "pages:", book.pages);
+console.log("4 — copy title:", bookCopy.title, "pages:", bookCopy.pages);

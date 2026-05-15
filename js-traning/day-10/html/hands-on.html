@@ -3,236 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Day 10 — DOM basics — Hands-on</title>
+    <title>Day 10 — DOM Manipulation Basics — Hands-on</title>
     <link rel="preload" href="../../shared/css/style.css" as="style">
     <link rel="stylesheet" href="../../shared/css/style.css">
+    <style>
+        /* Hands-on live demo (from Day10_Student_Doc) */
+        body.dark {
+            background: #111;
+            color: #eee;
+        }
+        .hands-on-live .name-item {
+            padding: 4px 8px;
+        }
+        .hands-on-live .card {
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 12px;
+            max-width: 280px;
+        }
+        .hands-on-live .card h3 {
+            margin: 0 0 8px;
+        }
+        .hands-on-live .card p {
+            margin: 0 0 4px;
+        }
+    </style>
 </head>
 <body>
     <div class="page-shell">
         <main class="page-main" id="main-content">
             <header class="page-title">
-                <p class="lesson-label">Day 10 — DOM basics</p>
+                <p class="lesson-label">Day 10 — DOM Manipulation Basics</p>
                 <h1>Hands-on</h1>
             </header>
 
             <details class="exercise" open>
                 <summary>
-                    <span class="lesson-task__tag">Topic 1</span>
-                    <span class="lesson-task__title">Part 1</span>
+                    <span class="lesson-task__tag">Task 1</span>
+                    <span class="lesson-task__title">Select and change text</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const title = document.querySelector(&quot;#title&quot;);</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 2</span>
-                    <span class="lesson-task__title">Part 2</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>title.textContent = &quot;Hello, kalyan&quot;;
+                    <ul class="task-spec">
+                        <li>Use <code>document.querySelector</code> to grab <code>#title</code>.</li>
+                        <li>Set <code>textContent</code> to <code>Hello, &lt;your name&gt;!</code></li>
+                        <li>Set <code>style.color</code> to <code>&quot;crimson&quot;</code>.</li>
+                        <li><strong>Bonus:</strong> set <code>style.fontFamily</code> to <code>&quot;Georgia, serif&quot;</code>.</li>
+                    </ul>
+                    <pre class="code-sample"><code>const title = document.querySelector(&quot;#title&quot;);
+title.textContent = &quot;Hello, Kalyan!&quot;;
 title.style.color = &quot;crimson&quot;;
 title.style.fontFamily = &quot;Georgia, serif&quot;;</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
+                    <p class="output-label">Reference: <code>../js/hands-on.js</code> (loaded at the bottom). The live HTML is in the box below.</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Section 3</span>
-                    <span class="lesson-task__title">Part 3</span>
+                    <span class="lesson-task__tag">Task 2</span>
+                    <span class="lesson-task__title">Toggle dark theme</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const themeBtn = document.getElementById(&quot;theme-btn&quot;)</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
+                    <ul class="task-spec">
+                        <li>Grab <code>#theme-btn</code> (events come on Day 11 — for now the script runs the toggle at the bottom).</li>
+                        <li>Call <code>document.body.classList.toggle(&quot;dark&quot;)</code> <strong>twice</strong> and watch the page flip.</li>
+                        <li><strong>Bonus:</strong> log <code>document.body.classList.contains(&quot;dark&quot;)</code>.</li>
+                    </ul>
+                    <pre class="code-sample"><code>const themeBtn = document.querySelector(&quot;#theme-btn&quot;);
+document.body.classList.toggle(&quot;dark&quot;);
+document.body.classList.toggle(&quot;dark&quot;);
+console.log(document.body.classList.contains(&quot;dark&quot;));</code></pre>
+                    <p class="output-label">Same file: <code>../js/hands-on.js</code>.</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Section 4</span>
-                    <span class="lesson-task__title">Part 4</span>
+                    <span class="lesson-task__tag">Task 3</span>
+                    <span class="lesson-task__title">Build a list dynamically</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>document.body.classList.toggle(&quot;dark&quot;);</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
+                    <ul class="task-spec">
+                        <li><code>const names = [&quot;Priya&quot;, &quot;Aarav&quot;, &quot;Riya&quot;, &quot;Kabir&quot;];</code></li>
+                        <li>Grab <code>#names-list</code>. For each name: create <code>&lt;li&gt;</code>, set <code>textContent</code>, add class <code>name-item</code>, <code>appendChild</code> to the list.</li>
+                        <li><strong>Bonus:</strong> template literal <code>`${index + 1}. ${name}`</code>.</li>
+                    </ul>
+                    <pre class="code-sample"><code>names.forEach((name, index) =&gt; {
+  const li = document.createElement(&quot;li&quot;);
+  li.textContent = `${index + 1}. ${name}`;
+  li.classList.add(&quot;name-item&quot;);
+  nameList.appendChild(li);
+});</code></pre>
+                    <p class="output-label">Same file: <code>../js/hands-on.js</code>.</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Section 5</span>
-                    <span class="lesson-task__title">Part 5</span>
+                    <span class="lesson-task__tag">Bonus</span>
+                    <span class="lesson-task__title">Build a card</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const names = [&quot;Priya&quot;, &quot;Aarav&quot;, &quot;Riya&quot;, &quot;Kabir&quot;];</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
+                    <ul class="task-spec">
+                        <li>In <code>#cards</code>, build a <code>&lt;div class=&quot;card&quot;&gt;</code> from <code>product</code>: <code>&lt;h3&gt;</code> name, <code>&lt;p&gt;</code> brand, <code>&lt;span&gt;</code> price as <code>₹60000</code>.</li>
+                    </ul>
+                    <pre class="code-sample"><code>const product = { name: &quot;Laptop&quot;, price: 60000, brand: &quot;Dell&quot; };
+const priceSpan = document.createElement(&quot;span&quot;);
+priceSpan.textContent = `₹${product.price}`;</code></pre>
+                    <p class="output-label">Same file: <code>../js/hands-on.js</code>.</p>
                 </div>
             </details>
 
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 6</span>
-                    <span class="lesson-task__title">Part 6</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const nameList = document.getElementById(&quot;names-list&quot;);</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 7</span>
-                    <span class="lesson-task__title">Part 7</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>names.forEach((name,index) =&gt; {
-    const li = document.createElement(&quot;li&quot;)</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 8</span>
-                    <span class="lesson-task__title">Part 8</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>li.textContent = `${index+1}. ${name}`;</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 9</span>
-                    <span class="lesson-task__title">Part 9</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>li.classList.add(&quot;name-item&quot;)</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 10</span>
-                    <span class="lesson-task__title">Part 10</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>nameList.appendChild(li);
-})</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 11</span>
-                    <span class="lesson-task__title">Part 11</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const product = { name: &quot;Laptop&quot;, price: 60000, brand: &quot;Dell&quot; };</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 12</span>
-                    <span class="lesson-task__title">Part 12</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const container = document.getElementById(&quot;cards&quot;)</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 13</span>
-                    <span class="lesson-task__title">Part 13</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const card = document.createElement(&quot;div&quot;) 
-card.classList.add(&quot;card&quot;)</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 14</span>
-                    <span class="lesson-task__title">Part 14</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const title1 = document.createElement(&quot;h3&quot;)
-title1.textContent = product.name</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 15</span>
-                    <span class="lesson-task__title">Part 15</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const brand = document.createElement(&quot;p&quot;)
-brand.textContent = product.brand</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 16</span>
-                    <span class="lesson-task__title">Part 16</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const price = document.createElement(&quot;span&quot;)
-price.textContent = product.price</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 17</span>
-                    <span class="lesson-task__title">Part 17</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>card.append(title1)
-card.append(brand)
-card.append(price)</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 18</span>
-                    <span class="lesson-task__title">Part 18</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>container.appendChild(card)</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 19</span>
-                    <span class="lesson-task__title">Part 19</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>container.style.backgroundColor = &quot;red&quot;;</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
+            <section class="hands-on-live" aria-label="DOM hands-on demo">
+                <h2 class="hands-on-live__label">Live page (your HTML setup)</h2>
+                <p class="hands-on-live__hint">Three steps for new nodes: <strong>create</strong> → <strong>configure</strong> → <strong>insert</strong>. Removal: <code>.remove()</code> or clear with <code>innerHTML = &quot;&quot;</code>.</p>
+                <h1 id="title">JS Training</h1>
+                <p>
+                    <button type="button" id="theme-btn">Toggle Theme</button>
+                    <button type="button" id="add-name">Add Name</button>
+                </p>
+                <ul id="names-list"></ul>
+                <div id="cards"></div>
+            </section>
         </main>
         <aside class="site-outline" aria-label="Curriculum outline">
             <p class="site-outline-title">Curriculum</p>

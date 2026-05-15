@@ -17,162 +17,115 @@
 
             <details class="exercise" open>
                 <summary>
-                    <span class="lesson-task__tag">Topic 1</span>
-                    <span class="lesson-task__title">Task 1</span>
+                    <span class="lesson-task__tag">Task 1</span>
+                    <span class="lesson-task__title">Grading system</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>function getGrade(marks) {
- 
-    if (marks &lt; 0 || marks &gt; 100) {
-        return &quot;Invalid marks&quot;;
-    }
- 
-    if (marks &gt;= 90) {
-        return &quot;A&quot;;
-    }
-    else if (marks &gt;= 75) {
-        return &quot;B&quot;;
-    }
-    else if (marks &gt;= 60) {
-        return &quot;C&quot;;
-    }
- 
-    return &quot;F&quot;;
+                    <ul class="task-spec">
+                        <li>Declare <code>const marks = 72</code> (use a block <code>{ ... }</code> if you need to re-run with other values).</li>
+                        <li>Use <code>if</code> / <code>else if</code> / <code>else</code> to <strong>log</strong> a grade: <strong>90+</strong> → <code>"A"</code>, <strong>75–89</strong> → <code>"B"</code>, <strong>60–74</strong> → <code>"C"</code>, <strong>below 60</strong> → <code>"F"</code>.</li>
+                        <li>Test with marks <strong>95</strong>, <strong>50</strong>, and <strong>75</strong> — confirm each prints the right grade.</li>
+                        <li><strong>Bonus:</strong> at the top of the chain, if marks are <strong>negative</strong> or <strong>above 100</strong>, log <code>"Invalid marks"</code> and <strong>do not</strong> print a letter grade.</li>
+                    </ul>
+                    <pre class="code-sample"><code>{
+  const marks = 72;
+  if (marks &lt; 0 || marks &gt; 100) console.log("Invalid marks");
+  else if (marks &gt;= 90) console.log(marks, "→ A");
+  else if (marks &gt;= 75) console.log(marks, "→ B");
+  else if (marks &gt;= 60) console.log(marks, "→ C");
+  else console.log(marks, "→ F");
 }
- 
-const lines1 = [];
- 
-lines1.push(`72 → ${getGrade(72)}`);
-lines1.push(`95 → ${getGrade(95)}`);
-lines1.push(`50 → ${getGrade(50)}`);
-lines1.push(`75 → ${getGrade(75)}`);
-lines1.push(`120 → ${getGrade(120)}`);
- 
-document.querySelector(&quot;#task1Output&quot;).textContent =
-    lines1.join(&quot;\n&quot;);</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
+// Repeat the same pattern for 95, 50, 75, and invalid examples — see hands-on.js</code></pre>
+                    <p class="output-label">Reference: <code>../js/hands-on.js</code> (loaded below). Open the console (F12).</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Section 2</span>
-                    <span class="lesson-task__title">Task 2</span>
+                    <span class="lesson-task__tag">Task 2</span>
+                    <span class="lesson-task__title">Day type with <code>switch</code></span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>// Task 2
- 
-function getDayType(day) {
- 
-    switch (day) {
- 
-        case &quot;Monday&quot;:
-        case &quot;Tuesday&quot;:
-        case &quot;Wednesday&quot;:
-        case &quot;Thursday&quot;:
-        case &quot;Friday&quot;:
-            return &quot;Weekday&quot;;
- 
-        case &quot;Saturday&quot;:
-        case &quot;Sunday&quot;:
-            return &quot;Weekend&quot;;
- 
-        default:
-            return &quot;Invalid day&quot;;
-    }
-}
- 
-const lines2 = [];
- 
-lines2.push(`Monday → ${getDayType(&quot;Monday&quot;)}`);
-lines2.push(`Saturday → ${getDayType(&quot;Saturday&quot;)}`);
-lines2.push(`Holiday → ${getDayType(&quot;Holiday&quot;)}`);
- 
-document.querySelector(&quot;#task2Output&quot;).textContent =
-    lines2.join(&quot;\n&quot;);</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
+                    <ul class="task-spec">
+                        <li>Declare <code>const day = "Wednesday"</code>.</li>
+                        <li>Write a <code>switch</code> that logs <code>"Weekday"</code> for Monday–Friday, <code>"Weekend"</code> for Saturday and Sunday, <code>"Invalid day"</code> otherwise.</li>
+                        <li>Use <strong>intentional fall-through</strong> to group weekday cases (no repeated <code>console.log</code> per weekday).</li>
+                        <li>Test with <code>"Monday"</code>, <code>"Saturday"</code>, and <code>"Holiday"</code> (same <code>switch</code> shape in separate blocks, or reassign <code>day</code> if you use <code>let</code>).</li>
+                    </ul>
+                    <pre class="code-sample"><code>{
+  const day = "Wednesday";
+  switch (day) {
+    case "Monday":
+    case "Tuesday":
+    case "Wednesday":
+    case "Thursday":
+    case "Friday":
+      console.log(day + " → Weekday");
+      break;
+    case "Saturday":
+    case "Sunday":
+      console.log(day + " → Weekend");
+      break;
+    default:
+      console.log(day + " → Invalid day");
+  }
+}</code></pre>
+                    <p class="output-label">Full tests for Monday / Saturday / Holiday: <code>../js/hands-on.js</code>.</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Section 3</span>
-                    <span class="lesson-task__title">Task 3</span>
+                    <span class="lesson-task__tag">Task 3</span>
+                    <span class="lesson-task__title">Truthy / falsy detective</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>// Task 3
- 
-const values = [
-    0,
-    &quot;0&quot;,
-    &quot;&quot;,
-    &quot; &quot;,
-    null,
-    undefined,
-    NaN,
-    [],
-    {},
-    &quot;false&quot;
-];
- 
-const lines3 = [];
- 
-for (const value of values) {
- 
-    const result =
-        value ? &quot;truthy&quot; : &quot;falsy&quot;;
- 
-    lines3.push(
-        `${JSON.stringify(value)} → ${result}`
-    );
+                    <ul class="task-spec">
+                        <li>For each value, write your guess as a <strong>comment</strong>, then check with <code>if (value) { ... } else { ... }</code> and log truthy vs falsy.</li>
+                        <li>Values: <code>0</code>, <code>"0"</code>, <code>""</code>, <code>" "</code> (single space), <code>null</code>, <code>undefined</code>, <code>NaN</code>, <code>[]</code>, <code>{}</code>, <code>"false"</code>.</li>
+                        <li>Below your checks, add a short comment listing the <strong>six falsy</strong> values from memory.</li>
+                    </ul>
+                    <pre class="code-sample"><code>// 0 — guess: falsy
+if (0) console.log("0 → truthy");
+else console.log("0 → falsy");
+
+// "0" — guess: truthy
+if ("0") console.log('"0" → truthy');
+else console.log('"0" → falsy');
+
+// ... (see hands-on.js for "", " ", null, undefined, NaN, [], {}, "false")
+
+/*
+The six falsy values (memorise):
+  false, 0, "", null, undefined, NaN
+*/</code></pre>
+                    <p class="output-label">Reference: <code>../js/hands-on.js</code>.</p>
+                </div>
+            </details>
+
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">Bonus</span>
+                    <span class="lesson-task__title">Guard clauses refactor</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <ul class="task-spec">
+                        <li>Copy the <strong>nested</strong> version below into your file, then refactor with <strong>guard clauses</strong> (flip conditions, <code>return</code> early after logging).</li>
+                        <li>Test with: a <strong>valid</strong> user, a user with <code>isBanned: true</code>, and <code>null</code>.</li>
+                    </ul>
+                    <pre class="code-sample"><code>// Nested version — refactor this:
+function canCommentNested(user) {
+  if (user) {
+    if (!user.isBanned) {
+      if (user.age &gt;= 13) {
+        console.log("Comment allowed");
+      }
+    }
+  }
 }
- 
-document.querySelector(&quot;#task3Output&quot;).textContent =
-    lines3.join(&quot;\n&quot;);
- 
- 
- 
- 
-// Bonus
- 
-function canComment(user) {
- 
-    if (!user) {
-        return &quot;No user&quot;;
-    }
- 
-    if (user.isBanned) {
-        return &quot;User is banned&quot;;
-    }
- 
-    if (user.age &lt; 13) {
-        return &quot;Too young&quot;;
-    }
- 
-    return &quot;Comment allowed&quot;;
-}
- 
-const validUser = {
-    name: &quot;Aarav&quot;,
-    age: 20,
-    isBanned: false
-};
- 
-const bannedUser = {
-    name: &quot;Riya&quot;,
-    age: 25,
-    isBanned: true
-};
- 
-const lines4 = [];
- 
-lines4.push(canComment(validUser));
-lines4.push(canComment(bannedUser));
-lines4.push(canComment(null));
- 
-document.querySelector(&quot;#task4Output&quot;).textContent =
-    lines4.join(&quot;\n&quot;);</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
+
+// Refactored (guard clauses) + tests — see hands-on.js</code></pre>
+                    <p class="output-label">Reference: <code>../js/hands-on.js</code>.</p>
                 </div>
             </details>
         </main>

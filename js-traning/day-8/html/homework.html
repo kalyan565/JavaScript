@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Day 8 — Objects — literals and access — Homework</title>
+    <title>Day 8 — Objects — Homework</title>
     <link rel="preload" href="../../shared/css/style.css" as="style">
     <link rel="stylesheet" href="../../shared/css/style.css">
 </head>
@@ -11,111 +11,60 @@
     <div class="page-shell">
         <main class="page-main" id="main-content">
             <header class="page-title">
-                <p class="lesson-label">Day 8 — Objects — literals and access</p>
+                <p class="lesson-label">Day 8 — Objects</p>
                 <h1>Homework</h1>
             </header>
 
             <details class="exercise" open>
                 <summary>
-                    <span class="lesson-task__tag">Problem 1</span>
-                    <span class="lesson-task__title">Part 1</span>
+                    <span class="lesson-task__tag">1</span>
+                    <span class="lesson-task__title"><code>book</code> and bracket notation</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const book = {
-    title : &quot;abc&quot;,
-    author : &quot;xyz&quot;,
-    year : 2002,
-    pages : 1000,</code></pre>
-                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
+                    <ul class="task-spec">
+                        <li>Create <code>book</code> with <code>title</code>, <code>author</code>, <code>year</code>, and <code>pages</code>.</li>
+                        <li>Log the title using <strong>bracket notation</strong> with a <strong>variable</strong> holding the key name (e.g. <code>const k = &quot;title&quot;; book[k]</code>).</li>
+                    </ul>
+                    <p class="output-label">Reference: <code>../js/homework.js</code>. Open the console.</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Problem 2</span>
-                    <span class="lesson-task__title">Part 2</span>
+                    <span class="lesson-task__tag">2</span>
+                    <span class="lesson-task__title"><code>summary()</code> method</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>summary() {
-        return `${this.title} by ${this.author} (${this.year})`
-    }
-}</code></pre>
-                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
+                    <ul class="task-spec">
+                        <li>Add a method <code>summary()</code> that returns <code>&quot;&lt;title&gt; by &lt;author&gt; (&lt;year&gt;)&quot;</code> using a template literal and <code>this</code>.</li>
+                    </ul>
+                    <p class="output-label">Reference: <code>../js/homework.js</code>.</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Problem 3</span>
-                    <span class="lesson-task__title">Part 3</span>
+                    <span class="lesson-task__tag">3</span>
+                    <span class="lesson-task__title"><code>Object.entries</code> + <code>forEach</code></span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>console.log(book[&quot;title&quot;])
-console.log(book.summary())</code></pre>
-                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
+                    <ul class="task-spec">
+                        <li>Use <code>Object.entries</code> and <code>forEach</code> to print every property of any object you choose.</li>
+                    </ul>
+                    <p class="output-label">Reference: <code>../js/homework.js</code>.</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Problem 4</span>
-                    <span class="lesson-task__title">Part 4</span>
+                    <span class="lesson-task__tag">4</span>
+                    <span class="lesson-task__title">Spread copy</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>Object.entries(book).forEach(([key,value]) =&gt; {
-   console.log(`${key} : ${value}`) 
-});</code></pre>
-                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Problem 5</span>
-                    <span class="lesson-task__title">Part 5</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>console.log(&quot;------------------------------------------------------&quot;)
-const obj = {...book};
-obj.title = 'kal';</code></pre>
-                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Problem 6</span>
-                    <span class="lesson-task__title">Part 6</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>Object.entries(obj).forEach(([key,value]) =&gt; {
-    console.log(`${key} : ${value}`) 
-});</code></pre>
-                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Problem 7</span>
-                    <span class="lesson-task__title">Part 7</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>console.log(&quot;------------------------------------------------------&quot;)</code></pre>
-                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Problem 8</span>
-                    <span class="lesson-task__title">Part 8</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>Object.entries(book).forEach(([key,value]) =&gt; {
-   console.log(`${key} : ${value}`) 
-});</code></pre>
-                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
+                    <ul class="task-spec">
+                        <li>Copy an object with the spread operator, change something on the copy, and confirm the original is unchanged.</li>
+                    </ul>
+                    <p class="output-label">Reference: <code>../js/homework.js</code>.</p>
                 </div>
             </details>
         </main>

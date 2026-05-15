@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Day 8 — Objects — literals and access — Lesson</title>
+    <title>Day 8 — Objects — Lesson</title>
     <link rel="preload" href="../../shared/css/style.css" as="style">
     <link rel="stylesheet" href="../../shared/css/style.css">
 </head>
@@ -11,90 +11,160 @@
     <div class="page-shell">
         <main class="page-main" id="main-content">
             <header class="page-title">
-                <p class="lesson-label">Day 8 — Objects — literals and access</p>
+                <p class="lesson-label">Day 8 — Objects</p>
                 <h1>Lesson</h1>
             </header>
 
             <details class="exercise" open>
                 <summary>
-                    <span class="lesson-task__tag">Topic 1</span>
-                    <span class="lesson-task__title">Part 1</span>
+                    <span class="lesson-task__tag">1</span>
+                    <span class="lesson-task__title">Object literals</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const user = { name: &quot;Priya&quot;, age: 24, &quot;favourite color&quot;: &quot;blue&quot; };</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
+                    <p>Syntax: <code>const obj = { key1: value1, key2: value2 }</code>. Values can be strings, numbers, booleans, arrays, nested objects, or functions.</p>
+                    <pre class="code-sample"><code>const userNested = {
+  name: &quot;Priya&quot;,
+  age: 24,
+  city: &quot;Jaipur&quot;,
+  isActive: true,
+  hobbies: [&quot;reading&quot;, &quot;trekking&quot;],
+  address: {
+    street: &quot;MI Road&quot;,
+    pincode: &quot;302001&quot;,
+  },
+};
+console.log(userNested);</code></pre>
+                    <p class="output-label">Runs in <code>../js/lesson.js</code>. Open the console (F12).</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Section 2</span>
-                    <span class="lesson-task__title">Part 2</span>
+                    <span class="lesson-task__tag">2</span>
+                    <span class="lesson-task__title">Dot vs bracket</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>console.log(user.name);              
-console.log(user.age);               // 24</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
+                    <p><strong>Dot</strong> (<code>user.name</code>) is the default. Use <strong>brackets</strong> for dynamic keys (<code>user[field]</code>) or keys with spaces (<code>user[&quot;favourite color&quot;]</code>). Missing properties are <code>undefined</code>.</p>
+                    <pre class="code-sample"><code>const user = { name: &quot;Priya&quot;, age: 24, &quot;favourite color&quot;: &quot;blue&quot; };
+console.log(user.name);
+console.log(user[&quot;favourite color&quot;]);
+const field = &quot;name&quot;;
+console.log(user[field]);
+console.log(user.email);
+
+const u = { name: &quot;Priya&quot; };
+console.log(u.name);
+const f = &quot;name&quot;;
+console.log(u[f]);
+console.log(u.email);</code></pre>
+                    <p class="output-label">Same file: <code>../js/lesson.js</code>.</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Section 3</span>
-                    <span class="lesson-task__title">Part 3</span>
+                    <span class="lesson-task__tag">3</span>
+                    <span class="lesson-task__title">Add, update, delete</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const field = &quot;name&quot;;
-console.log(user[field]);            // Priya  ← variable</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
+                    <p><code>const</code> locks the binding to the object, not the contents inside the object. You can still add, change, and remove properties.</p>
+                    <pre class="code-sample"><code>const userMutable = { name: &quot;Priya&quot;, age: 24 };
+userMutable.email = &quot;priya@example.com&quot;;
+userMutable.city = &quot;Jaipur&quot;;
+userMutable.age = 25;
+delete userMutable.city;
+
+console.log(userMutable);</code></pre>
+                    <p class="output-label">Same file: <code>../js/lesson.js</code>.</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Section 4</span>
-                    <span class="lesson-task__title">Part 4</span>
+                    <span class="lesson-task__tag">4</span>
+                    <span class="lesson-task__title">Methods and <code>this</code></span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>console.log(user[&quot;favourite color&quot;]); // blue   (can't do user.favourite color)</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
+                    <p>A property whose value is a function is a <strong>method</strong>. Inside a normal method, <code>this</code> is the object the method was called on. Prefer <code>greet() { }</code> shorthand — avoid <strong>arrow</strong> functions as methods (they do not get their own <code>this</code>).</p>
+                    <pre class="code-sample"><code>const userMethods = {
+  name: &quot;Aarav&quot;,
+  age: 22,
+  greet() {
+    return `Hello, I am ${this.name}`;
+  },
+  birthday() {
+    this.age += 1;
+    return `Happy birthday! ${this.name} is now ${this.age}`;
+  },
+};
+
+console.log(userMethods.greet());
+console.log(userMethods.birthday());
+console.log(userMethods.age);</code></pre>
+                    <p class="output-label">Same file: <code>../js/lesson.js</code>.</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Section 5</span>
-                    <span class="lesson-task__title">Part 5</span>
+                    <span class="lesson-task__tag">5</span>
+                    <span class="lesson-task__title">Destructuring</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>console.log(user.email);</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
+                    <p>Pull properties into variables: <code>const { name, age } = user;</code>. Rename with <code>name: userName</code>, defaults with <code>phone = &quot;N/A&quot;</code>, and use the same pattern in function parameters.</p>
+                    <pre class="code-sample"><code>const userFull = {
+  name: &quot;Riya&quot;,
+  age: 23,
+  city: &quot;Jaipur&quot;,
+  email: &quot;r@x.in&quot;,
+};
+
+const { name, age } = userFull;
+const { name: userName, city } = userFull;
+const { phone = &quot;N/A&quot; } = userFull;
+
+const greet = ({ name: n, age: a }) =&gt; `Hi ${n}, age ${a}`;
+console.log(greet(userFull));</code></pre>
+                    <p class="output-label">Same file: <code>../js/lesson.js</code> (also includes follow-along <code>u2</code>).</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Section 6</span>
-                    <span class="lesson-task__title">console.log(user.favourite color);</span>
+                    <span class="lesson-task__tag">6</span>
+                    <span class="lesson-task__title"><code>Object.keys</code>, <code>values</code>, <code>entries</code></span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>//console.log(user.favourite color); 
- console.log(&quot;---------------------------------------------------------------&quot;)
- console.log(&quot;---------------------------------------------------------------&quot;)
- console.log(&quot;---------------------------------------------------------------&quot;)
- console.log(&quot;---------------------------------------------------------------&quot;)
- 
- const u = { name: &quot;kalyan&quot; };
- console.log(u.name);
- 
- const f = &quot;name&quot;;
- console.log(u[f]);
- 
- console.log(u.email);
- 
- 
- console.log(&quot;---------------------------------------------------------------&quot;)</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
+                    <p>Turn property names, values, or <code>[key, value]</code> pairs into arrays — then chain <code>map</code>, <code>forEach</code>, etc.</p>
+                    <pre class="code-sample"><code>const userKeys = { name: &quot;Anaya&quot;, age: 21, city: &quot;Jaipur&quot; };
+
+console.log(Object.keys(userKeys));
+console.log(Object.values(userKeys));
+console.log(Object.entries(userKeys));
+
+Object.entries(userKeys).forEach(([key, value]) =&gt; {
+  console.log(`${key}: ${value}`);
+});</code></pre>
+                    <p class="output-label">Same file: <code>../js/lesson.js</code>.</p>
+                </div>
+            </details>
+
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">7</span>
+                    <span class="lesson-task__title"><code>Object.assign</code> and spread</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <p>Merge or shallow-copy objects: <code>Object.assign({}, a, b)</code> or <code>{ ...a, ...b }</code>.</p>
+                    <pre class="code-sample"><code>const objA = { name: &quot;Priya&quot; };
+const objB = { age: 24 };
+
+const merged = Object.assign({}, objA, objB);
+const merged2 = { ...objA, ...objB };
+const copy = { ...objA };
+
+console.log(merged, merged2, copy);</code></pre>
+                    <p class="output-label">Same file: <code>../js/lesson.js</code>.</p>
                 </div>
             </details>
         </main>

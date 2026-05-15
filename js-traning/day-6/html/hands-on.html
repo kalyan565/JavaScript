@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Day 6 — declarations, arrows, defaults — Hands-on</title>
+    <title>Day 6 — Functions — Hands-on</title>
     <link rel="preload" href="../../shared/css/style.css" as="style">
     <link rel="stylesheet" href="../../shared/css/style.css">
 </head>
@@ -11,192 +11,109 @@
     <div class="page-shell">
         <main class="page-main" id="main-content">
             <header class="page-title">
-                <p class="lesson-label">Day 6 — declarations, arrows, defaults</p>
+                <p class="lesson-label">Day 6 — Functions</p>
                 <h1>Hands-on</h1>
             </header>
 
             <details class="exercise" open>
                 <summary>
-                    <span class="lesson-task__tag">Topic 1</span>
-                    <span class="lesson-task__title">Part 1</span>
+                    <span class="lesson-task__tag">Task 1</span>
+                    <span class="lesson-task__title">Rectangle area</span>
                 </summary>
                 <div class="lesson-task__body">
+                    <ul class="task-spec">
+                        <li>Write <code>function area(length, width)</code> that <strong>returns</strong> the area of a rectangle.</li>
+                        <li>Call it <strong>three times</strong> with different values and <code>console.log</code> each result.</li>
+                        <li><strong>Bonus:</strong> rewrite the same logic as an <strong>arrow function</strong> with <strong>implicit return</strong>.</li>
+                    </ul>
                     <pre class="code-sample"><code>function area(length, width) {
   return length * width;
-}</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
+}
 
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 2</span>
-                    <span class="lesson-task__title">Part 2</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>console.log(area(10, 5));
+console.log(area(10, 5));
 console.log(area(7, 3));
-console.log(area(15, 4));</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
+console.log(area(15, 4));
+
+const areaArrow = (length, width) => length * width;
+console.log("arrow:", areaArrow(8, 2));</code></pre>
+                    <p class="output-label">Reference: <code>../js/hands-on.js</code> (loaded below).</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Section 3</span>
-                    <span class="lesson-task__title">Part 3</span>
+                    <span class="lesson-task__tag">Task 2</span>
+                    <span class="lesson-task__title">Greeting with default</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const areaArrow = (length, width) =&gt; length * width;</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 4</span>
-                    <span class="lesson-task__title">Part 4</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>console.log(areaArrow(8, 2));</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 5</span>
-                    <span class="lesson-task__title">Part 5</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>function greet(name = &quot;Guest&quot;) {
+                    <ul class="task-spec">
+                        <li>Write <code>function greet(name)</code> that returns <code>"Hello, &lt;name&gt;!"</code> (use a template literal).</li>
+                        <li>Use a <strong>default parameter</strong>: if no name is passed, default to <code>"Guest"</code>.</li>
+                        <li>Call it with <code>"Priya"</code>, with <code>"Aarav"</code>, and with <strong>no argument</strong>.</li>
+                        <li><strong>Bonus:</strong> try <code>greet(null)</code> — does it use the default? <strong>No:</strong> default parameters only apply when the argument is <code>undefined</code> (missing). <code>null</code> is an explicit value, so you get <code>"Hello, null!"</code>.</li>
+                    </ul>
+                    <pre class="code-sample"><code>function greet(name = "Guest") {
   return `Hello, ${name}!`;
-}</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
+}
+
+console.log(greet("Priya"));
+console.log(greet("Aarav"));
+console.log(greet());
+console.log(greet(null));</code></pre>
+                    <p class="output-label">Reference: <code>../js/hands-on.js</code>.</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Section 6</span>
-                    <span class="lesson-task__title">Part 6</span>
+                    <span class="lesson-task__tag">Task 3</span>
+                    <span class="lesson-task__title">Temperature converter</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>console.log(greet(&quot;Priya&quot;));
-console.log(greet(&quot;Aarav&quot;));
-console.log(greet());</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
+                    <ul class="task-spec">
+                        <li>Write an <strong>arrow function</strong> <code>cToF(celsius)</code> with <strong>implicit return</strong>.</li>
+                        <li>Formula: <code>F = C * 9/5 + 32</code>.</li>
+                        <li>Test with: <strong>0</strong>, <strong>100</strong>, <strong>37</strong> (body temperature), <strong>45</strong> (Jaipur summer).</li>
+                    </ul>
+                    <pre class="code-sample"><code>const cToF = (celsius) => (celsius * 9) / 5 + 32;
 
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 7</span>
-                    <span class="lesson-task__title">Bonus</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>// Bonus</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 8</span>
-                    <span class="lesson-task__title">Part 8</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>console.log(greet(null));</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 9</span>
-                    <span class="lesson-task__title">Part 9</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const cToF = celsius =&gt; (celsius * 9) / 5 + 32;</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 10</span>
-                    <span class="lesson-task__title">Part 10</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>console.log(cToF(0));   // 32
+console.log(cToF(0));   // 32
 console.log(cToF(100)); // 212
 console.log(cToF(37));  // 98.6
 console.log(cToF(45));  // 113</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
+                    <p class="output-label">Reference: <code>../js/hands-on.js</code>.</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Section 11</span>
-                    <span class="lesson-task__title">Part 11</span>
+                    <span class="lesson-task__tag">Bonus</span>
+                    <span class="lesson-task__title">Pure vs impure</span>
                 </summary>
                 <div class="lesson-task__body">
+                    <ul class="task-spec">
+                        <li>Write a <strong>pure</strong> function <code>double(n)</code> that returns <code>n * 2</code>.</li>
+                        <li>Write an <strong>impure</strong> function <code>addToTotal(n)</code> that updates an outer <code>let total = 0</code> and returns the new total.</li>
+                        <li>Call each function <strong>three times</strong>. Notice how the impure output depends on earlier calls.</li>
+                        <li>Add a <strong>comment</strong>: which is easier to reason about, and why?</li>
+                    </ul>
                     <pre class="code-sample"><code>function double(n) {
   return n * 2;
-}</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
+}
+console.log("pure double:", double(2), double(5), double(10));
 
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 12</span>
-                    <span class="lesson-task__title">Part 12</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>console.log(double(2));
-console.log(double(5));
-console.log(double(10));</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 13</span>
-                    <span class="lesson-task__title">Part 13</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>let total = 0;</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 14</span>
-                    <span class="lesson-task__title">Part 14</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>function addToTotal(n) {
+let total = 0;
+function addToTotal(n) {
   total += n;
   return total;
-}</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
+}
+console.log("impure addToTotal:", addToTotal(5), addToTotal(5), addToTotal(5));
 
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 15</span>
-                    <span class="lesson-task__title">Part 15</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>console.log(addToTotal(5));  // 5
-console.log(addToTotal(5));  // 10
-console.log(addToTotal(5));  // 15</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
+/*
+Pure double(n) is easier to reason about: same input → same output, no hidden state.
+addToTotal mutates outer total, so output depends on call history.
+*/</code></pre>
+                    <p class="output-label">Reference: <code>../js/hands-on.js</code>.</p>
                 </div>
             </details>
         </main>

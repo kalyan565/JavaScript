@@ -17,7 +17,10 @@
 //import "./day13.js"
 //import "./day14.js"
 //import "../exercises/day14-exercise.js"
-import "../../day-16/day16.js"
+//import "./day16.js"
+//import "./day16-handson.js"
+import "./day17.js"
+
 
 // const marks = 65;
 // if(marks >= 90) {

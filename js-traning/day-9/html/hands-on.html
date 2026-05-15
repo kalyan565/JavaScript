@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Day 9 — ES6+ patterns — Hands-on</title>
+    <title>Day 9 — ES6+ Essentials — Hands-on</title>
     <link rel="preload" href="../../shared/css/style.css" as="style">
     <link rel="stylesheet" href="../../shared/css/style.css">
 </head>
@@ -11,128 +11,94 @@
     <div class="page-shell">
         <main class="page-main" id="main-content">
             <header class="page-title">
-                <p class="lesson-label">Day 9 — ES6+ patterns</p>
+                <p class="lesson-label">Day 9 — ES6+ Essentials</p>
                 <h1>Hands-on</h1>
             </header>
 
             <details class="exercise" open>
                 <summary>
-                    <span class="lesson-task__tag">Topic 1</span>
-                    <span class="lesson-task__title">Part 1</span>
+                    <span class="lesson-task__tag">Task 1</span>
+                    <span class="lesson-task__title">Template literal sentence builder</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const item = &quot;laptop&quot;
+                    <ul class="task-spec">
+                        <li>Declare <code>item</code>, <code>price</code>, <code>tax</code> as given in the doc.</li>
+                        <li>Build the sentence with a template literal. Compute GST and total <strong>inside</strong> <code>${...}</code> (no separate <code>gst</code> / <code>total</code> variables first).</li>
+                        <li><strong>Bonus:</strong> a multiline template with each part on its own line.</li>
+                    </ul>
+                    <pre class="code-sample"><code>const item = &quot;Laptop&quot;;
 const price = 60000;
-const tax  = 0.18 
-const str = `The ${item} costs ${60000} + ${10800} GST = ${price+10800}`
-console.log(str)</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
+const tax = 0.18;
+
+const sentence = `The ${item} costs ₹${price} + ₹${Math.round(price * tax)} GST = ₹${Math.round(price + price * tax)}.`;
+console.log(sentence);</code></pre>
+                    <p class="output-label">Full solution in <code>../js/hands-on.js</code>. Open the console (F12).</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Section 2</span>
-                    <span class="lesson-task__title">Part 2</span>
+                    <span class="lesson-task__tag">Task 2</span>
+                    <span class="lesson-task__title">Array + object destructuring</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const scores = [88, 75, 92, 60, 45];</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
+                    <ul class="task-spec">
+                        <li>From <code>scores</code>: first two into <code>top</code> and <code>second</code>, rest into <code>others</code>.</li>
+                        <li>From <code>user</code>: <code>name</code>, rename <code>age</code> to <code>userAge</code>, nested <code>city</code>. Log everything.</li>
+                    </ul>
+                    <pre class="code-sample"><code>const scores = [88, 75, 92, 60, 45];
+const [top, second, ...others] = scores;
+
+const user = {
+  name: &quot;Anaya&quot;,
+  age: 21,
+  address: { city: &quot;Jaipur&quot;, pincode: &quot;302001&quot; },
+};
+const { name, age: userAge, address: { city } } = user;</code></pre>
+                    <p class="output-label">Same file: <code>../js/hands-on.js</code>.</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Section 3</span>
-                    <span class="lesson-task__title">Part 3</span>
+                    <span class="lesson-task__tag">Task 3</span>
+                    <span class="lesson-task__title">Rest parameters</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const [top, second, ...others] = scores;
-console.log(top)
-console.log(second)
-console.log(others)</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 4</span>
-                    <span class="lesson-task__title">Part 4</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const user = { name: &quot;Anaya&quot;, age: 21, address: { city: &quot;Jaipur&quot;, pincode: &quot;302001&quot; } };
-const {name, age : userage , address : {city}} = user;
-console.log(name,userage,city)</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 5</span>
-                    <span class="lesson-task__title">Part 5</span>
-                </summary>
-                <div class="lesson-task__body">
+                    <ul class="task-spec">
+                        <li><code>sumAll(...numbers)</code> — test <code>(1,2,3)</code>, <code>(10,20,30,40)</code>, and <code>()</code>.</li>
+                        <li><code>joinNames(separator, ...names)</code> — test <code>joinNames(&quot;, &quot;, &quot;Priya&quot;, &quot;Aarav&quot;, &quot;Riya&quot;)</code>.</li>
+                    </ul>
                     <pre class="code-sample"><code>function sumAll(...numbers) {
-    return numbers.reduce((a,c) =&gt; a+c , 0);
+  return numbers.reduce((acc, n) =&gt; acc + n, 0);
 }
-console.log(sumAll(1, 2, 3))
-console.log(sumAll(10, 20, 30))
-console.log(sumAll())</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
 
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 6</span>
-                    <span class="lesson-task__title">Part 6</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>function joinNames(seperator, ...names) {
-    return names.join(seperator);
+function joinNames(separator, ...names) {
+  return names.join(separator);
 }</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
+                    <p class="output-label">Same file: <code>../js/hands-on.js</code>.</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Section 7</span>
-                    <span class="lesson-task__title">Part 7</span>
+                    <span class="lesson-task__tag">Bonus</span>
+                    <span class="lesson-task__title">Spread to merge settings</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>console.log(joinNames(&quot;, &quot;,&quot;priya&quot;,&quot;arav&quot;,&quot;kumar&quot;));</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 8</span>
-                    <span class="lesson-task__title">Part 8</span>
-                </summary>
-                <div class="lesson-task__body">
+                    <ul class="task-spec">
+                        <li>Merge <code>defaults</code> and <code>userPrefs</code> with object spread so prefs override; keep other defaults.</li>
+                        <li><strong>Bonus:</strong> <code>applyPrefs(defaults, prefs)</code> that returns <code>{ ...defaults, ...prefs }</code>.</li>
+                    </ul>
                     <pre class="code-sample"><code>const defaults = { theme: &quot;light&quot;, lang: &quot;en&quot;, notifications: true };
 const userPrefs = { theme: &quot;dark&quot;, fontSize: 16 };
-const merged = {...defaults,...userPrefs}
-console.log(merged)</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
 
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 9</span>
-                    <span class="lesson-task__title">Part 9</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>function applyprefs(defaults,prefs) {
-    return {...defaults,...prefs}
-}
-console.log(applyprefs(defaults,userPrefs))</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
+const mergedSettings = { ...defaults, ...userPrefs };
+
+function applyPrefs(defaultsObj, prefs) {
+  return { ...defaultsObj, ...prefs };
+}</code></pre>
+                    <p class="output-label">Same file: <code>../js/hands-on.js</code>.</p>
                 </div>
             </details>
         </main>

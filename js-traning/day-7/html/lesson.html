@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Day 7 — Arrays — basics and iteration — Lesson</title>
+    <title>Day 7 — Arrays — Lesson</title>
     <link rel="preload" href="../../shared/css/style.css" as="style">
     <link rel="stylesheet" href="../../shared/css/style.css">
 </head>
@@ -11,201 +11,126 @@
     <div class="page-shell">
         <main class="page-main" id="main-content">
             <header class="page-title">
-                <p class="lesson-label">Day 7 — Arrays — basics and iteration</p>
+                <p class="lesson-label">Day 7 — Arrays</p>
                 <h1>Lesson</h1>
             </header>
 
             <details class="exercise" open>
                 <summary>
-                    <span class="lesson-task__tag">Topic 1</span>
-                    <span class="lesson-task__title">Part 1</span>
+                    <span class="lesson-task__tag">1</span>
+                    <span class="lesson-task__title">Creating &amp; accessing</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const f = ['a','b','c'];
-console.log(f.at(-1));</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
+                    <p>Index from <code>0</code>, use <code>.length</code>, last element via <code>arr[arr.length - 1]</code> or <code>arr.at(-1)</code>. Bracket notation with a negative number is <strong>not</strong> “from the end” — it is a normal key, so you get <code>undefined</code>.</p>
+                    <pre class="code-sample"><code>const fruits = [&quot;apple&quot;, &quot;banana&quot;, &quot;mango&quot;];
+console.log(fruits[0]);
+console.log(fruits[fruits.length - 1]);
+fruits[1] = &quot;cherry&quot;;
+console.log(fruits[-1]);    // undefined
+console.log(fruits.at(-1)); // &quot;mango&quot;</code></pre>
+                    <p class="output-label">Runs in <code>../js/lesson.js</code>. Open the console (F12).</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Section 2</span>
-                    <span class="lesson-task__title">Part 2</span>
+                    <span class="lesson-task__tag">2</span>
+                    <span class="lesson-task__title">Mutating methods</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const numbers = [1,2,3,4,5];
-numbers.forEach(n =&gt; console.log(n*2));</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
+                    <p><code>push</code>/<code>pop</code> at the end; <code>unshift</code>/<code>shift</code> at the start. <code>splice</code> removes or inserts in place.</p>
+                    <pre class="code-sample"><code>const cart = [&quot;apple&quot;, &quot;banana&quot;];
+cart.push(&quot;mango&quot;);
+cart.pop();
+cart.unshift(&quot;orange&quot;);
+cart.shift();
+
+const items = [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;];
+items.splice(1, 2); // remove 2 at index 1
+
+const more = [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;];
+more.splice(1, 0, &quot;X&quot;, &quot;Y&quot;); // insert at 1, delete 0</code></pre>
+                    <p class="output-label">Same file: <code>../js/lesson.js</code>.</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Section 3</span>
-                    <span class="lesson-task__title">Part 3</span>
+                    <span class="lesson-task__tag">3</span>
+                    <span class="lesson-task__title">Non-mutating methods</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const doubled = numbers.map(n =&gt; n*2);
-console.log(numbers);
-console.log(doubled);</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
+                    <p><code>slice</code> copies a range into a <strong>new</strong> array. <code>splice</code> mutates — one letter, opposite worlds.</p>
+                    <pre class="code-sample"><code>const arr = [1, 2, 3, 4, 5];
+arr.slice(1, 3);
+arr.concat([6, 7]);
+arr.join(&quot;-&quot;);
+arr.includes(3);
+arr.indexOf(4);
+// arr unchanged</code></pre>
+                    <p class="output-label">Same file: <code>../js/lesson.js</code>.</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Section 4</span>
-                    <span class="lesson-task__title">Part 4</span>
+                    <span class="lesson-task__tag">4</span>
+                    <span class="lesson-task__title"><code>forEach</code> &amp; <code>map</code></span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const prices = [100,200,300];
-const gst = prices.map(n =&gt; n*1.18);
-console.log(gst)</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
+                    <p><code>forEach</code> runs a function on each element; return value is <code>undefined</code> (side effects). <code>map</code> returns a <strong>new</strong> array of transformed values.</p>
+                    <pre class="code-sample"><code>const numbers = [1, 2, 3, 4];
+numbers.forEach(n =&gt; console.log(n * 2));
+const doubled = numbers.map(n =&gt; n * 2);
+const withGst = [100, 200, 300].map(p =&gt; p * 1.18);</code></pre>
+                    <p class="output-label">Same file: <code>../js/lesson.js</code>.</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Section 5</span>
-                    <span class="lesson-task__title">Part 5</span>
+                    <span class="lesson-task__tag">5</span>
+                    <span class="lesson-task__title"><code>filter</code>, <code>find</code>, <code>some</code>, <code>every</code></span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>console.log(&quot;-----------------------------------------------------------&quot;);</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
+                    <p>Predicate callbacks return booleans. <code>filter</code> keeps all matches; <code>find</code> returns the first match or <code>undefined</code>.</p>
+                    <pre class="code-sample"><code>const scores = [88, 42, 75, 60, 91, 39];
+scores.filter(s =&gt; s &gt;= 60);
+scores.find(s =&gt; s &lt; 60);
+scores.some(s =&gt; s &lt; 60);
+scores.every(s =&gt; s &gt;= 60);</code></pre>
+                    <p class="output-label">Same file: <code>../js/lesson.js</code>.</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Section 6</span>
-                    <span class="lesson-task__title">Part 6</span>
+                    <span class="lesson-task__tag">6</span>
+                    <span class="lesson-task__title"><code>reduce</code> — aggregation</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>[1,2,3].forEach(n =&gt; console.log(n*2));
-console.log([1,2,3].map(n =&gt; n*2))</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
+                    <p><code>arr.reduce((acc, current) =&gt; nextAcc, startingValue)</code> folds the array into one value.</p>
+                    <pre class="code-sample"><code>const nums = [1, 2, 3, 4, 5];
+const sum = nums.reduce((acc, n) =&gt; acc + n, 0);
+const max = nums.reduce((a, n) =&gt; (n &gt; a ? n : a), -Infinity);</code></pre>
+                    <p class="output-label">Same file: <code>../js/lesson.js</code>.</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Section 7</span>
-                    <span class="lesson-task__title">Part 7</span>
+                    <span class="lesson-task__tag">7</span>
+                    <span class="lesson-task__title">Spread <code>...</code></span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>console.log(&quot;---------------------------------------------------------------------&quot;);
-const scoring = [89,23,56,47,88,95];
-const pass = scoring.filter(n =&gt; n&gt;= 50);
-console.log(pass);</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 8</span>
-                    <span class="lesson-task__title">Part 8</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const fistFail = scoring.find(n =&gt; n&lt;30);
-console.log(fistFail)</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 9</span>
-                    <span class="lesson-task__title">Part 9</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>console.log(scoring.some(n =&gt; n&gt;90));</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 10</span>
-                    <span class="lesson-task__title">Part 10</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>console.log(scoring.every(n =&gt; n&gt;60));</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 11</span>
-                    <span class="lesson-task__title">Part 11</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>console.log(&quot;------------------------------------------------------------------&quot;)
-const numbers3 = [4,5,6,7,8];
-const max = numbers.reduce((a,n)=&gt; n&gt;a ? n : a, -Infinity);
-console.log(max)</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 12</span>
-                    <span class="lesson-task__title">Part 12</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const a = [1,2,3,4]
-const b = [5,6,7,8]</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 13</span>
-                    <span class="lesson-task__title">Part 13</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const acpy = [...a];
-console.log(acpy)</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 14</span>
-                    <span class="lesson-task__title">Part 14</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const merged = [...a,...b]
-console.log(merged)</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 15</span>
-                    <span class="lesson-task__title">Part 15</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const newele = [...a,99,...b]
-console.log(newele)</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 16</span>
-                    <span class="lesson-task__title">Part 16</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>console.log(Math.max(...a))</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
+                    <p>Copy <code>[...a]</code>, merge <code>[...a, ...b]</code>, or pass elements as arguments: <code>Math.max(...nums)</code>.</p>
+                    <pre class="code-sample"><code>const a = [1, 2, 3];
+const b = [4, 5, 6];
+[...a];
+[...a, ...b];
+[...a, 99, ...b];
+Math.max(...a);</code></pre>
+                    <p class="output-label">Same file: <code>../js/lesson.js</code>.</p>
                 </div>
             </details>
         </main>

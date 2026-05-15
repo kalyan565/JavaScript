@@ -1,102 +1,57 @@
-// —— Task 1 — reference solution ——
+// Task 1 — Cart manipulation (push, unshift, pop, splice mutate the array)
 
 const cart = ["bread", "milk", "eggs"];
 
 cart.push("butter");
 cart.unshift("rice");
-
-const lines1 = [];
-
-lines1.push('After push("butter") + unshift("rice"):');
-lines1.push(JSON.stringify(cart));
+console.log("Task 1 — cart after push('butter') and unshift('rice'):", cart);
 
 const removed = cart.pop();
-
-lines1.push("");
-lines1.push("pop() removed → " + JSON.stringify(removed));
-lines1.push("cart after pop → " + JSON.stringify(cart));
+console.log("Task 1 — pop() removed:", removed);
+console.log("Task 1 — cart after pop:", cart);
 
 cart.splice(1, 1);
+console.log("Task 1 — cart after splice(1, 1):", cart);
 
-lines1.push("");
-lines1.push("After splice(1, 1) → " + JSON.stringify(cart));
-
-document.querySelector("#task1Output").textContent =
-    lines1.join("\n");
-
-
-
-// —— Task 2 — reference solution ——
+// Task 2 — Filter, find, every, some
 
 const scores = [88, 42, 75, 60, 91, 39, 55, 70];
 
 const passing = scores.filter((s) => s >= 60);
+console.log("Task 2 — passing (>= 60):", passing);
 
 const firstFail = scores.find((s) => s < 60);
+console.log("Task 2 — first failing score:", firstFail);
 
-const allPass = scores.every((s) => s >= 60);
+console.log("Task 2 — all passing?", scores.every((s) => s >= 60));
 
-const anyAbove90 = scores.some((s) => s > 90);
+console.log("Task 2 bonus — any score > 90?", scores.some((s) => s > 90));
 
-const lines2 = [];
-
-lines2.push("filter (>= 60) → " + JSON.stringify(passing));
-lines2.push("find (first failing) → " + firstFail);
-lines2.push("every (all passing?) → " + allPass);
-lines2.push("Bonus: some (> 90?) → " + anyAbove90);
-
-document.querySelector("#task2Output").textContent =
-    lines2.join("\n");
-
-
-
-// —— Task 3 — reference solution ——
+// Task 3 — Map prices with 18% GST (original array unchanged)
 
 const prices = [100, 250, 500, 1200, 80];
 
-const withGst = prices.map((p) => {
-    return (p * 1.18).toFixed(2);
-});
+const withGst = prices.map((p) => p * 1.18);
+console.log("Task 3 — original prices:", prices);
+console.log("Task 3 — with 18% GST:", withGst);
 
-const lines3 = [];
+const withGstRounded = prices.map((p) => Number((p * 1.18).toFixed(2)));
+console.log(
+  "Task 3 bonus — rounded to 2 decimals (Number + toFixed):",
+  withGstRounded
+);
 
-lines3.push("original prices → " + JSON.stringify(prices));
-lines3.push("prices with GST → " + JSON.stringify(withGst));
-
-document.querySelector("#task3Output").textContent =
-    lines3.join("\n");
-
-
-
-// —— Bonus Task — reference solution ——
+// Bonus — reduce: total, max, filter + reduce
 
 const expenses = [250, 800, 120, 50, 1500, 75];
 
-const total = expenses.reduce((sum, value) => {
-    return sum + value;
-}, 0);
+const expenseTotal = expenses.reduce((sum, n) => sum + n, 0);
+console.log("Reduce bonus — total expenses:", expenseTotal);
 
-const highest = expenses.reduce((max, value) => {
+const maxExpense = expenses.reduce((max, n) => (n > max ? n : max), expenses[0]);
+console.log("Reduce bonus — highest single expense:", maxExpense);
 
-    if (value > max) {
-        return value;
-    }
-
-    return max;
-
-});
-
-const above100 = expenses
-    .filter((value) => value > 100)
-    .reduce((sum, value) => {
-        return sum + value;
-    }, 0);
-
-const lines4 = [];
-
-lines4.push("total expenses → " + total);
-lines4.push("highest expense → " + highest);
-lines4.push("expenses above 100 total → " + above100);
-
-document.querySelector("#task4Output").textContent =
-    lines4.join("\n");
+const totalAbove100 = expenses
+  .filter((n) => n > 100)
+  .reduce((sum, n) => sum + n, 0);
+console.log("Reduce bonus — total of expenses > 100:", totalAbove100);

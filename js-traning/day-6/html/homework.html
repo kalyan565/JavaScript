@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Day 6 — declarations, arrows, defaults — Homework</title>
+    <title>Day 6 — Functions — Homework</title>
     <link rel="preload" href="../../shared/css/style.css" as="style">
     <link rel="stylesheet" href="../../shared/css/style.css">
 </head>
@@ -11,103 +11,72 @@
     <div class="page-shell">
         <main class="page-main" id="main-content">
             <header class="page-title">
-                <p class="lesson-label">Day 6 — declarations, arrows, defaults</p>
+                <p class="lesson-label">Day 6 — Functions</p>
                 <h1>Homework</h1>
             </header>
 
             <details class="exercise" open>
                 <summary>
-                    <span class="lesson-task__tag">Problem 1</span>
-                    <span class="lesson-task__title">Part 1</span>
+                    <span class="lesson-task__tag">Task 1</span>
+                    <span class="lesson-task__title"><code>kmToMiles(km)</code></span>
                 </summary>
                 <div class="lesson-task__body">
+                    <ul class="task-spec">
+                        <li>Return distance in miles: <code>km * 0.621</code>.</li>
+                    </ul>
                     <pre class="code-sample"><code>function kmToMiles(km) {
   return km * 0.621;
 }</code></pre>
-                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
+                    <p class="output-label">Reference solution in <code>../js/homework.js</code> (loaded below). Open the console to see sample calls.</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Problem 2</span>
-                    <span class="lesson-task__title">Part 2</span>
+                    <span class="lesson-task__tag">Task 2</span>
+                    <span class="lesson-task__title"><code>gstAmount(price, rate = 18)</code></span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>console.log(kmToMiles(10));</code></pre>
-                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Problem 3</span>
-                    <span class="lesson-task__title">Part 3</span>
-                </summary>
-                <div class="lesson-task__body">
+                    <ul class="task-spec">
+                        <li>Return the tax amount for <code>price</code> at <code>rate</code> percent.</li>
+                        <li>Use default parameter <code>rate = 18</code> when the caller omits <code>rate</code>.</li>
+                    </ul>
                     <pre class="code-sample"><code>function gstAmount(price, rate = 18) {
   return (price * rate) / 100;
 }</code></pre>
-                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
+                    <p class="output-label">Same script in <code>../js/homework.js</code>.</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Problem 4</span>
-                    <span class="lesson-task__title">Part 4</span>
+                    <span class="lesson-task__tag">Task 3</span>
+                    <span class="lesson-task__title"><code>fullName(first, last)</code></span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>console.log(gstAmount(1000));</code></pre>
-                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Problem 5</span>
-                    <span class="lesson-task__title">Part 5</span>
-                </summary>
-                <div class="lesson-task__body">
+                    <ul class="task-spec">
+                        <li>Return the full name as a single string (e.g. first and last separated by a space).</li>
+                    </ul>
                     <pre class="code-sample"><code>function fullName(first, last) {
   return `${first} ${last}`;
 }</code></pre>
-                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
+                    <p class="output-label">Same script in <code>../js/homework.js</code>.</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Problem 6</span>
-                    <span class="lesson-task__title">Part 6</span>
+                    <span class="lesson-task__tag">Task 4</span>
+                    <span class="lesson-task__title"><code>isAdult(age)</code></span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>console.log(fullName(&quot;sai&quot;, &quot;Kalyan&quot;));</code></pre>
-                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Problem 7</span>
-                    <span class="lesson-task__title">Part 7</span>
-                </summary>
-                <div class="lesson-task__body">
+                    <ul class="task-spec">
+                        <li>Return <code>true</code> if <code>age</code> is 18 or older, otherwise <code>false</code>.</li>
+                    </ul>
                     <pre class="code-sample"><code>function isAdult(age) {
   return age &gt;= 18;
 }</code></pre>
-                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Problem 8</span>
-                    <span class="lesson-task__title">Part 8</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>console.log(isAdult(20));</code></pre>
-                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
+                    <p class="output-label">Same script in <code>../js/homework.js</code>.</p>
                 </div>
             </details>
         </main>

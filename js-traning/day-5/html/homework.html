@@ -17,142 +17,94 @@
 
             <details class="exercise" open>
                 <summary>
-                    <span class="lesson-task__tag">Problem 1</span>
-                    <span class="lesson-task__title">Part 1</span>
+                    <span class="lesson-task__tag">Task 1</span>
+                    <span class="lesson-task__title">FizzBuzz (<code>for</code> loop, 1–50)</span>
                 </summary>
                 <div class="lesson-task__body">
+                    <ul class="task-spec">
+                        <li>Print <code>Fizz</code> for multiples of 3, <code>Buzz</code> for multiples of 5, <code>FizzBuzz</code> for both, otherwise the number.</li>
+                    </ul>
                     <pre class="code-sample"><code>for (let i = 1; i &lt;= 50; i++) {
   if (i % 3 === 0 &amp;&amp; i % 5 === 0) {
-    console.log(&quot;FizzBuzz&quot;);
+    console.log("FizzBuzz");
   } else if (i % 3 === 0) {
-    console.log(&quot;Fizz&quot;);
+    console.log("Fizz");
   } else if (i % 5 === 0) {
-    console.log(&quot;Buzz&quot;);
+    console.log("Buzz");
   } else {
     console.log(i);
   }
 }</code></pre>
-                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
+                    <p class="output-label">Runs from <code>../js/homework.js</code> (loaded below). Check the console.</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Problem 2</span>
-                    <span class="lesson-task__title">Part 2</span>
+                    <span class="lesson-task__tag">Task 2</span>
+                    <span class="lesson-task__title"><code>while</code> — smallest <code>n</code> where <code>n² &gt; 1000</code></span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>let n = 1;</code></pre>
-                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
+                    <ul class="task-spec">
+                        <li>Start with <code>let n = 1</code>. Increment <code>n</code> while <code>n * n &lt;= 1000</code>.</li>
+                        <li>Log <code>n</code> after the loop (expect <strong>32</strong>: first integer whose square exceeds 1000).</li>
+                    </ul>
+                    <pre class="code-sample"><code>let n = 1;
 
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Problem 3</span>
-                    <span class="lesson-task__title">Part 3</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>while (n * n &lt;= 1000) {
+while (n * n &lt;= 1000) {
   n++;
-}</code></pre>
-                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
+}
+
+console.log(n); // 32</code></pre>
+                    <p class="output-label">Same script in <code>../js/homework.js</code>.</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Problem 4</span>
-                    <span class="lesson-task__title">Part 4</span>
+                    <span class="lesson-task__tag">Task 3</span>
+                    <span class="lesson-task__title">Nested <code>for</code> — star triangle (5 rows)</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>console.log(n); // 32</code></pre>
-                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Problem 5</span>
-                    <span class="lesson-task__title">Part 5</span>
-                </summary>
-                <div class="lesson-task__body">
+                    <ul class="task-spec">
+                        <li>Outer loop: rows 1–5. Inner loop: append <code>"*"</code> so row <code>i</code> has <code>i</code> stars.</li>
+                        <li>Log each row after the inner loop.</li>
+                    </ul>
                     <pre class="code-sample"><code>for (let i = 1; i &lt;= 5; i++) {
-  let row = &quot;&quot;;</code></pre>
-                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
+  let row = "";
 
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Problem 6</span>
-                    <span class="lesson-task__title">Part 6</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>for (let j = 1; j &lt;= i; j++) {
-    row += &quot;*&quot;;
-  }</code></pre>
-                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
+  for (let j = 1; j &lt;= i; j++) {
+    row += "*";
+  }
 
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Problem 7</span>
-                    <span class="lesson-task__title">Part 7</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>console.log(row);
+  console.log(row);
 }</code></pre>
-                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
+                    <p class="output-label">Same script in <code>../js/homework.js</code>.</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Problem 8</span>
-                    <span class="lesson-task__title">Part 8</span>
+                    <span class="lesson-task__tag">Task 4</span>
+                    <span class="lesson-task__title">Maximum with <code>for...of</code></span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const scores = [88, 72, 95, 60, 41];</code></pre>
-                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
+                    <ul class="task-spec">
+                        <li>Given <code>scores</code>, track the largest value using <code>for (const score of scores)</code>.</li>
+                        <li>Log the maximum (expect <strong>95</strong> for the sample array).</li>
+                    </ul>
+                    <pre class="code-sample"><code>const scores = [88, 72, 95, 60, 41];
 
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Problem 9</span>
-                    <span class="lesson-task__title">Part 9</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>let max = scores[0];</code></pre>
-                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
+let max = scores[0];
 
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Problem 10</span>
-                    <span class="lesson-task__title">Part 10</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>for (const score of scores) {
+for (const score of scores) {
   if (score &gt; max) {
     max = score;
   }
-}</code></pre>
-                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
+}
 
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Problem 11</span>
-                    <span class="lesson-task__title">Part 11</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>console.log(max);</code></pre>
-                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
+console.log(max);</code></pre>
+                    <p class="output-label">Same script in <code>../js/homework.js</code>.</p>
                 </div>
             </details>
         </main>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Day 10 — DOM basics — Lesson</title>
+    <title>Day 10 — DOM Manipulation Basics — Lesson</title>
     <link rel="preload" href="../../shared/css/style.css" as="style">
     <link rel="stylesheet" href="../../shared/css/style.css">
 </head>
@@ -11,237 +11,100 @@
     <div class="page-shell">
         <main class="page-main" id="main-content">
             <header class="page-title">
-                <p class="lesson-label">Day 10 — DOM basics</p>
+                <p class="lesson-label">Day 10 — DOM Manipulation Basics</p>
                 <h1>Lesson</h1>
             </header>
 
             <details class="exercise" open>
                 <summary>
-                    <span class="lesson-task__tag">Topic 1</span>
-                    <span class="lesson-task__title">Part 1</span>
+                    <span class="lesson-task__tag">1</span>
+                    <span class="lesson-task__title">What is the DOM?</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const title = document.querySelector(&quot;#title&quot;);</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
+                    <p>The browser parses your HTML and builds a <strong>tree of objects</strong> in memory. That tree is the <strong>Document Object Model (DOM)</strong>. JavaScript reads and updates that tree; the browser re-renders. The entry point is <code>document</code>.</p>
+                    <pre class="code-sample"><code>// Conceptual tree:
+// document
+//   └── html
+//         └── body
+//               ├── h1#title
+//               └── button.btn
+
+console.log(document.documentElement);</code></pre>
+                    <p class="output-label"><code>../js/lesson.js</code> injects a small demo box at the bottom of the page, then runs the topics. Open the <strong>console</strong> (F12). In Node, the script only logs that you need a browser.</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Section 2</span>
-                    <span class="lesson-task__title">Part 2</span>
+                    <span class="lesson-task__tag">2</span>
+                    <span class="lesson-task__title">Selecting elements</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>title.textContent = &quot;Hello, kalyan&quot;;
-title.style.color = &quot;crimson&quot;;
-title.style.fontFamily = &quot;Georgia, serif&quot;;</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
+                    <p>Prefer <code>querySelector</code> / <code>querySelectorAll</code> (CSS selectors). <code>querySelectorAll</code> returns a <strong>NodeList</strong> — <code>forEach</code> works; use <code>[...nodeList]</code> if you need <code>map</code> / <code>filter</code>.</p>
+                    <pre class="code-sample"><code>document.getElementById(&quot;day10-title&quot;);
+document.querySelector(&quot;.btn&quot;);
+document.querySelectorAll(&quot;.btn&quot;);
+[...document.querySelectorAll(&quot;.btn&quot;)];</code></pre>
+                    <p class="output-label">Same file: <code>../js/lesson.js</code> (queries are scoped to the injected sandbox where noted).</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Section 3</span>
-                    <span class="lesson-task__title">Part 3</span>
+                    <span class="lesson-task__tag">3</span>
+                    <span class="lesson-task__title"><code>textContent</code> vs <code>innerHTML</code></span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const themeBtn = document.getElementById(&quot;theme-btn&quot;)</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
+                    <p><code>textContent</code> is plain text — tags show as characters (safe). <code>innerHTML</code> parses HTML — <strong>never</strong> assign untrusted user input (XSS risk).</p>
+                    <pre class="code-sample"><code>el.textContent = &quot;&lt;em&gt;Hi&lt;/em&gt;&quot;; // shows angle brackets
+el.innerHTML = &quot;&lt;em&gt;Hi&lt;/em&gt;&quot;;     // renders emphasis</code></pre>
+                    <p class="output-label">Same file: <code>../js/lesson.js</code>.</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Section 4</span>
-                    <span class="lesson-task__title">Part 4</span>
+                    <span class="lesson-task__tag">4</span>
+                    <span class="lesson-task__title">Styles and <code>classList</code></span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>document.body.classList.toggle(&quot;dark&quot;);</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
+                    <p>Inline: <code>el.style.color</code> (camelCase for CSS properties). Prefer <strong>classes</strong> in CSS and <code>classList.add</code> / <code>remove</code> / <code>toggle</code> / <code>contains</code> from JS.</p>
+                    <pre class="code-sample"><code>title.style.color = &quot;red&quot;;
+title.style.backgroundColor = &quot;yellow&quot;;
+title.classList.add(&quot;highlight&quot;);
+title.classList.toggle(&quot;active&quot;);</code></pre>
+                    <p class="output-label">Same file: <code>../js/lesson.js</code>.</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Section 5</span>
-                    <span class="lesson-task__title">Part 5</span>
+                    <span class="lesson-task__tag">5</span>
+                    <span class="lesson-task__title">Creating elements</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const names = [&quot;Priya&quot;, &quot;Aarav&quot;, &quot;Riya&quot;, &quot;Kabir&quot;];</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
+                    <p><code>document.createElement</code> → set <code>textContent</code> / attributes / classes → <code>appendChild</code>, <code>prepend</code>, or <code>append</code>. Nothing appears until it is inserted.</p>
+                    <pre class="code-sample"><code>const li = document.createElement(&quot;li&quot;);
+li.textContent = &quot;Buy milk&quot;;
+li.classList.add(&quot;todo-item&quot;);
+list.appendChild(li);
+list.prepend(anotherLi);</code></pre>
+                    <p class="output-label">Same file: <code>../js/lesson.js</code>.</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Section 6</span>
-                    <span class="lesson-task__title">Part 6</span>
+                    <span class="lesson-task__tag">6</span>
+                    <span class="lesson-task__title">Removing elements</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const nameList = document.getElementById(&quot;names-list&quot;);</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
-                </div>
-            </details>
+                    <p><code>element.remove()</code> removes a node from its parent. Clearing children with <code>parent.innerHTML = &quot;&quot;</code> is quick but not always ideal.</p>
+                    <pre class="code-sample"><code>const li = document.querySelector(&quot;#todo-1&quot;);
+li.remove();
 
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 7</span>
-                    <span class="lesson-task__title">Part 7</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>names.forEach((name,index) =&gt; {
-    const li = document.createElement(&quot;li&quot;)</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 8</span>
-                    <span class="lesson-task__title">Part 8</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>li.textContent = `${index+1}. ${name}`;</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 9</span>
-                    <span class="lesson-task__title">Part 9</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>li.classList.add(&quot;name-item&quot;)</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 10</span>
-                    <span class="lesson-task__title">Part 10</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>nameList.appendChild(li);
-})</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 11</span>
-                    <span class="lesson-task__title">Part 11</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const product = { name: &quot;Laptop&quot;, price: 60000, brand: &quot;Dell&quot; };</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 12</span>
-                    <span class="lesson-task__title">Part 12</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const container = document.getElementById(&quot;cards&quot;)</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 13</span>
-                    <span class="lesson-task__title">Part 13</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const card = document.createElement(&quot;div&quot;) 
-card.classList.add(&quot;card&quot;)</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 14</span>
-                    <span class="lesson-task__title">Part 14</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const title1 = document.createElement(&quot;h3&quot;)
-title1.textContent = product.name</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 15</span>
-                    <span class="lesson-task__title">Part 15</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const brand = document.createElement(&quot;p&quot;)
-brand.textContent = product.brand</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 16</span>
-                    <span class="lesson-task__title">Part 16</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const price = document.createElement(&quot;span&quot;)
-price.textContent = product.price</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 17</span>
-                    <span class="lesson-task__title">Part 17</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>card.append(title1)
-card.append(brand)
-card.append(price)</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 18</span>
-                    <span class="lesson-task__title">Part 18</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>container.appendChild(card)</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 19</span>
-                    <span class="lesson-task__title">Part 19</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>container.style.backgroundColor = &quot;red&quot;;</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 20</span>
-                    <span class="lesson-task__title">container.style.minHeight = &quot;100px&quot;;</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>// container.style.minHeight = &quot;100px&quot;;</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
+list.innerHTML = &quot;&quot;;</code></pre>
+                    <p class="output-label">Same file: <code>../js/lesson.js</code> (uses <code>#day10-todo-1</code> in the demo).</p>
                 </div>
             </details>
         </main>

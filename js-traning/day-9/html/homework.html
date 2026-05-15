@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Day 9 — ES6+ patterns — Homework</title>
+    <title>Day 9 — ES6+ Essentials — Homework</title>
     <link rel="preload" href="../../shared/css/style.css" as="style">
     <link rel="stylesheet" href="../../shared/css/style.css">
 </head>
@@ -11,87 +11,72 @@
     <div class="page-shell">
         <main class="page-main" id="main-content">
             <header class="page-title">
-                <p class="lesson-label">Day 9 — ES6+ patterns</p>
+                <p class="lesson-label">Day 9 — ES6+ Essentials</p>
                 <h1>Homework</h1>
             </header>
 
             <details class="exercise" open>
                 <summary>
-                    <span class="lesson-task__tag">Problem 1</span>
-                    <span class="lesson-task__title">Part 1</span>
+                    <span class="lesson-task__tag">Task 1</span>
+                    <span class="lesson-task__title">Template literal from an object</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const obj = { first: &quot;Priya&quot;, last: &quot;Sharma&quot;, city: &quot;Jaipur&quot; };
-console.log(`${first} ${last} from ${city}`)</code></pre>
-                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
+                    <ul class="task-spec">
+                        <li>Use <code>{ first: &quot;Priya&quot;, last: &quot;Sharma&quot;, city: &quot;Jaipur&quot; }</code> and a template literal to print <code>Priya Sharma from Jaipur</code>.</li>
+                    </ul>
+                    <pre class="code-sample"><code>const person = { first: &quot;Priya&quot;, last: &quot;Sharma&quot;, city: &quot;Jaipur&quot; };
+const { first, last, city } = person;
+console.log(`${first} ${last} from ${city}`);</code></pre>
+                    <p class="output-label">Reference: <code>../js/homework.js</code>. Open the console (F12).</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Problem 2</span>
-                    <span class="lesson-task__title">Part 2</span>
+                    <span class="lesson-task__tag">Task 2</span>
+                    <span class="lesson-task__title">Array destructuring + rest</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const arr = [1,2,3,4,5,6]
-const [head,...tail] = arr;
-console.log(head)
-console.log(tail)</code></pre>
-                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
+                    <ul class="task-spec">
+                        <li>Split <code>[1, 2, 3, 4, 5, 6]</code> into <code>head</code> and <code>...tail</code>. Log both.</li>
+                    </ul>
+                    <pre class="code-sample"><code>const nums = [1, 2, 3, 4, 5, 6];
+const [head, ...tail] = nums;
+console.log(head, tail);</code></pre>
+                    <p class="output-label">Reference: <code>../js/homework.js</code>.</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Problem 3</span>
-                    <span class="lesson-task__title">Part 3</span>
+                    <span class="lesson-task__tag">Task 3</span>
+                    <span class="lesson-task__title"><code>multiply(...nums)</code></span>
                 </summary>
                 <div class="lesson-task__body">
+                    <ul class="task-spec">
+                        <li>Use <strong>rest</strong> parameters and <strong>reduce</strong> to multiply any number of arguments.</li>
+                    </ul>
                     <pre class="code-sample"><code>function multiply(...nums) {
-    return nums.reduce((a,c) =&gt; a*c,1);
+  return nums.reduce((acc, n) =&gt; acc * n, 1);
 }</code></pre>
-                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
+                    <p class="output-label">Reference: <code>../js/homework.js</code> (includes sample calls). With no arguments, <code>reduce</code> on an empty array returns the initial value <code>1</code> (empty product).</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Problem 4</span>
-                    <span class="lesson-task__title">Part 4</span>
+                    <span class="lesson-task__tag">Task 4</span>
+                    <span class="lesson-task__title">Object spread without mutating</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>console.log(multiply(2, 3, 4));  
-console.log(multiply(5));        
-console.log(multiply());</code></pre>
-                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Problem 5</span>
-                    <span class="lesson-task__title">Part 5</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const user = {
-  name: &quot;Aarav&quot;,
-  age: 21,
-  city: &quot;Delhi&quot;
-};</code></pre>
-                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Problem 6</span>
-                    <span class="lesson-task__title">Part 6</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const updatedUser = {...user,age: 22};
-console.log(user);        
-console.log(updatedUser)</code></pre>
-                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
+                    <ul class="task-spec">
+                        <li>Use object spread to change one property on a <strong>new</strong> object and verify the original is unchanged.</li>
+                    </ul>
+                    <pre class="code-sample"><code>const user = { name: &quot;Aarav&quot;, age: 21, city: &quot;Delhi&quot; };
+const updatedUser = { ...user, age: 22 };
+console.log(user);
+console.log(updatedUser);</code></pre>
+                    <p class="output-label">Reference: <code>../js/homework.js</code>.</p>
                 </div>
             </details>
         </main>

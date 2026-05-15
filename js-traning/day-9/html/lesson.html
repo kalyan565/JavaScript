@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Day 9 — ES6+ patterns — Lesson</title>
+    <title>Day 9 — ES6+ Essentials — Lesson</title>
     <link rel="preload" href="../../shared/css/style.css" as="style">
     <link rel="stylesheet" href="../../shared/css/style.css">
 </head>
@@ -11,92 +11,146 @@
     <div class="page-shell">
         <main class="page-main" id="main-content">
             <header class="page-title">
-                <p class="lesson-label">Day 9 — ES6+ patterns</p>
+                <p class="lesson-label">Day 9 — ES6+ Essentials</p>
                 <h1>Lesson</h1>
             </header>
 
             <details class="exercise" open>
                 <summary>
-                    <span class="lesson-task__tag">Topic 1</span>
-                    <span class="lesson-task__title">Part 1</span>
+                    <span class="lesson-task__tag">1</span>
+                    <span class="lesson-task__title">Template literals</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const address = `MI Road
-Jaipur 302001
-Rajasthan`;</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
+                    <p>Use <strong>backticks</strong> for <code>${expression}</code> interpolation, multiline text without <code>\n</code>, and embedded expressions (ternaries, math, function calls).</p>
+                    <pre class="code-sample"><code>const personName = &quot;Priya&quot;;
+const personAge = 24;
+const msg = `Hello, ${personName}. You are ${personAge} years old.`;
+
+const address = `MI Road
+Jaipur 302001`;
+
+const taxed = `₹${(1000 * 1.18).toFixed(2)}`;</code></pre>
+                    <p class="output-label">Runs in <code>../js/lesson.js</code>. Open the console (F12). (Script uses <code>personName</code> / <code>personAge</code> so it does not clash with <code>window.name</code> in the browser.)</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Section 2</span>
-                    <span class="lesson-task__title">Part 2</span>
+                    <span class="lesson-task__tag">2</span>
+                    <span class="lesson-task__title">Array destructuring</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>console.log(address)</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
+                    <p>Unpack by position: skip slots with commas, supply defaults, swap with <code>[x, y] = [y, x]</code>, gather the rest with <code>...tail</code>.</p>
+                    <pre class="code-sample"><code>const colors = [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;];
+const [first, second, third] = colors;
+const [, , last] = colors;
+const [a, b, c, d = &quot;yellow&quot;] = colors;
+
+let x = 1, y = 2;
+[x, y] = [y, x];
+
+const [head, ...tail] = [1, 2, 3, 4, 5];</code></pre>
+                    <p class="output-label">Same file: <code>../js/lesson.js</code>.</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Section 3</span>
-                    <span class="lesson-task__title">Part 3</span>
+                    <span class="lesson-task__tag">3</span>
+                    <span class="lesson-task__title">Object destructuring (deeper)</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const address1 = `Mi road \n Jaipur 324324 \n Rajsthan`
-console.log(address1)</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
+                    <p>Nested: <code>const { address: { city } } = user</code> creates <code>city</code> only. Rename, defaults, <code>...</code>rest, and destructuring in parameters — often with <code>= {}</code> defaults.</p>
+                    <pre class="code-sample"><code>const user = {
+  name: &quot;Aarav&quot;,
+  age: 22,
+  address: { city: &quot;Jaipur&quot;, pincode: &quot;302001&quot; },
+};
+
+const { address: { city } } = user;
+const { name: userName, phone = &quot;N/A&quot; } = user;
+const { name: onlyName, ...userRest } = user;
+
+const greet = ({ name, age }) =&gt; `${name} is ${age}`;
+const showInfo = ({ name = &quot;Guest&quot;, role = &quot;User&quot; } = {}) =&gt;
+  `${role}: ${name}`;</code></pre>
+                    <p class="output-label">Same file: <code>../js/lesson.js</code> (see also follow-along <code>u</code> / <code>restU</code>).</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Section 4</span>
-                    <span class="lesson-task__title">Part 4</span>
+                    <span class="lesson-task__tag">4</span>
+                    <span class="lesson-task__title">Rest parameters</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const colors = [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;];</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
+                    <p><strong>Rest</strong> collects extra arguments into an array. It must be the <strong>last</strong> parameter. (Spread expands; rest collects — same <code>...</code>, different place.)</p>
+                    <pre class="code-sample"><code>function sum(...numbers) {
+  return numbers.reduce((acc, n) =&gt; acc + n, 0);
+}
+
+function greet(greeting, ...names) {
+  return names.map((n) =&gt; `${greeting}, ${n}`).join(&quot; | &quot;);
+}
+
+const max = (...n) =&gt; Math.max(...n);</code></pre>
+                    <p class="output-label">Same file: <code>../js/lesson.js</code>.</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Section 5</span>
-                    <span class="lesson-task__title">Part 5</span>
+                    <span class="lesson-task__tag">5</span>
+                    <span class="lesson-task__title">Spread — arrays and objects</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const [first, second, third] = colors;
-console.log(first, second, third);</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
+                    <p>Array spread merges or copies elements. Object spread copies properties; <strong>later</strong> spreads override earlier keys on conflicts.</p>
+                    <pre class="code-sample"><code>const arrA = [1, 2, 3];
+const arrB = [4, 5, 6];
+console.log([...arrA, ...arrB]);
+
+const profile = { name: &quot;Priya&quot;, age: 24, city: &quot;Jaipur&quot; };
+const updated = { ...profile, age: 25 };
+
+const defaults = { theme: &quot;light&quot;, notifications: true };
+const userPrefs = { theme: &quot;dark&quot; };
+const finalPrefs = { ...defaults, ...userPrefs };</code></pre>
+                    <p class="output-label">Same file: <code>../js/lesson.js</code>.</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Section 6</span>
-                    <span class="lesson-task__title">Part 6</span>
+                    <span class="lesson-task__tag">6</span>
+                    <span class="lesson-task__title"><code>||</code> vs <code>??</code></span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const showInfo = ({ name = &quot;Guest&quot;, role = &quot;User&quot;, city } = {}) =&gt;
-  `${role}: ${name} : ${city}`;
-console.log(showInfo());                
-console.log(showInfo({ name: &quot;Riya&quot;, city : &quot;xyz&quot; })); 
-console.log(showInfo({city : &quot;xyz&quot;}))</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
+                    <p><code>||</code> falls back when the left side is <strong>any</strong> falsy value. <code>??</code> falls back only for <code>null</code> or <code>undefined</code> — so <code>0</code> and <code>&quot;&quot;</code> can be kept.</p>
+                    <pre class="code-sample"><code>console.log(0 || &quot;default&quot;);
+console.log(0 ?? &quot;default&quot;);
+
+const userInputCount = 0;
+const count = userInputCount ?? 1;</code></pre>
+                    <p class="output-label">Same file: <code>../js/lesson.js</code>.</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Section 7</span>
-                    <span class="lesson-task__title">Part 7</span>
+                    <span class="lesson-task__tag">7</span>
+                    <span class="lesson-task__title">Computed property names</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>console.log(&quot;--------------------------------------------------------------------------&quot;)</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
+                    <p>Use <code>[expression]</code> as a key inside an object literal instead of assigning after the fact.</p>
+                    <pre class="code-sample"><code>const fieldName = &quot;email&quot;;
+const fieldValue = &quot;priya@x.in&quot;;
+
+const user2 = {
+  name: &quot;Priya&quot;,
+  [fieldName]: fieldValue,
+  [`is_${fieldName}_verified`]: true,
+};</code></pre>
+                    <p class="output-label">Same file: <code>../js/lesson.js</code>.</p>
                 </div>
             </details>
         </main>

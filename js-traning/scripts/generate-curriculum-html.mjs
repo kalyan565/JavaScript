@@ -272,6 +272,22 @@ function main() {
             if (dayNum === 2 && page === "homework") continue;
             if (dayNum === 3 && page === "hands-on") continue;
             if (dayNum === 3 && page === "homework") continue;
+            if (dayNum === 4 && page === "hands-on") continue;
+            if (dayNum === 5 && page === "homework") continue;
+            if (dayNum === 6 && page === "lesson") continue;
+            if (dayNum === 6 && page === "hands-on") continue;
+            if (dayNum === 6 && page === "homework") continue;
+            if (dayNum === 7 && page === "lesson") continue;
+            if (dayNum === 7 && page === "hands-on") continue;
+            if (dayNum === 7 && page === "homework") continue;
+            if (dayNum === 8 && page === "lesson") continue;
+            if (dayNum === 8 && page === "hands-on") continue;
+            if (dayNum === 8 && page === "homework") continue;
+            if (dayNum === 9 && page === "lesson") continue;
+            if (dayNum === 9 && page === "hands-on") continue;
+            if (dayNum === 9 && page === "homework") continue;
+            if (dayNum === 10 && page === "lesson") continue;
+            if (dayNum === 10 && page === "hands-on") continue;
 
             const baseName =
                 page === "lesson"

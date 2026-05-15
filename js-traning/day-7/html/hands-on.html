@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Day 7 — Arrays — basics and iteration — Hands-on</title>
+    <title>Day 7 — Arrays — Hands-on</title>
     <link rel="preload" href="../../shared/css/style.css" as="style">
     <link rel="stylesheet" href="../../shared/css/style.css">
 </head>
@@ -11,428 +11,98 @@
     <div class="page-shell">
         <main class="page-main" id="main-content">
             <header class="page-title">
-                <p class="lesson-label">Day 7 — Arrays — basics and iteration</p>
+                <p class="lesson-label">Day 7 — Arrays</p>
                 <h1>Hands-on</h1>
             </header>
 
             <details class="exercise" open>
                 <summary>
-                    <span class="lesson-task__tag">Topic 1</span>
-                    <span class="lesson-task__title">—— Task 1 — reference solution ——</span>
+                    <span class="lesson-task__tag">Task 1</span>
+                    <span class="lesson-task__title">Cart manipulation</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>// —— Task 1 — reference solution ——</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
+                    <ul class="task-spec">
+                        <li>Start with <code>const cart = [&quot;bread&quot;, &quot;milk&quot;, &quot;eggs&quot;];</code></li>
+                        <li>Use <code>push</code> to add <code>&quot;butter&quot;</code>, then <code>unshift</code> to add <code>&quot;rice&quot;</code> at the start. Log the cart.</li>
+                        <li>Use <code>pop</code> to remove the last item. Log what was removed and the new cart.</li>
+                        <li>Use <code>splice(1, 1)</code> to remove one item at index 1. Log the cart afterward.</li>
+                    </ul>
+                    <pre class="code-sample"><code>const cart = [&quot;bread&quot;, &quot;milk&quot;, &quot;eggs&quot;];
+cart.push(&quot;butter&quot;);
+cart.unshift(&quot;rice&quot;);
+console.log(cart);
+
+const removed = cart.pop();
+console.log(removed, cart);
+
+cart.splice(1, 1);
+console.log(cart);</code></pre>
+                    <p class="output-label">Reference: <code>../js/hands-on.js</code> (loaded below). Open DevTools → Console.</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Section 2</span>
-                    <span class="lesson-task__title">Part 2</span>
+                    <span class="lesson-task__tag">Task 2</span>
+                    <span class="lesson-task__title">Filter passing scores</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const cart = [&quot;bread&quot;, &quot;milk&quot;, &quot;eggs&quot;];</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
+                    <ul class="task-spec">
+                        <li><code>const scores = [88, 42, 75, 60, 91, 39, 55, 70];</code></li>
+                        <li><code>filter</code> → new array of scores <code>&gt;= 60</code>. Log it.</li>
+                        <li><code>find</code> → the <strong>first</strong> failing score (<code>&lt; 60</code>). Log it.</li>
+                        <li><code>every</code> → are <strong>all</strong> passing? Log the boolean.</li>
+                        <li><strong>Bonus:</strong> <code>some</code> → is <strong>any</strong> score above <code>90</code>?</li>
+                    </ul>
+                    <pre class="code-sample"><code>const scores = [88, 42, 75, 60, 91, 39, 55, 70];
+const passing = scores.filter((s) =&gt; s &gt;= 60);
+const firstFail = scores.find((s) =&gt; s &lt; 60);
+console.log(passing, firstFail, scores.every((s) =&gt; s &gt;= 60));
+console.log(scores.some((s) =&gt; s &gt; 90));</code></pre>
+                    <p class="output-label">Reference: <code>../js/hands-on.js</code>.</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Section 3</span>
-                    <span class="lesson-task__title">Part 3</span>
+                    <span class="lesson-task__tag">Task 3</span>
+                    <span class="lesson-task__title">Map prices with GST</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>cart.push(&quot;butter&quot;);
-cart.unshift(&quot;rice&quot;);</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
+                    <ul class="task-spec">
+                        <li><code>const prices = [100, 250, 500, 1200, 80];</code></li>
+                        <li>Use <code>map</code> so each value includes <strong>18% GST</strong> (multiply by <code>1.18</code>). Log original and new array — original unchanged.</li>
+                        <li><strong>Bonus:</strong> round with <code>.toFixed(2)</code> (returns a string; wrap with <code>Number(...)</code> if you want numbers).</li>
+                    </ul>
+                    <pre class="code-sample"><code>const prices = [100, 250, 500, 1200, 80];
+const withGst = prices.map((p) =&gt; p * 1.18);
+console.log(prices, withGst);
+const rounded = prices.map((p) =&gt; Number((p * 1.18).toFixed(2)));
+console.log(rounded);</code></pre>
+                    <p class="output-label">Reference: <code>../js/hands-on.js</code>.</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Section 4</span>
-                    <span class="lesson-task__title">Part 4</span>
+                    <span class="lesson-task__tag">Bonus</span>
+                    <span class="lesson-task__title">Reduce — total, max, filter + reduce</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const lines1 = [];</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 5</span>
-                    <span class="lesson-task__title">Part 5</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>lines1.push('After push(&quot;butter&quot;) + unshift(&quot;rice&quot;):');
-lines1.push(JSON.stringify(cart));</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 6</span>
-                    <span class="lesson-task__title">Part 6</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const removed = cart.pop();</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 7</span>
-                    <span class="lesson-task__title">Part 7</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>lines1.push(&quot;&quot;);
-lines1.push(&quot;pop() removed → &quot; + JSON.stringify(removed));
-lines1.push(&quot;cart after pop → &quot; + JSON.stringify(cart));</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 8</span>
-                    <span class="lesson-task__title">Part 8</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>cart.splice(1, 1);</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 9</span>
-                    <span class="lesson-task__title">Part 9</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>lines1.push(&quot;&quot;);
-lines1.push(&quot;After splice(1, 1) → &quot; + JSON.stringify(cart));</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 10</span>
-                    <span class="lesson-task__title">Part 10</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>document.querySelector(&quot;#task1Output&quot;).textContent =
-    lines1.join(&quot;\n&quot;);</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 11</span>
-                    <span class="lesson-task__title">—— Task 2 — reference solution ——</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>// —— Task 2 — reference solution ——</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 12</span>
-                    <span class="lesson-task__title">Part 12</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const scores = [88, 42, 75, 60, 91, 39, 55, 70];</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 13</span>
-                    <span class="lesson-task__title">Part 13</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const passing = scores.filter((s) =&gt; s &gt;= 60);</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 14</span>
-                    <span class="lesson-task__title">Part 14</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const firstFail = scores.find((s) =&gt; s &lt; 60);</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 15</span>
-                    <span class="lesson-task__title">Part 15</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const allPass = scores.every((s) =&gt; s &gt;= 60);</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 16</span>
-                    <span class="lesson-task__title">Part 16</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const anyAbove90 = scores.some((s) =&gt; s &gt; 90);</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 17</span>
-                    <span class="lesson-task__title">Part 17</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const lines2 = [];</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 18</span>
-                    <span class="lesson-task__title">Part 18</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>lines2.push(&quot;filter (&gt;= 60) → &quot; + JSON.stringify(passing));
-lines2.push(&quot;find (first failing) → &quot; + firstFail);
-lines2.push(&quot;every (all passing?) → &quot; + allPass);
-lines2.push(&quot;Bonus: some (&gt; 90?) → &quot; + anyAbove90);</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 19</span>
-                    <span class="lesson-task__title">Part 19</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>document.querySelector(&quot;#task2Output&quot;).textContent =
-    lines2.join(&quot;\n&quot;);</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 20</span>
-                    <span class="lesson-task__title">—— Task 3 — reference solution ——</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>// —— Task 3 — reference solution ——</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 21</span>
-                    <span class="lesson-task__title">Part 21</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const prices = [100, 250, 500, 1200, 80];</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 22</span>
-                    <span class="lesson-task__title">Part 22</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const withGst = prices.map((p) =&gt; {
-    return (p * 1.18).toFixed(2);
-});</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 23</span>
-                    <span class="lesson-task__title">Part 23</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const lines3 = [];</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 24</span>
-                    <span class="lesson-task__title">Part 24</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>lines3.push(&quot;original prices → &quot; + JSON.stringify(prices));
-lines3.push(&quot;prices with GST → &quot; + JSON.stringify(withGst));</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 25</span>
-                    <span class="lesson-task__title">Part 25</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>document.querySelector(&quot;#task3Output&quot;).textContent =
-    lines3.join(&quot;\n&quot;);</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 26</span>
-                    <span class="lesson-task__title">—— Bonus Task — reference solution ——</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>// —— Bonus Task — reference solution ——</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 27</span>
-                    <span class="lesson-task__title">Part 27</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const expenses = [250, 800, 120, 50, 1500, 75];</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 28</span>
-                    <span class="lesson-task__title">Part 28</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const total = expenses.reduce((sum, value) =&gt; {
-    return sum + value;
-}, 0);</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 29</span>
-                    <span class="lesson-task__title">Part 29</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const highest = expenses.reduce((max, value) =&gt; {</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 30</span>
-                    <span class="lesson-task__title">Part 30</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>if (value &gt; max) {
-        return value;
-    }</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 31</span>
-                    <span class="lesson-task__title">Part 31</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>return max;</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 32</span>
-                    <span class="lesson-task__title">Part 32</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>});</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 33</span>
-                    <span class="lesson-task__title">Part 33</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const above100 = expenses
-    .filter((value) =&gt; value &gt; 100)
-    .reduce((sum, value) =&gt; {
-        return sum + value;
-    }, 0);</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 34</span>
-                    <span class="lesson-task__title">Part 34</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const lines4 = [];</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 35</span>
-                    <span class="lesson-task__title">Part 35</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>lines4.push(&quot;total expenses → &quot; + total);
-lines4.push(&quot;highest expense → &quot; + highest);
-lines4.push(&quot;expenses above 100 total → &quot; + above100);</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 36</span>
-                    <span class="lesson-task__title">Part 36</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>document.querySelector(&quot;#task4Output&quot;).textContent =
-    lines4.join(&quot;\n&quot;);</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
+                    <ul class="task-spec">
+                        <li><code>const expenses = [250, 800, 120, 50, 1500, 75];</code></li>
+                        <li><code>reduce</code> → total of all expenses.</li>
+                        <li><code>reduce</code> → highest single expense.</li>
+                        <li><strong>Bonus:</strong> chain <code>filter</code> + <code>reduce</code> to total only expenses <code>&gt; 100</code>.</li>
+                    </ul>
+                    <pre class="code-sample"><code>const expenses = [250, 800, 120, 50, 1500, 75];
+const total = expenses.reduce((sum, n) =&gt; sum + n, 0);
+const max = expenses.reduce((m, n) =&gt; (n &gt; m ? n : m), expenses[0]);
+const bigSum = expenses
+  .filter((n) =&gt; n &gt; 100)
+  .reduce((sum, n) =&gt; sum + n, 0);
+console.log(total, max, bigSum);</code></pre>
+                    <p class="output-label">Reference: <code>../js/hands-on.js</code>.</p>
                 </div>
             </details>
         </main>

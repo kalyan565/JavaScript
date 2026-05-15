@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Day 6 — declarations, arrows, defaults — Lesson</title>
+    <title>Day 6 — Functions — Lesson</title>
     <link rel="preload" href="../../shared/css/style.css" as="style">
     <link rel="stylesheet" href="../../shared/css/style.css">
 </head>
@@ -11,146 +11,135 @@
     <div class="page-shell">
         <main class="page-main" id="main-content">
             <header class="page-title">
-                <p class="lesson-label">Day 6 — declarations, arrows, defaults</p>
+                <p class="lesson-label">Day 6 — Functions</p>
                 <h1>Lesson</h1>
             </header>
 
             <details class="exercise" open>
                 <summary>
-                    <span class="lesson-task__tag">Topic 1</span>
-                    <span class="lesson-task__title">Part 1</span>
+                    <span class="lesson-task__tag">1</span>
+                    <span class="lesson-task__title">Function Declarations</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>function add(a,b) {
-    console.log(a+b);
+                    <pre class="code-sample"><code>function add(a, b) {
+  console.log(a + b);
 }
-add(2,3);</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
+add(2, 3);</code></pre>
+                    <p class="output-label">Runs in <code>../js/lesson.js</code>. Open the console (F12).</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Section 2</span>
-                    <span class="lesson-task__title">Part 2</span>
+                    <span class="lesson-task__tag">2</span>
+                    <span class="lesson-task__title">return — Functions Give Back Values</span>
                 </summary>
                 <div class="lesson-task__body">
                     <pre class="code-sample"><code>function xyz() {
-    console.log(&quot;hi&quot;);
+  console.log("hi");
 }
 const x = xyz();
-console.log(x);</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
-                </div>
-            </details>
+console.log("return value of xyz():", x); // undefined — no return
 
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 3</span>
-                    <span class="lesson-task__title">Part 3</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const greet = function(xyz) {
-    return &quot;hello, &quot; + xyz;
-}</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 4</span>
-                    <span class="lesson-task__title">Part 4</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>console.log(greet(&quot;kalyan&quot;));</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 5</span>
-                    <span class="lesson-task__title">Part 5</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const add1 = (a,b) =&gt; {
-    return a+b ;
-}</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 6</span>
-                    <span class="lesson-task__title">Part 6</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>console.log(add1(1,1));</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 7</span>
-                    <span class="lesson-task__title">Part 7</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const add2 = (a,b) =&gt; a+b;
-console.log(add2(2,2));</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 8</span>
-                    <span class="lesson-task__title">Part 8</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const square = x =&gt; x*x;
-console.log(square(4));</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 9</span>
-                    <span class="lesson-task__title">Part 9</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const greet1 = () =&gt; &quot;hello&quot;;
-console.log(greet1());</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 10</span>
-                    <span class="lesson-task__title">Part 10</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>console.log(&quot;-------------------------------------------------------&quot;)</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 11</span>
-                    <span class="lesson-task__title">Part 11</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>function greet2(name = &quot;kalyan&quot;) {
-    console.log(name);
+function double(n) {
+  return n * 2;
 }
-greet2(&quot;xyz&quot;);
+console.log("double(5):", double(5));</code></pre>
+                    <p class="output-label">Same file: <code>../js/lesson.js</code>.</p>
+                </div>
+            </details>
+
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">3</span>
+                    <span class="lesson-task__title">Function Expressions</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <pre class="code-sample"><code>const greet = function (name) {
+  return "hello, " + name;
+};
+console.log(greet("kalyan"));</code></pre>
+                    <p class="output-label">Same file: <code>../js/lesson.js</code>.</p>
+                </div>
+            </details>
+
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">4</span>
+                    <span class="lesson-task__title">Arrow Functions =&gt;</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <pre class="code-sample"><code>const add1 = (a, b) =&gt; {
+  return a + b;
+};
+console.log(add1(1, 1));
+
+const add2 = (a, b) =&gt; a + b;
+console.log(add2(2, 2));
+
+const square = (x) =&gt; x * x;
+console.log(square(4));
+
+const greet1 = () =&gt; "hello";
+console.log(greet1());</code></pre>
+                    <p class="output-label">Same file: <code>../js/lesson.js</code>.</p>
+                </div>
+            </details>
+
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">5</span>
+                    <span class="lesson-task__title">Parameters &amp; Defaults</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <pre class="code-sample"><code>function greet2(name = "kalyan") {
+  console.log(name);
+}
+greet2("xyz");
 greet2();</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
+                    <p class="output-label">Same file: <code>../js/lesson.js</code>.</p>
+                </div>
+            </details>
+
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">6</span>
+                    <span class="lesson-task__title">Scope: Global vs Local</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <pre class="code-sample"><code>let outer = "I am outside the function";
+
+function demoScope() {
+  let inner = "I exist only inside demoScope";
+  console.log("inside — can read outer:", outer);
+  console.log("inside — inner:", inner);
+}
+
+demoScope();
+console.log("outside — outer:", outer);
+// console.log(inner); // ReferenceError</code></pre>
+                    <p class="output-label">Same file: <code>../js/lesson.js</code>.</p>
+                </div>
+            </details>
+
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">7</span>
+                    <span class="lesson-task__title">Pure Functions (Intro)</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <pre class="code-sample"><code>function addPure(a, b) {
+  return a + b;
+}
+console.log("pure:", addPure(2, 3), addPure(2, 3));
+
+let counter = 0;
+function impureBump() {
+  counter += 1;
+  return counter;
+}
+console.log("impure:", impureBump(), impureBump());</code></pre>
+                    <p class="output-label">Same file: <code>../js/lesson.js</code>.</p>
                 </div>
             </details>
         </main>

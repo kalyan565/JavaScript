@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Day 8 — Objects — literals and access — Hands-on</title>
+    <title>Day 8 — Objects — Hands-on</title>
     <link rel="preload" href="../../shared/css/style.css" as="style">
     <link rel="stylesheet" href="../../shared/css/style.css">
 </head>
@@ -11,103 +11,127 @@
     <div class="page-shell">
         <main class="page-main" id="main-content">
             <header class="page-title">
-                <p class="lesson-label">Day 8 — Objects — literals and access</p>
+                <p class="lesson-label">Day 8 — Objects</p>
                 <h1>Hands-on</h1>
             </header>
 
             <details class="exercise" open>
                 <summary>
-                    <span class="lesson-task__tag">Topic 1</span>
-                    <span class="lesson-task__title">Task 1</span>
+                    <span class="lesson-task__tag">Task 1</span>
+                    <span class="lesson-task__title">Build a <code>student</code> object</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>//Task 1
-const student = {
-    name : &quot;Anaya&quot;,
-    age : 21,
-    city : &quot;Jaipur&quot;,
-    Course : &quot;B.Tech&quot;,
-    marks : [87,98,99]
-}
-
-console.log(student)
-console.log(student.name)
-console.log(student.age)
-console.log(student.marks[0]);
-
-console.log(&quot;------------------------------------------------------------------------------------&quot;)
-
-student.email = &quot;xyz@gmail.com&quot;
-student.age = 23
-delete(student.city)
-
-console.log(student)
-console.log(student.name)
-console.log(student.age)
-console.log(student.marks[0]);
-
-console.log(&quot;------------------------------------------------------------------------------------&quot;)</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 2</span>
-                    <span class="lesson-task__title">Task 2</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>//Task 2
-const bankAccount = {
-    holder : &quot;kalyan&quot;,
-    balance : 5000,
-    deposit(val) {
-        this.balance = this.balance + val; 
-        return `The updated balance is ${this.balance}`
-    },
-    withDraw(val) {
-        if(this.balance &gt; val) {
-            this.balance = this.balance - val;
-            return `The remaining balance is ${this.balance}`
-        }
-        return &quot;Insufficient funds&quot;;
-    }
+                    <ul class="task-spec">
+                        <li>Properties: <code>name = &quot;Anaya&quot;</code>, <code>age = 21</code>, <code>city = &quot;Jaipur&quot;</code>, <code>course = &quot;B.Tech&quot;</code>, <code>marks</code> (array of 3 numbers).</li>
+                        <li>Log the student, then log <code>name</code>, <code>age</code>, and the <strong>first</strong> mark using dot notation.</li>
+                        <li>Add <code>email = &quot;anaya@example.com&quot;</code>, set <code>age</code> to <code>22</code>, <code>delete</code> <code>city</code>, and log the object again.</li>
+                    </ul>
+                    <pre class="code-sample"><code>const student = {
+  name: &quot;Anaya&quot;,
+  age: 21,
+  city: &quot;Jaipur&quot;,
+  course: &quot;B.Tech&quot;,
+  marks: [85, 90, 88],
 };
-console.log(bankAccount.deposit(1000));
-console.log(bankAccount.withDraw(2000));
-console.log(bankAccount.withDraw(10000));
 
-console.log(&quot;------------------------------------------------------------------------------------&quot;)</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
+console.log(student);
+console.log(student.name, student.age, student.marks[0]);
+
+student.email = &quot;anaya@example.com&quot;;
+student.age = 22;
+delete student.city;
+
+console.log(student);</code></pre>
+                    <p class="output-label">Same code runs from <code>../js/hands-on.js</code>. Open the console (F12).</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Section 3</span>
-                    <span class="lesson-task__title">Task 3</span>
+                    <span class="lesson-task__tag">Task 2</span>
+                    <span class="lesson-task__title"><code>bankAccount</code> methods and <code>this</code></span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>//Task 3
-const product = { id: 101, name: &quot;Laptop&quot;, price: 60000, brand: &quot;Dell&quot;, stock: 5 };
-const {name, price} = product;
-console.log(name)
-console.log(price)
+                    <ul class="task-spec">
+                        <li><code>holder = &quot;Aarav&quot;</code>, <code>balance = 5000</code>.</li>
+                        <li><code>deposit(amount)</code> adds to balance and returns the new balance.</li>
+                        <li><code>withdraw(amount)</code> subtracts only if the balance is enough; otherwise return <code>&quot;Insufficient funds&quot;</code>.</li>
+                        <li>Test: deposit <code>1000</code>, withdraw <code>2000</code>, withdraw <code>10000</code>.</li>
+                    </ul>
+                    <pre class="code-sample"><code>const bankAccount = {
+  holder: &quot;Aarav&quot;,
+  balance: 5000,
+  deposit(amount) {
+    this.balance += amount;
+    return this.balance;
+  },
+  withdraw(amount) {
+    if (this.balance &gt;= amount) {
+      this.balance -= amount;
+      return this.balance;
+    }
+    return &quot;Insufficient funds&quot;;
+  },
+};
 
-const {brand: make}  = product;
+console.log(bankAccount.deposit(1000));
+console.log(bankAccount.withdraw(2000));
+console.log(bankAccount.withdraw(10000));</code></pre>
+                    <p class="output-label">Same code runs from <code>../js/hands-on.js</code>.</p>
+                </div>
+            </details>
+
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">Task 3</span>
+                    <span class="lesson-task__title">Destructuring <code>product</code></span>
+                </summary>
+                <div class="lesson-task__body">
+                    <ul class="task-spec">
+                        <li>Object: <code>{ id: 101, name: &quot;Laptop&quot;, price: 60000, brand: &quot;Dell&quot;, stock: 5 }</code>.</li>
+                        <li>Destructure <code>name</code> and <code>price</code>; log them.</li>
+                        <li>Destructure <code>brand</code> renamed to <code>make</code>; log it.</li>
+                        <li>Destructure <code>warranty</code> with default <code>&quot;1 year&quot;</code> (property missing); log it.</li>
+                    </ul>
+                    <pre class="code-sample"><code>const product = {
+  id: 101,
+  name: &quot;Laptop&quot;,
+  price: 60000,
+  brand: &quot;Dell&quot;,
+  stock: 5,
+};
+
+const { name, price } = product;
+console.log(name, price);
+
+const { brand: make } = product;
 console.log(make);
 
-const {warrenty = 'one year'} = product;
-console.log(warrenty)
+const { warranty = &quot;1 year&quot; } = product;
+console.log(warranty);</code></pre>
+                    <p class="output-label">Same code runs from <code>../js/hands-on.js</code>.</p>
+                </div>
+            </details>
 
-
-//Bouns
-console.log(Object.keys(student))
-console.log(Object.values(student))
-console.log(Object.entries(student).forEach(([key,value]) =&gt; {
-    console.log(`${key} : ${value}`);
-} ) )</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">Bonus</span>
+                    <span class="lesson-task__title">Keys, values, entries, count</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <ul class="task-spec">
+                        <li>Use the <code>student</code> object from Task 1 (after edits).</li>
+                        <li>Log all keys with <code>Object.keys</code>, all values with <code>Object.values</code>.</li>
+                        <li>Use <code>Object.entries</code> with <code>forEach</code> to log each line as <code>key: value</code>.</li>
+                        <li>Bonus: count how many properties the object has.</li>
+                    </ul>
+                    <pre class="code-sample"><code>console.log(Object.keys(student));
+console.log(Object.values(student));
+Object.entries(student).forEach(([key, value]) =&gt; {
+  console.log(`${key}: ${value}`);
+});
+console.log(Object.keys(student).length);</code></pre>
+                    <p class="output-label">Same code runs from <code>../js/hands-on.js</code> (after Task 1 edits to <code>student</code>).</p>
                 </div>
             </details>
         </main>
