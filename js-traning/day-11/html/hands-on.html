@@ -3,140 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Day 11 — Events — Hands-on</title>
+    <title>Day 11 — Events &amp; Event Handling — Hands-on</title>
     <link rel="preload" href="../../shared/css/style.css" as="style">
     <link rel="stylesheet" href="../../shared/css/style.css">
+    <style>
+        .hands-on-demo {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+        }
+        .hands-on-demo #todo-list li.done {
+            text-decoration: line-through;
+            opacity: 0.5;
+        }
+    </style>
 </head>
 <body>
     <div class="page-shell">
         <main class="page-main" id="main-content">
             <header class="page-title">
-                <p class="lesson-label">Day 11 — Events</p>
+                <p class="lesson-label">Day 11 — Events &amp; Event Handling</p>
                 <h1>Hands-on</h1>
             </header>
 
+            <section class="hands-on-demo" aria-label="Event demos">
+                <p><button type="button" id="counter-btn">Click me</button></p>
+                <p>Clicks: <span id="count">0</span></p>
+                <p><input id="live-input" type="text" placeholder="Type something..." /></p>
+                <p id="preview">Start typing...</p>
+                <form id="reg-form">
+                    <input id="name-field" type="text" placeholder="Your name" />
+                    <button type="submit">Submit</button>
+                </form>
+                <p id="welcome"></p>
+                <ul id="todo-list">
+                    <li>Buy milk</li>
+                    <li>Walk dog</li>
+                    <li>Pay bills</li>
+                </ul>
+            </section>
+
             <details class="exercise" open>
                 <summary>
-                    <span class="lesson-task__tag">Topic 1</span>
-                    <span class="lesson-task__title">Part 1</span>
+                    <span class="lesson-task__tag">1</span>
+                    <span class="lesson-task__title">Click counter (<code>#counter-btn</code>, <code>#count</code>)</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const button = document.querySelector(&quot;#counter-btn&quot;)
-const countSpan = document.querySelector(&quot;#count&quot;)</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
+                    <p>Increment on each click; update the span. Bonus: from the 10th click, set the button text to <code>Stop clicking!</code></p>
+                    <pre class="code-sample"><code>const counterBtn = document.querySelector(&quot;#counter-btn&quot;);
+const countSpan = document.querySelector(&quot;#count&quot;);
+let clickCount = 0;
+counterBtn.addEventListener(&quot;click&quot;, () =&gt; {
+  clickCount += 1;
+  countSpan.textContent = String(clickCount);
+  if (clickCount &gt;= 10) counterBtn.textContent = &quot;Stop clicking!&quot;;
+});</code></pre>
+                    <p class="output-label">Reference: <code>../js/hands-on.js</code></p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Section 2</span>
-                    <span class="lesson-task__title">Part 2</span>
+                    <span class="lesson-task__tag">2</span>
+                    <span class="lesson-task__title">Live input preview (<code>#live-input</code>, <code>#preview</code>)</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>let count = 0;
-button.addEventListener(&quot;click&quot;, () =&gt; {
-    if(count &lt; 10) {
-        count++;
-        countSpan.textContent =  count;
-    } else  {
-        countSpan.textContent = &quot;Stop Clicking&quot;
-    }
-})</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
+                    <p>Use the <code>input</code> event. Bonus: when empty, show <code>Start typing...</code></p>
+                    <pre class="code-sample"><code>liveInput.addEventListener(&quot;input&quot;, (e) =&gt; {
+  const value = e.target.value;
+  preview.textContent = value === &quot;&quot; ? &quot;Start typing...&quot; : value;
+});</code></pre>
+                    <p class="output-label">Reference: <code>../js/hands-on.js</code></p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Section 3</span>
-                    <span class="lesson-task__title">Part 3</span>
+                    <span class="lesson-task__tag">3</span>
+                    <span class="lesson-task__title">Form <code>preventDefault</code> (<code>#reg-form</code>, <code>#welcome</code>)</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const LiveInput = document.querySelector(&quot;#live-input&quot;)
-const preview = document.querySelector(&quot;#preview&quot;)</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
+                    <p>On <code>submit</code>, <code>preventDefault</code>, read <code>#name-field</code>, set welcome with a template literal. Bonus: empty name → <code>Please enter your name</code>.</p>
+                    <pre class="code-sample"><code>regForm.addEventListener(&quot;submit&quot;, (e) =&gt; {
+  e.preventDefault();
+  const name = nameField.value.trim();
+  welcome.textContent =
+    name === &quot;&quot; ? &quot;Please enter your name&quot; : `Welcome, ${name}!`;
+});</code></pre>
+                    <p class="output-label">Reference: <code>../js/hands-on.js</code></p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Section 4</span>
-                    <span class="lesson-task__title">Part 4</span>
+                    <span class="lesson-task__tag">4</span>
+                    <span class="lesson-task__title">Event delegation (<code>#todo-list</code>)</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>LiveInput.addEventListener(&quot;keydown&quot;, (e) =&gt; {
-    preview.textContent = e.key;
-})</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 5</span>
-                    <span class="lesson-task__title">Part 5</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const regForm = document.querySelector(&quot;#reg-form&quot;)
-const nameFiled = document.querySelector(&quot;#name-field&quot;)
-const welcome = document.querySelector(&quot;#welcome&quot;)</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 6</span>
-                    <span class="lesson-task__title">Part 6</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>welcome.textContent = &quot;please enter your name&quot;
-regForm.addEventListener(&quot;submit&quot; , (e)=&gt; {
-    e.preventDefault();
-   
-    if(nameFiled === &quot;&quot;) {
-        welcome.textContent = &quot;please enter your name&quot;
-    } else {
-    welcome.textContent = `Welcome, ${nameFiled.value}`
-    }</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 7</span>
-                    <span class="lesson-task__title">Part 7</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>})</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 8</span>
-                    <span class="lesson-task__title">Part 8</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>document.querySelectorAll(&quot;#todo-list li&quot;).forEach(li =&gt; {
-  li.addEventListener(&quot;click&quot;, () =&gt; {
-    li.classList.toggle(&quot;done&quot;);
-    
-  });</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 9</span>
-                    <span class="lesson-task__title">Part 9</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>})</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
+                    <p>One <code>click</code> on the <code>&lt;ul&gt;</code>; toggle <code>done</code> only when <code>e.target.tagName === &quot;LI&quot;</code>. Bonus: <code>createElement(&quot;li&quot;)</code> + <code>appendChild</code> — still toggles without new listeners.</p>
+                    <pre class="code-sample"><code>todoList.addEventListener(&quot;click&quot;, (e) =&gt; {
+  if (e.target.tagName === &quot;LI&quot;) e.target.classList.toggle(&quot;done&quot;);
+});
+const bonusLi = document.createElement(&quot;li&quot;);
+bonusLi.textContent = &quot;Brand new task&quot;;
+todoList.appendChild(bonusLi);</code></pre>
+                    <p class="output-label">Reference: <code>../js/hands-on.js</code></p>
                 </div>
             </details>
         </main>

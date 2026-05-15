@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Day 12 — Errors and modules — Hands-on</title>
+    <title>Day 12 — Error Handling &amp; Module Basics — Hands-on</title>
     <link rel="preload" href="../../shared/css/style.css" as="style">
     <link rel="stylesheet" href="../../shared/css/style.css">
 </head>
@@ -11,137 +11,78 @@
     <div class="page-shell">
         <main class="page-main" id="main-content">
             <header class="page-title">
-                <p class="lesson-label">Day 12 — Errors and modules</p>
+                <p class="lesson-label">Day 12 — Error Handling &amp; Module Basics</p>
                 <h1>Hands-on</h1>
             </header>
 
+            <p class="output-label" style="margin-bottom:1rem;">Open DevTools → Console. Tasks 1–3 are in <code>../js/hands-on.js</code>. Bonus ES modules: <code>../js/mathUtils.js</code> + <code>../js/app.js</code> (loaded with <code>type="module"</code>).</p>
+
             <details class="exercise" open>
                 <summary>
-                    <span class="lesson-task__tag">Topic 1</span>
-                    <span class="lesson-task__title">Part 1</span>
+                    <span class="lesson-task__tag">1</span>
+                    <span class="lesson-task__title">Safe <code>JSON.parse</code> — <code>safeParse(str)</code></span>
                 </summary>
                 <div class="lesson-task__body">
+                    <p><code>try</code> / <code>catch</code> around <code>JSON.parse(str)</code>. On success return the value; on failure log <code>Invalid JSON:</code> plus <code>err.message</code> and return <code>null</code>. Test with a valid string and a broken one.</p>
                     <pre class="code-sample"><code>function safeParse(str) {
-    try {
-        const data = JSON.parse(str);
-        return data
-    }
-    catch (err){
-        console.log(&quot;invalid JSON :&quot;, err.message);   
-        return null;
-    }
+  try {
+    return JSON.parse(str);
+  } catch (err) {
+    console.log(&quot;Invalid JSON:&quot;, err.message);
+    return null;
+  }
 }</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
+                    <p class="output-label">Reference: <code>../js/hands-on.js</code></p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Section 2</span>
-                    <span class="lesson-task__title">Part 2</span>
+                    <span class="lesson-task__tag">2</span>
+                    <span class="lesson-task__title"><code>setAge(age)</code> — throw <code>Error</code>, wrap in <code>try/catch</code></span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>console.log(safeParse('{&quot;name&quot;:&quot;Priya&quot;}'));
-console.log(safeParse('{&quot;name&quot;:&quot;Priy'));</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 3</span>
-                    <span class="lesson-task__title">Part 3</span>
-                </summary>
-                <div class="lesson-task__body">
+                    <p>Throw <code>new Error(&quot;Age must be a number&quot;)</code> if <code>typeof age !== &quot;number&quot;</code>. Throw <code>new Error(&quot;Age must be 0–120&quot;)</code> if out of range. Otherwise return <code>age</code>. Test <code>25</code>, <code>&quot;twenty&quot;</code>, <code>200</code>.</p>
                     <pre class="code-sample"><code>function setAge(age) {
-    if(typeof age != &quot;number&quot;) 
-        throw &quot;age must be a number&quot;
-    if(age &gt; 120) 
-        throw &quot;age must be 0–120&quot;
-    else 
-        return age;
+  if (typeof age !== &quot;number&quot;) throw new Error(&quot;Age must be a number&quot;);
+  if (age &lt; 0 || age &gt; 120) throw new Error(&quot;Age must be 0–120&quot;);
+  return age;
 }</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
+                    <p class="output-label">Reference: <code>../js/hands-on.js</code></p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Section 4</span>
-                    <span class="lesson-task__title">Part 4</span>
+                    <span class="lesson-task__tag">3</span>
+                    <span class="lesson-task__title"><code>ValidationError</code> + <code>validateEmail</code></span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>try {
-    console.log(setAge(20));
-    console.log(setAge(&quot;twenty&quot;));
-    console.log(setAge(200));
-}
-catch(err) {
-    console.log(err);
-} finally {
-    console.log(&quot;shock ayyara&quot;)
-}</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 5</span>
-                    <span class="lesson-task__title">Part 5</span>
-                </summary>
-                <div class="lesson-task__body">
+                    <p>Subclass <code>Error</code>, set <code>this.name = &quot;ValidationError&quot;</code>. <code>validateEmail</code> throws if <code>@</code> is missing. In <code>catch</code>, branch on <code>err instanceof ValidationError</code>.</p>
                     <pre class="code-sample"><code>class ValidationError extends Error {
-    constructor(message) {
-        super(message)
-        this.name = &quot;Validation Error&quot;
-    }
+  constructor(message) {
+    super(message);
+    this.name = &quot;ValidationError&quot;;
+  }
+}
+function validateEmail(email) {
+  if (!email.includes(&quot;@&quot;)) throw new ValidationError(&quot;Invalid email&quot;);
+  return email;
 }</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
+                    <p class="output-label">Reference: <code>../js/hands-on.js</code></p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Section 6</span>
-                    <span class="lesson-task__title">Part 6</span>
+                    <span class="lesson-task__tag">4</span>
+                    <span class="lesson-task__title">Bonus — modules (<code>mathUtils.js</code> + <code>app.js</code>)</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>function validateEmail(email) {
-    if(!email.includes('@')) {
-        throw new ValidationError(&quot;invalid email error&quot;);
-    }
-    return &quot;valid email&quot;
-}</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 7</span>
-                    <span class="lesson-task__title">Part 7</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>try {
-    console.log(validateEmail(&quot;kalyan@.gmas&quot;));
-    console.log(validateEmail(&quot;kalyan.gmas&quot;));</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 8</span>
-                    <span class="lesson-task__title">Part 8</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>} catch(err) {
-    if(err instanceof ValidationError) {
-        console.log(&quot;validation failed&quot;,err.message)
-    }
-}</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
+                    <p>Named exports <code>PI</code>, <code>add</code>, <code>multiply</code> (and more); default <code>formatPrice</code>. Entry script imports and logs.</p>
+                    <pre class="code-sample"><code>import formatPrice, { PI, add, multiply } from &quot;./mathUtils.js&quot;;
+console.log(PI, add(2, 3), multiply(4, 5), formatPrice(99));</code></pre>
+                    <p class="output-label">Reference: <code>../js/mathUtils.js</code>, <code>../js/app.js</code> — load with <code>&lt;script type=&quot;module&quot; src=&quot;../js/app.js&quot;&gt;&lt;/script&gt;</code></p>
                 </div>
             </details>
         </main>
@@ -293,6 +234,7 @@ catch(err) {
         </aside>
     </div>
     <script defer src="../js/hands-on.js"></script>
+    <script type="module" src="../js/app.js"></script>
     <script src="../../shared/js/nav-lock.js"></script>
 </body>
 </html>

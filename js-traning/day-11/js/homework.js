@@ -1,38 +1,53 @@
-const Cchange = document.querySelector("#color-change");
+/**
+ * Task 1 — Random RGB background (Math.random per channel)
+ */
+const colorBtn = document.querySelector("#color-change");
 
-Cchange.addEventListener("click", () => {
-    const r = Math.floor(Math.random() * 256);
-    const g = Math.floor(Math.random() * 256);
-    const b = Math.floor(Math.random() * 256);
-    
-    const color = `rgb(${r}, ${g}, ${b})`
-    console.log(color)
-    document.body.style.backgroundColor = color;
-})
+colorBtn.addEventListener("click", () => {
+  const r = Math.floor(Math.random() * 256);
+  const g = Math.floor(Math.random() * 256);
+  const b = Math.floor(Math.random() * 256);
+  const color = `rgb(${r}, ${g}, ${b})`;
+  document.body.style.backgroundColor = color;
+});
 
-const liveInput = document.querySelector("#less")
+/**
+ * Task 2 — Red if value length is under 3 chars, green otherwise (input event)
+ */
+const liveInput = document.querySelector("#less");
 
+liveInput.addEventListener("input", (e) => {
+  const el = e.target;
+  el.style.backgroundColor = el.value.length < 3 ? "red" : "green";
+});
 
-liveInput.addEventListener("input", () => {
+/**
+ * Task 3 — Two number fields; on submit (preventDefault) show sum below
+ */
+const sumForm = document.querySelector("#sum-form");
+const num1 = document.querySelector("#num1");
+const num2 = document.querySelector("#num2");
+const sumOutput = document.querySelector("#below");
 
-    if(liveInput.value.length < 3) {
-        liveInput.style.backgroundColor = "red";
-    }
-    else {
-        liveInput.style.backgroundColor = "green";
+sumForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const a = Number(num1.value);
+  const b = Number(num2.value);
+  sumOutput.textContent = `Sum: ${a + b}`;
+});
 
-    }
-})
+/**
+ * Task 4 — Delegation: one listener on list; click LI logs its text.
+ * Sixth item appended — still works without new listeners.
+ */
+const logList = document.querySelector("#hw-log-list");
 
+logList.addEventListener("click", (e) => {
+  if (e.target.tagName === "LI") {
+    console.log(e.target.textContent);
+  }
+});
 
-const num1 = document.querySelector("#num1")
-const num2 = document.querySelector("#num2")
-
-const sumbtn = document.querySelector("#sum")
-const blwsum = document.querySelector("#below")
-
-sumbtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    const sum = Number(num1.value) + Number(num2.value)
-    blwsum.textContent = sum;
-} )
+const sixth = document.createElement("li");
+sixth.textContent = "Foxtrot (added dynamically)";
+logList.appendChild(sixth);

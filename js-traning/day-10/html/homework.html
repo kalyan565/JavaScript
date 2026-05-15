@@ -3,128 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Day 10 — DOM basics — Homework</title>
+    <title>Day 10 — DOM Manipulation Basics — Homework</title>
     <link rel="preload" href="../../shared/css/style.css" as="style">
     <link rel="stylesheet" href="../../shared/css/style.css">
+    <style>
+        #homework-demo {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            border: 2px dashed #94a3b8;
+            border-radius: 8px;
+        }
+        #homework-demo #items li.even {
+            background: #e2e8f0;
+        }
+        #products {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 12px;
+        }
+        #products .homework-card {
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 12px;
+            min-width: 140px;
+        }
+        #products .homework-card h3 {
+            margin: 0 0 8px;
+        }
+        #products .homework-card p {
+            margin: 0;
+        }
+        .homework-btn {
+            margin: 8px 0;
+        }
+    </style>
 </head>
 <body>
     <div class="page-shell">
         <main class="page-main" id="main-content">
             <header class="page-title">
-                <p class="lesson-label">Day 10 — DOM basics</p>
+                <p class="lesson-label">Day 10 — DOM Manipulation Basics</p>
                 <h1>Homework</h1>
             </header>
 
             <details class="exercise" open>
                 <summary>
-                    <span class="lesson-task__tag">Problem 1</span>
-                    <span class="lesson-task__title">Task 1</span>
+                    <span class="lesson-task__tag">Task 1</span>
+                    <span class="lesson-task__title"><code>&lt;p&gt;</code> and three text updates</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>// Task 1
-
-const text = document.querySelector(&quot;#text&quot;);
-
-text.textContent = &quot;Hello&quot;;
-
-text.innerHTML = &quot;&lt;strong&gt;Hello World&lt;/strong&gt;&quot;;
-
-text.textContent = &quot;Back to plain text&quot;;</code></pre>
-                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
+                    <ul class="task-spec">
+                        <li>Add a <code>&lt;p&gt;</code> to the page with JavaScript.</li>
+                        <li>Set text with <code>textContent</code>, then set <code>innerHTML</code> that includes a <code>&lt;strong&gt;</code> tag, then set plain text again with <code>textContent</code>.</li>
+                    </ul>
+                    <pre class="code-sample"><code>const p = document.createElement(&quot;p&quot;);
+parent.appendChild(p);
+p.textContent = &quot;Plain first.&quot;;
+p.innerHTML = &quot;Has &lt;strong&gt;bold&lt;/strong&gt;.&quot;;
+p.textContent = &quot;Plain again.&quot;;</code></pre>
+                    <p class="output-label">Reference: <code>../js/homework.js</code>. Open this page in a browser.</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Problem 2</span>
-                    <span class="lesson-task__title">Task 2</span>
+                    <span class="lesson-task__tag">Task 2</span>
+                    <span class="lesson-task__title">List of five + <code>even</code> class</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>// Task 2
-
-const items = document.querySelectorAll(&quot;#items li&quot;);
-
-items.forEach(function(item, index) {
-
-    if (index % 2 === 0) {
-        item.classList.add(&quot;even&quot;);
-    }
-
+                    <ul class="task-spec">
+                        <li>Keep five <code>&lt;li&gt;</code> items in the HTML list below.</li>
+                        <li>Loop in JS and add the class <code>even</code> to items at <strong>even indices</strong> (0, 2, 4).</li>
+                    </ul>
+                    <pre class="code-sample"><code>const items = document.querySelectorAll(&quot;#items li&quot;);
+items.forEach((item, index) =&gt; {
+  if (index % 2 === 0) item.classList.add(&quot;even&quot;);
 });</code></pre>
-                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
+                    <p class="output-label">Reference: <code>../js/homework.js</code>.</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Problem 3</span>
-                    <span class="lesson-task__title">Task 3</span>
+                    <span class="lesson-task__tag">Task 3</span>
+                    <span class="lesson-task__title">Programmatic button</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>// Task 3
-
-const button = document.createElement(&quot;button&quot;);
-
-button.textContent = &quot;Click me&quot;;
-
-button.id = &quot;click-btn&quot;;
-
-button.classList.add(&quot;btn&quot;);
-
-document.body.appendChild(button);</code></pre>
-                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
+                    <ul class="task-spec">
+                        <li><code>createElement(&quot;button&quot;)</code>, text <code>Click me</code>, set an <code>id</code> and a <code>class</code>, append to <code>document.body</code>.</li>
+                    </ul>
+                    <pre class="code-sample"><code>const btn = document.createElement(&quot;button&quot;);
+btn.type = &quot;button&quot;;
+btn.textContent = &quot;Click me&quot;;
+btn.id = &quot;homework-click-btn&quot;;
+btn.classList.add(&quot;homework-btn&quot;);
+document.body.appendChild(btn);</code></pre>
+                    <p class="output-label">Reference: <code>../js/homework.js</code>.</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Problem 4</span>
-                    <span class="lesson-task__title">Task 4</span>
+                    <span class="lesson-task__tag">Task 4</span>
+                    <span class="lesson-task__title">Three product cards</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>// Task 4
-
-const productList = [
-    {
-        name: &quot;Laptop&quot;,
-        price: 60000
-    },
-    {
-        name: &quot;Phone&quot;,
-        price: 25000
-    },
-    {
-        name: &quot;Tablet&quot;,
-        price: 18000
-    }
-];
-
-const productsDiv = document.querySelector(&quot;#products&quot;);
-
-productList.forEach(function(product) {
-
-    const card = document.createElement(&quot;div&quot;);
-
-    card.classList.add(&quot;card&quot;);
-
-    const title = document.createElement(&quot;h3&quot;);
-
-    title.textContent = product.name;
-
-    const price = document.createElement(&quot;p&quot;);
-
-    price.textContent = &quot;₹&quot; + product.price;
-
-    card.appendChild(title);
-
-    card.appendChild(price);
-
-    productsDiv.appendChild(card);
-
-});</code></pre>
-                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
+                    <ul class="task-spec">
+                        <li>An array of three objects with <code>name</code> and <code>price</code>.</li>
+                        <li>Build three cards dynamically and append them into <code>#products</code>.</li>
+                    </ul>
+                    <pre class="code-sample"><code>const products = [
+  { name: &quot;Laptop&quot;, price: 60000 },
+  { name: &quot;Phone&quot;, price: 25000 },
+  { name: &quot;Tablet&quot;, price: 18000 },
+];</code></pre>
+                    <p class="output-label">Reference: <code>../js/homework.js</code>.</p>
                 </div>
             </details>
+
+            <section id="homework-demo" aria-label="Homework live output">
+                <h2 class="hands-on-live__label">Live area</h2>
+                <p class="hands-on-live__hint">Task 2 list (five items). Task 4 cards render into the row below.</p>
+                <ul id="items">
+                    <li>Item one</li>
+                    <li>Item two</li>
+                    <li>Item three</li>
+                    <li>Item four</li>
+                    <li>Item five</li>
+                </ul>
+                <div id="products"></div>
+            </section>
         </main>
         <aside class="site-outline" aria-label="Curriculum outline">
             <p class="site-outline-title">Curriculum</p>

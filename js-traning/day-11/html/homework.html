@@ -3,133 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Day 11 — Events — Homework</title>
+    <title>Day 11 — Events &amp; Event Handling — Homework</title>
     <link rel="preload" href="../../shared/css/style.css" as="style">
     <link rel="stylesheet" href="../../shared/css/style.css">
+    <style>
+        .homework-demo {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+        }
+        .homework-demo h2 {
+            margin: 0 0 0.75rem;
+            font-size: 1rem;
+        }
+        .homework-demo section + section {
+            margin-top: 1.25rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e2e8f0;
+        }
+    </style>
 </head>
 <body>
     <div class="page-shell">
         <main class="page-main" id="main-content">
             <header class="page-title">
-                <p class="lesson-label">Day 11 — Events</p>
+                <p class="lesson-label">Day 11 — Events &amp; Event Handling</p>
                 <h1>Homework</h1>
             </header>
 
+            <div class="homework-demo" aria-label="Homework widgets">
+                <section>
+                    <h2>1. Random page background</h2>
+                    <button type="button" id="color-change">Random background</button>
+                </section>
+                <section>
+                    <h2>2. Length check (live)</h2>
+                    <input type="text" id="less" placeholder="Type at least 3 characters…" autocomplete="off" />
+                </section>
+                <section>
+                    <h2>3. Sum form</h2>
+                    <form id="sum-form">
+                        <input type="number" id="num1" step="any" placeholder="First number" />
+                        <input type="number" id="num2" step="any" placeholder="Second number" />
+                        <button type="submit" id="sum">Submit</button>
+                    </form>
+                    <p id="below" aria-live="polite"></p>
+                </section>
+                <section>
+                    <h2>4. Delegated list (check console)</h2>
+                    <ul id="hw-log-list">
+                        <li>Alpha</li>
+                        <li>Bravo</li>
+                        <li>Charlie</li>
+                        <li>Delta</li>
+                        <li>Echo</li>
+                    </ul>
+                </section>
+            </div>
+
             <details class="exercise" open>
                 <summary>
-                    <span class="lesson-task__tag">Problem 1</span>
-                    <span class="lesson-task__title">Part 1</span>
+                    <span class="lesson-task__tag">1</span>
+                    <span class="lesson-task__title">Random RGB background</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const Cchange = document.querySelector(&quot;#color-change&quot;);</code></pre>
-                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
+                    <p>Button <code>#color-change</code>: on click, set <code>document.body.style.backgroundColor</code> to <code>rgb(r,g,b)</code> using <code>Math.floor(Math.random() * 256)</code> for each channel.</p>
+                    <pre class="code-sample"><code>colorBtn.addEventListener(&quot;click&quot;, () =&gt; {
+  const r = Math.floor(Math.random() * 256);
+  const g = Math.floor(Math.random() * 256);
+  const b = Math.floor(Math.random() * 256);
+  document.body.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+});</code></pre>
+                    <p class="output-label">Reference: <code>../js/homework.js</code></p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Problem 2</span>
-                    <span class="lesson-task__title">Part 2</span>
+                    <span class="lesson-task__tag">2</span>
+                    <span class="lesson-task__title">Live length styling (<code>#less</code>)</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>Cchange.addEventListener(&quot;click&quot;, () =&gt; {
-    const r = Math.floor(Math.random() * 256);
-    const g = Math.floor(Math.random() * 256);
-    const b = Math.floor(Math.random() * 256);
-    
-    const color = `rgb(${r}, ${g}, ${b})`
-    console.log(color)
-    document.body.style.backgroundColor = color;
-})</code></pre>
-                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
+                    <p>On <code>input</code>: background <code>red</code> if fewer than 3 characters, <code>green</code> otherwise.</p>
+                    <pre class="code-sample"><code>liveInput.addEventListener(&quot;input&quot;, (e) =&gt; {
+  const el = e.target;
+  el.style.backgroundColor = el.value.length &lt; 3 ? &quot;red&quot; : &quot;green&quot;;
+});</code></pre>
+                    <p class="output-label">Reference: <code>../js/homework.js</code></p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Problem 3</span>
-                    <span class="lesson-task__title">Part 3</span>
+                    <span class="lesson-task__tag">3</span>
+                    <span class="lesson-task__title">Sum form (<code>#sum-form</code>, <code>#below</code>)</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const liveInput = document.querySelector(&quot;#less&quot;)</code></pre>
-                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
+                    <p>Listen for <code>submit</code> on the form, <code>preventDefault</code>, add <code>Number(num1.value) + Number(num2.value)</code>, show result in <code>#below</code>.</p>
+                    <pre class="code-sample"><code>sumForm.addEventListener(&quot;submit&quot;, (e) =&gt; {
+  e.preventDefault();
+  const a = Number(num1.value);
+  const b = Number(num2.value);
+  sumOutput.textContent = `Sum: ${a + b}`;
+});</code></pre>
+                    <p class="output-label">Reference: <code>../js/homework.js</code></p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Problem 4</span>
-                    <span class="lesson-task__title">Part 4</span>
+                    <span class="lesson-task__tag">4</span>
+                    <span class="lesson-task__title">Delegated list + dynamic item (<code>#hw-log-list</code>)</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>liveInput.addEventListener(&quot;input&quot;, () =&gt; {</code></pre>
-                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Problem 5</span>
-                    <span class="lesson-task__title">Part 5</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>if(liveInput.value.length &lt; 3) {
-        liveInput.style.backgroundColor = &quot;red&quot;;
-    }
-    else {
-        liveInput.style.backgroundColor = &quot;green&quot;;</code></pre>
-                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Problem 6</span>
-                    <span class="lesson-task__title">Part 6</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>}
-})</code></pre>
-                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Problem 7</span>
-                    <span class="lesson-task__title">Part 7</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const num1 = document.querySelector(&quot;#num1&quot;)
-const num2 = document.querySelector(&quot;#num2&quot;)</code></pre>
-                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Problem 8</span>
-                    <span class="lesson-task__title">Part 8</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const sumbtn = document.querySelector(&quot;#sum&quot;)
-const blwsum = document.querySelector(&quot;#below&quot;)</code></pre>
-                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Problem 9</span>
-                    <span class="lesson-task__title">Part 9</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>sumbtn.addEventListener(&quot;click&quot;, (e) =&gt; {
-    e.preventDefault();
-    const sum = Number(num1.value) + Number(num2.value)
-    blwsum.textContent = sum;
-} )</code></pre>
-                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
+                    <p>One listener on the list; if <code>e.target.tagName === &quot;LI&quot;</code>, <code>console.log(e.target.textContent)</code>. Append a sixth <code>&lt;li&gt;</code> with <code>createElement</code> — it should work with the same listener.</p>
+                    <pre class="code-sample"><code>logList.addEventListener(&quot;click&quot;, (e) =&gt; {
+  if (e.target.tagName === &quot;LI&quot;) console.log(e.target.textContent);
+});
+const sixth = document.createElement(&quot;li&quot;);
+sixth.textContent = &quot;Foxtrot (added dynamically)&quot;;
+logList.appendChild(sixth);</code></pre>
+                    <p class="output-label">Reference: <code>../js/homework.js</code> — check the browser console when clicking list items.</p>
                 </div>
             </details>
         </main>

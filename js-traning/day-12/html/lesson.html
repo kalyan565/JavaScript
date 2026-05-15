@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Day 12 — Errors and modules — Lesson</title>
+    <title>Day 12 — Error Handling &amp; Module Basics — Lesson</title>
     <link rel="preload" href="../../shared/css/style.css" as="style">
     <link rel="stylesheet" href="../../shared/css/style.css">
 </head>
@@ -11,72 +11,104 @@
     <div class="page-shell">
         <main class="page-main" id="main-content">
             <header class="page-title">
-                <p class="lesson-label">Day 12 — Errors and modules</p>
+                <p class="lesson-label">Day 12 — Error Handling &amp; Module Basics</p>
                 <h1>Lesson</h1>
             </header>
 
             <details class="exercise" open>
                 <summary>
-                    <span class="lesson-task__tag">Topic 1</span>
-                    <span class="lesson-task__title">Part 1</span>
+                    <span class="lesson-task__tag">1</span>
+                    <span class="lesson-task__title">Error types: syntax, runtime, logic</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>function tryExm() {
-try {
-  const data = JSON.parse('{&quot;name&quot;:&quot;Priya&quot;');   // missing closing brace
-  console.log(data);
-} catch (err) {
-  console.log(&quot;Couldn't parse:&quot;, err.message);
-}
-console.log(&quot;App keeps running&quot;);
-}</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
+                    <p><strong>Syntax</strong> — at parse time; the file cannot run (e.g. missing bracket). <strong>Runtime</strong> — while running; <code>try/catch</code> can handle (e.g. <code>null.foo</code>). <strong>Logic</strong> — code runs but the answer is wrong; fix with tests, not <code>catch</code>.</p>
+                    <pre class="code-sample"><code>// Logic bug — runs, wrong answer
+const average = (a, b) =&gt; a + b / 2; // should be (a + b) / 2</code></pre>
+                    <p class="output-label">Run <code>../js/lesson.js</code> (browser console or <code>node day-12/js/lesson.js</code>).</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Section 2</span>
-                    <span class="lesson-task__title">tryExm();</span>
+                    <span class="lesson-task__tag">2</span>
+                    <span class="lesson-task__title"><code>try</code> / <code>catch</code> / <code>finally</code></span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>//tryExm();</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 3</span>
-                    <span class="lesson-task__title">Part 3</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>function divide(a, b) {
-  if (typeof a !== &quot;number&quot; || typeof b !== &quot;number&quot;) {
-    throw new Error(&quot;Both arguments must be numbers&quot;);
-  }
-  if (b === 0) {
-    throw new Error(&quot;Cannot divide by zero&quot;);
-  }
-  return a / b;
-}</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 4</span>
-                    <span class="lesson-task__title">Part 4</span>
-                </summary>
-                <div class="lesson-task__body">
+                    <p><code>try</code> holds risky code; <code>catch (err)</code> runs if an error is thrown; <code>finally</code> runs whether or not there was an error.</p>
                     <pre class="code-sample"><code>try {
-  console.log(divide(4, 2));    
-  console.log(divide(10, 2));    
+  JSON.parse(&quot;{bad&quot;);
+} catch (e) {
+  console.log(&quot;oops&quot;);
+}
+console.log(&quot;done&quot;);</code></pre>
+                    <p class="output-label">Same: <code>../js/lesson.js</code>.</p>
+                </div>
+            </details>
+
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">3</span>
+                    <span class="lesson-task__title">The <code>Error</code> object</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <p><code>err.message</code>, <code>err.name</code> (<code>TypeError</code>, <code>SyntaxError</code>, …), <code>err.stack</code>. Branch on <code>err.name</code> or <code>instanceof</code> when you need different recovery paths.</p>
+                    <pre class="code-sample"><code>try {
+  null.foo;
 } catch (err) {
-  console.log(&quot;Caught:&quot;, err.message);
+  console.log(err.message, err.name);
 }</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
+                    <p class="output-label">Same: <code>../js/lesson.js</code>.</p>
+                </div>
+            </details>
+
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">4</span>
+                    <span class="lesson-task__title"><code>throw new Error(...)</code></span>
+                </summary>
+                <div class="lesson-task__body">
+                    <p>Throw an <code>Error</code> instance (not a bare string) so callers get <code>message</code>, <code>name</code>, and <code>stack</code>.</p>
+                    <pre class="code-sample"><code>if (b === 0) throw new Error(&quot;Cannot divide by zero&quot;);</code></pre>
+                    <p class="output-label">Same: <code>../js/lesson.js</code> (<code>divide</code> example).</p>
+                </div>
+            </details>
+
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">5</span>
+                    <span class="lesson-task__title">Custom error classes</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <p><code>class ValidationError extends Error</code> — set <code>this.name</code> in the constructor; use <code>err instanceof ValidationError</code> in <code>catch</code>. Re-throw with <code>throw err</code> when it is not yours to handle.</p>
+                    <pre class="code-sample"><code>class ValidationError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = &quot;ValidationError&quot;;
+  }
+}</code></pre>
+                    <p class="output-label">Same: <code>../js/lesson.js</code>.</p>
+                </div>
+            </details>
+
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">6</span>
+                    <span class="lesson-task__title">Modules — named <code>export</code> / <code>import</code></span>
+                </summary>
+                <div class="lesson-task__body">
+                    <p>Named exports: <code>export function add() {}</code>, <code>export { multiply }</code>. Import: <code>import { add, PI } from &quot;./mathUtils.js&quot;</code>, <code>import * as math from &quot;./mathUtils.js&quot;</code>, <code>import { add as sum } from &quot;./mathUtils.js&quot;</code>.</p>
+                    <p class="output-label">Source: <code>../js/mathUtils.js</code> + <code>../js/day12-lesson-modules.mjs</code> (loaded below). If imports fail from <code>file://</code>, serve the folder with a local static server.</p>
+                </div>
+            </details>
+
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">7</span>
+                    <span class="lesson-task__title">Default export &amp; mixing with named</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <p><code>export default function greet(name) {}</code> — import without braces: <code>import greet from &quot;./greet.js&quot;</code>. Mix: <code>import formatPrice, { TAX } from &quot;./priceUtils.js&quot;</code>.</p>
+                    <p class="output-label">Source: <code>../js/greet.js</code>, <code>../js/priceUtils.js</code>, <code>../js/day12-lesson-modules.mjs</code>.</p>
                 </div>
             </details>
         </main>
@@ -228,6 +260,7 @@ console.log(&quot;App keeps running&quot;);
         </aside>
     </div>
     <script defer src="../js/lesson.js"></script>
+    <script type="module" src="../js/day12-lesson-modules.mjs"></script>
     <script src="../../shared/js/nav-lock.js"></script>
 </body>
 </html>
