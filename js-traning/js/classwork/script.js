@@ -19,7 +19,29 @@
 //import "../exercises/day14-exercise.js"
 //import "./day16.js"
 //import "./day16-handson.js"
-import "./day17.js"
+//import "./day17.js"
+// import "../../day-13/js/hands-on.js"
+// import "../../day-13/js/homework.js"
+//import "../../day-14/js/hands-on.js"
+//import "./day18-handson.js"
+//import './day19.js';
+import './day21.js';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // const marks = 65;
