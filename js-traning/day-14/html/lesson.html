@@ -15,79 +15,125 @@
                 <h1>Lesson</h1>
             </header>
 
+            <p class="output-label" style="margin-bottom:1rem;">Open DevTools → Console, or run <code>node day-14/js/lesson.js</code>. Source: <code>../js/lesson.js</code>.</p>
+
             <details class="exercise" open>
                 <summary>
-                    <span class="lesson-task__tag">Topic 1</span>
-                    <span class="lesson-task__title">Part 1</span>
+                    <span class="lesson-task__tag">1</span>
+                    <span class="lesson-task__title">Lexical (static) scope</span>
                 </summary>
                 <div class="lesson-task__body">
+                    <p>A function’s scope is fixed by <strong>where it is written</strong> in the source, not by where it is called. JavaScript uses lexical scope only.</p>
+                    <pre class="code-sample"><code>const city = &quot;Jaipur&quot;;
+function outer() {
+  const language = &quot;Hindi&quot;;
+  function inner() {
+    const greeting = &quot;Namaste&quot;;
+    console.log(greeting, language, city);
+  }
+  inner();
+}
+outer();</code></pre>
+                    <p class="output-label"><code>../js/lesson.js</code> — Topic 1</p>
+                </div>
+            </details>
+
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">2</span>
+                    <span class="lesson-task__title">The scope chain</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <p>Look up names in the current scope, then the next outer scope, until global. Inner scopes cannot see sibling inners’ bindings. Missing name → <code>ReferenceError</code>.</p>
+                    <pre class="code-sample"><code>const x = 1;
+function a() {
+  const y = 2;
+  function b() {
+    console.log(x + y); // walks outward: 3
+  }
+  b();
+}
+a();</code></pre>
+                    <p class="output-label"><code>../js/lesson.js</code> — Topic 2</p>
+                </div>
+            </details>
+
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">3</span>
+                    <span class="lesson-task__title">What is a closure?</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <p>A function that <strong>remembers</strong> variables from the scope where it was created, even after that outer function has returned. Each call to a factory can create a <strong>separate</strong> closure with its own captured values.</p>
+                    <pre class="code-sample"><code>function makeGreeter(name) {
+  return function () {
+    console.log(`Namaste, ${name}!`);
+  };
+}
+const greetPriya = makeGreeter(&quot;Priya&quot;);
+const greetAarav = makeGreeter(&quot;Aarav&quot;);
+greetPriya();
+greetAarav();</code></pre>
+                    <p class="output-label"><code>../js/lesson.js</code> — Topic 3</p>
+                </div>
+            </details>
+
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">4</span>
+                    <span class="lesson-task__title">Practical closure patterns</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <p><strong>Private state</strong> — counter, bank-style object with hidden balance. <strong>Memoization</strong> — cache results of an expensive function in a closed-over object.</p>
                     <pre class="code-sample"><code>function makeCounter() {
-    let count = 0;
-    return function () {
-        count++;
-        return count;
-    }
+  let count = 0;
+  return () =&gt; ++count;
+}
+function memoize(fn) {
+  const cache = {};
+  return (n) =&gt; (n in cache ? cache[n] : (cache[n] = fn(n)));
 }</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
+                    <p class="output-label"><code>../js/lesson.js</code> — Topic 4 (includes <code>createAccount</code> demo)</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Section 2</span>
-                    <span class="lesson-task__title">Part 2</span>
+                    <span class="lesson-task__tag">5</span>
+                    <span class="lesson-task__title">The <code>var</code>-in-loop bug</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const cnt1 = makeCounter();
-const cnt2 = makeCounter();</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
+                    <p><code>var</code> is function-scoped: one shared <code>i</code> for the whole loop, so every callback sees the final value. <code>let</code> gives a fresh binding per iteration. Classic fixes: <code>let</code>, per-iteration <code>IIFE</code>, or <code>bind</code> / passing the value into the timer.</p>
+                    <pre class="code-sample"><code>for (var i = 0; i &lt; 3; i++) {
+  setTimeout(() =&gt; console.log(i), 100); // often 3, 3, 3
+}
+for (let j = 0; j &lt; 3; j++) {
+  setTimeout(() =&gt; console.log(j), 100); // 0, 1, 2
+}</code></pre>
+                    <p class="output-label"><code>../js/lesson.js</code> uses synchronous function arrays to show the same idea without waiting on timers.</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Section 3</span>
-                    <span class="lesson-task__title">Part 3</span>
+                    <span class="lesson-task__tag">6</span>
+                    <span class="lesson-task__title">IIFE — Immediately Invoked Function Expression</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>console.log(cnt1());
-console.log(cnt1());</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
-                </div>
-            </details>
+                    <p>Runs once, creates a private scope. Common historical pattern: return a small API object while hiding <code>let</code> state in the closure.</p>
+                    <pre class="code-sample"><code>(function () {
+  const secret = &quot;hidden&quot;;
+})();
+(function (city) {
+  console.log(`Greetings from ${city}`);
+})(&quot;Jaipur&quot;);
+(() =&gt; { console.log(42); })();
 
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 4</span>
-                    <span class="lesson-task__title">Part 4</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>console.log(cnt1());
-console.log(cnt1());</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 5</span>
-                    <span class="lesson-task__title">Part 5</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>console.log(cnt2());
-console.log(cnt2());</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 6</span>
-                    <span class="lesson-task__title">Part 6</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>console.log(cnt1())</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
+const counterModule = (function () {
+  let count = 0;
+  return { inc: () =&gt; ++count, get: () =&gt; count };
+})();</code></pre>
+                    <p class="output-label"><code>../js/lesson.js</code> — Topic 6</p>
                 </div>
             </details>
         </main>
@@ -217,7 +263,7 @@ console.log(cnt2());</code></pre>
                 </li>
                 <li class="site-outline-day">
                     <details class="site-outline-details">
-                        <summary>Day 13 — Objects</summary>
+                        <summary>Day 13 — Execution context &amp; hoisting</summary>
                         <ul>
                             <li><a href="../../day-13/html/lesson.html">Lesson</a></li>
                             <li><a href="../../day-13/html/hands-on.html">Hands-on</a></li>
@@ -227,7 +273,7 @@ console.log(cnt2());</code></pre>
                 </li>
                 <li class="site-outline-day">
                     <details class="site-outline-details" open>
-                        <summary>Day 14 — Objects</summary>
+                        <summary>Day 14 — Scope &amp; closures</summary>
                         <ul>
                             <li><a href="lesson.html" aria-current="page">Lesson</a></li>
                             <li><a href="hands-on.html">Hands-on</a></li>

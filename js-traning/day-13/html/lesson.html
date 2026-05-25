@@ -15,195 +15,123 @@
                 <h1>Lesson</h1>
             </header>
 
+            <p class="output-label" style="margin-bottom:1rem;">All demos log to the console. Open DevTools (F12) or run <code>node day-13/js/lesson.js</code>. Source: <code>../js/lesson.js</code>.</p>
+
             <details class="exercise" open>
                 <summary>
-                    <span class="lesson-task__tag">Topic 1</span>
-                    <span class="lesson-task__title">Part 1</span>
+                    <span class="lesson-task__tag">1</span>
+                    <span class="lesson-task__title">What is an execution context?</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>console.log(a);        
-var a = 1;</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
+                    <p><strong>Global EC</strong> — created when the script loads; exactly one per program; holds top-level declarations and <code>this</code> at global scope. <strong>Function EC</strong> — created on each function call; holds locals, arguments, and that call’s <code>this</code>. Each EC has a variable environment, a link to the outer scope, and <code>this</code>.</p>
+                    <pre class="code-sample"><code>const city = &quot;Jaipur&quot;;
+function greet(name) {
+  const message = `Hi ${name} from ${city}`;
+  return message;
+}
+greet(&quot;Priya&quot;); // function EC #1, then torn down
+greet(&quot;Aarav&quot;); // function EC #2 — fresh</code></pre>
+                    <p class="output-label"><code>../js/lesson.js</code> — Topic 1</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Section 2</span>
-                    <span class="lesson-task__title">console.log(b);</span>
+                    <span class="lesson-task__tag">2</span>
+                    <span class="lesson-task__title">The two phases: creation &amp; execution</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>//console.log(b);        
-//let b = 2;</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
+                    <p><strong>Creation</strong> — engine scans declarations and allocates memory (no user code runs yet). <strong>Execution</strong> — lines run top-to-bottom. <code>var</code> starts as <code>undefined</code>; <code>let</code>/<code>const</code> exist but sit in the TDZ until their line runs.</p>
+                    <pre class="code-sample"><code>console.log(lessonScore); // undefined (var hoisted)
+var lessonScore = 90;
+console.log(lessonScore); // 90</code></pre>
+                    <p class="output-label"><code>../js/lesson.js</code> — Topic 2</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Section 3</span>
-                    <span class="lesson-task__title">console.log(c);</span>
+                    <span class="lesson-task__tag">3</span>
+                    <span class="lesson-task__title">The call stack (LIFO)</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>// console.log(c);       
-// const c = 3;</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
+                    <p>Script start → push global EC. Function call → push that function’s EC. Return → pop. Last in, first out. While innermost code runs, its frame is on top.</p>
+                    <pre class="code-sample"><code>function multiply(a, b) { return a * b; }
+function square(n) { return multiply(n, n); }
+function printSquare(n) {
+  console.log(square(n)); // 25
+}
+printSquare(5);
+// multiply(5,5) on top → square(5) → printSquare(5) → global</code></pre>
+                    <p class="output-label"><code>../js/lesson.js</code> — Topic 3</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Section 4</span>
-                    <span class="lesson-task__title">Part 4</span>
+                    <span class="lesson-task__tag">4</span>
+                    <span class="lesson-task__title">Hoisting — what it really is</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>greet();              
-function greet() { console.log(&quot;Hi&quot;); }</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
+                    <p>Declarations are not “moved” in the source file; the engine records them in the creation phase so bindings exist before execution reaches their lines. <code>var</code> → <code>undefined</code>; <code>let</code>/<code>const</code> → TDZ until initialisation; <code>function foo() {}</code> → full function available.</p>
+                    <pre class="code-sample"><code>console.log(varA); // undefined
+var varA = 1;
+console.log(letB); // ReferenceError (TDZ)
+let letB = 2;
+hi(); // OK — function declaration hoisted
+function hi() { console.log(&quot;Hi&quot;); }</code></pre>
+                    <p class="output-label"><code>../js/lesson.js</code> wraps the <code>let</code> demo in <code>try/catch</code> so the script keeps running.</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Section 5</span>
-                    <span class="lesson-task__title">Part 5</span>
+                    <span class="lesson-task__tag">5</span>
+                    <span class="lesson-task__title"><code>var</code> vs <code>let</code> / <code>const</code> + TDZ</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>// console.log(score);    // undefined            ← no error, but probably not what you wanted
-// var score = 90;</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 6</span>
-                    <span class="lesson-task__title">let — TDZ catches the bug for you</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>// let — TDZ catches the bug for you
-// console.log(level);    // ReferenceError       ← TDZ — Cannot access 'level' before initialization
-// let level = 5;</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 7</span>
-                    <span class="lesson-task__title">The TDZ &quot;ends&quot; exactly when the let/const line runs:</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>// The TDZ &quot;ends&quot; exactly when the let/const line runs:
-{
-  // &lt;-- start of block. 'mark' is in TDZ here
-  // console.log(mark);  // would throw
+                    <p><strong>TDZ</strong> (temporal dead zone): from block entry until the <code>let</code>/<code>const</code> line runs, the binding exists but must not be read. <code>var</code> is function-scoped and can leak out of blocks; <code>let</code>/<code>const</code> are block-scoped.</p>
+                    <pre class="code-sample"><code>{
+  // console.log(mark); // ReferenceError
   let mark = 87;
-  console.log(mark);    // 87  ← TDZ has ended, mark is initialised
+  console.log(mark); // 87
 }</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
+                    <p class="output-label"><code>../js/lesson.js</code> — Topic 5</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Section 8</span>
-                    <span class="lesson-task__title">Function declaration — works BEFORE its definition</span>
+                    <span class="lesson-task__tag">6</span>
+                    <span class="lesson-task__title">Function declaration vs expression</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>// Function declaration — works BEFORE its definition
-sayHi();           // &quot;Hi&quot;      ← full body hoisted
-function sayHi() {
-  console.log(&quot;Hi&quot;);
-}</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
+                    <p>Declaration: hoisted as callable before its line. <code>var foo = function () {}</code>: <code>foo</code> is <code>undefined</code> until assignment → early call → <strong>TypeError</strong>. <code>const foo = () =&gt; {}</code>: TDZ → early call → <strong>ReferenceError</strong>.</p>
+                    <pre class="code-sample"><code>sayHi();
+function sayHi() { console.log(&quot;Hi&quot;); }
+
+greet();
+var greet = function () { console.log(&quot;Hello&quot;); }; // TypeError
+
+welcome();
+const welcome = () =&gt; console.log(&quot;Welcome&quot;); // ReferenceError (TDZ)</code></pre>
+                    <p class="output-label"><code>../js/lesson.js</code> demonstrates each inside <code>try/catch</code> where needed.</p>
                 </div>
             </details>
 
             <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Section 9</span>
-                    <span class="lesson-task__title">Function expression with var — TypeError</span>
+                    <span class="lesson-task__tag">7</span>
+                    <span class="lesson-task__title">Why this matters in practice</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>// Function expression with var — TypeError
-// greet1();           // TypeError: greet is not a function
-//                    //   ↑ greet was hoisted with value 'undefined'.
-//                    //     Calling undefined() throws TypeError.
-// var greet1 = function () {
-//   console.log(&quot;Hello&quot;);
-// };</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 10</span>
-                    <span class="lesson-task__title">Function expression with const — ReferenceError (TDZ)</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>// Function expression with const — ReferenceError (TDZ)
-// welcome();         // ReferenceError: Cannot access 'welcome' before initialization
-// const welcome = function () {
-//   console.log(&quot;Welcome&quot;);
-// };</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 11</span>
-                    <span class="lesson-task__title">Arrow function — same as const above (always TDZ if let/const)</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>// Arrow function — same as const above (always TDZ if let/const)
-const shout = () =&gt; console.log(&quot;HEY&quot;);
-shout();           // ReferenceError</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 12</span>
-                    <span class="lesson-task__title">Part 12</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>let item = &quot;Laptop&quot;
-const price = 60000;
-const tax = 0.18;</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 13</span>
-                    <span class="lesson-task__title">Part 13</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const singleLine = `The ${item} costs ${price} + ${price * tax} GST = ${price + (price * tax)}`;</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 14</span>
-                    <span class="lesson-task__title">Part 14</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>const multiline = `
-The ${item} costs:
-Base Price: ${price}
-GST 18%: ${price * tax}
-Total: ${price + (price * tax)}
-`;
-console.log(singleLine)
-console.log(multiline);</code></pre>
-                    <p class="output-label">Code below mirrors <code>../js/lesson.js</code>. Open DevTools → Console to see output when the script runs.</p>
+                    <ul>
+                        <li>Reading legacy <code>var</code> code — hoisting explains “impossible” order.</li>
+                        <li><code>TypeError: … is not a function</code> at the top of a file — often a function expression called before assignment.</li>
+                        <li>Stack traces — each frame is an execution context; top = where the error surfaced.</li>
+                        <li>Linters (<code>no-var</code>, <code>no-use-before-define</code>) — prevent TDZ / hoisting bugs.</li>
+                    </ul>
+                    <p class="output-label">Rule of thumb: read <code>var</code> in old code; write <code>let</code>/<code>const</code>. Don’t rely on hoisting for control flow.</p>
                 </div>
             </details>
         </main>
@@ -333,7 +261,7 @@ console.log(multiline);</code></pre>
                 </li>
                 <li class="site-outline-day">
                     <details class="site-outline-details" open>
-                        <summary>Day 13 — Objects</summary>
+                        <summary>Day 13 — Execution context &amp; hoisting</summary>
                         <ul>
                             <li><a href="lesson.html" aria-current="page">Lesson</a></li>
                             <li><a href="hands-on.html">Hands-on</a></li>

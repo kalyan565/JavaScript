@@ -11,7 +11,6 @@ const TRAINING = path.resolve(__dirname, "..");
 
 const DAY_SUMMARIES = {
     1: "Introduction to JavaScript",
-    1: "Introduction to JavaScript",
     2: "Data Types & the Type System",
     3: "Operators & Expressions",
     4: "Control Flow",
@@ -23,8 +22,16 @@ const DAY_SUMMARIES = {
     10: "DOM Manipulation Basics",
     11: "Events & Event Handling",
     12: "Error Handling & Module Basics",
-    13: "Objects",
-    14: "Objects",
+    13: "Execution context & hoisting",
+    14: "Scope & closures",
+    15: "The this keyword",
+    16: "Prototypes & prototype chain",
+    17: "ES6 classes",
+    18: "Promises & async/await",
+    19: "Fetch & APIs",
+    20: "Iterators & generators",
+    21: "Maps, Sets & structured data",
+    22: "Review & mini project",
 };
 
 const DAY_HEADLINE = {
@@ -41,6 +48,14 @@ const DAY_HEADLINE = {
     12: "Errors and modules",
     13: "Execution context & hoisting",
     14: "Scope & closures",
+    15: "this, bind, call, apply",
+    16: "Object.create and the prototype chain",
+    17: "class syntax and inheritance",
+    18: "async control flow",
+    19: "HTTP from the browser",
+    20: "for..of and yield",
+    21: "beyond plain objects",
+    22: "tie it together",
 };
 
 function escapeHtml(s) {
@@ -149,7 +164,7 @@ function sidebar(dayNum, current) {
     lines.push(
         '                <li class="site-outline-item"><a href="../../index.html">Overview</a></li>'
     );
-    for (let n = 1; n <= 14; n++) {
+    for (let n = 1; n <= 22; n++) {
         const summary = DAY_SUMMARIES[n];
         if (!summary) continue;
         const open = n === dayNum ? " open" : "";
@@ -157,7 +172,7 @@ function sidebar(dayNum, current) {
         lines.push(
             `                    <details class="site-outline-details"${open}>`
         );
-        lines.push(`                        <summary>Day ${n} — ${summary}</summary>`);
+        lines.push(`                        <summary>Day ${n} — ${escapeHtml(summary)}</summary>`);
         lines.push(`                        <ul>`);
         for (const [slug, label] of pages) {
             const isCurrent = n === dayNum && slug === current;
@@ -295,6 +310,15 @@ function main() {
             if (dayNum === 12 && page === "lesson") continue;
             if (dayNum === 12 && page === "hands-on") continue;
             if (dayNum === 12 && page === "homework") continue;
+            if (dayNum === 13 && page === "lesson") continue;
+            if (dayNum === 14 && page === "lesson") continue;
+            if (dayNum === 15 && page === "lesson") continue;
+            if (dayNum === 15 && page === "homework") continue;
+            if (dayNum === 16 && page === "lesson") continue;
+            if (dayNum === 16 && page === "hands-on") continue;
+            if (dayNum === 17 && page === "lesson") continue;
+            if (dayNum === 18 && page === "lesson") continue;
+            if (dayNum === 18 && page === "homework") continue;
 
             const baseName =
                 page === "lesson"
@@ -327,7 +351,48 @@ function main() {
             writePage(dayNum, page, mainInner, pageTitle, headline);
         }
     }
-    console.log("Wrote day-2 … day-14 pages under each day-N/html/");
+
+    // Scaffold days 17–22 so overview links resolve (fill JS later).
+    for (let dayNum = 17; dayNum <= 22; dayNum++) {
+        const summary = DAY_SUMMARIES[dayNum];
+        const headline = `Day ${dayNum} — ${DAY_HEADLINE[dayNum] || summary}`;
+        const jsDir = path.join(TRAINING, `day-${dayNum}`, "js");
+        fs.mkdirSync(jsDir, { recursive: true });
+
+        for (const page of ["lesson", "hands-on", "homework"]) {
+            const baseName =
+                page === "lesson"
+                    ? "lesson.js"
+                    : page === "hands-on"
+                      ? "hands-on.js"
+                      : "homework.js";
+            const filePath = path.join(jsDir, baseName);
+            if (!fs.existsSync(filePath)) {
+                fs.writeFileSync(
+                    filePath,
+                    `// Day ${dayNum} — ${summary} (${page})\nconsole.log(\`Day ${dayNum} ${page} — scaffold: replace with real exercises.\`);\n`,
+                    "utf8"
+                );
+            }
+
+            const raw = readIfExists(filePath);
+            const pageTitle = `${headline} — ${
+                page === "lesson" ? "Lesson" : page === "hands-on" ? "Hands-on" : "Homework"
+            }`;
+
+            if (!raw || !raw.trim()) {
+                const stub = `            <p class="curriculum-lede">There is no <code>${baseName}</code> in <code>day-${dayNum}/js/</code> yet. Add that file and re-run <code>node scripts/generate-curriculum-html.mjs</code> to embed the code here.</p>`;
+                writePage(dayNum, page, stub, pageTitle, headline);
+                continue;
+            }
+
+            const sections = splitIntoSections(raw);
+            const mainInner = renderSections(sections, page, baseName);
+            writePage(dayNum, page, mainInner, pageTitle, headline);
+        }
+    }
+
+    console.log("Wrote day-2 … day-14 pages; scaffolded day-17 … day-22 under each day-N/html/");
 }
 
 main();
