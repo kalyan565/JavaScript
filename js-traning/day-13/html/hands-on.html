@@ -3,125 +3,319 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Day 13 — Execution context &amp; hoisting — Hands-on</title>
+    <title>Day 13 — Execution Context &amp; Hoisting — Hands-on</title>
+
     <link rel="preload" href="../../shared/css/style.css" as="style">
     <link rel="stylesheet" href="../../shared/css/style.css">
 </head>
+
 <body>
+
     <div class="page-shell">
+
         <main class="page-main" id="main-content">
+
             <header class="page-title">
-                <p class="lesson-label">Day 13 — Execution context &amp; hoisting</p>
+
+                <p class="lesson-label">Day 13 — Execution Context &amp; Hoisting</p>
+
                 <h1>Hands-on</h1>
+
             </header>
 
+            <!-- Task 1 -->
             <details class="exercise" open>
+
                 <summary>
-                    <span class="lesson-task__tag">Topic 1</span>
-                    <span class="lesson-task__title">Part 1</span>
+
+                    <span class="lesson-task__tag">
+                        Task 1
+                    </span>
+
+                    <span class="lesson-task__title">
+                        Predict the var Hoist
+                    </span>
+
                 </summary>
+
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>console.log(name); // this will print undefiend because var by defaults sets on the top 
-var name = &quot;priya&quot;;
+
+                    <ul class="task-spec">
+
+                        <li>
+                            Predict the output before running the code.
+                        </li>
+
+                        <li>
+                            Compare prediction with actual output.
+                        </li>
+
+                        <li>
+                            Understand how
+                            <code>var</code>
+                            hoisting works.
+                        </li>
+
+                    </ul>
+
+<pre class="code-sample"><code>console.log(name);
+
+var name = "Priya";
+
 console.log(name);</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
+
+<pre class="code-sample"><code>// Output:
+//
+// undefined
+// Priya
+//
+// var declarations are hoisted
+// and initialized with undefined.
+//
+// That is why the first log
+// does not throw ReferenceError.</code></pre>
+
+                    <p class="output-label">
+                        Try the steps, then compare with
+                        <code>../js/hands-on.js</code>.
+                    </p>
+
                 </div>
+
             </details>
 
+            <!-- Task 2 -->
             <details class="exercise">
+
                 <summary>
-                    <span class="lesson-task__tag">Section 2</span>
-                    <span class="lesson-task__title">Part 2</span>
+
+                    <span class="lesson-task__tag">
+                        Task 2
+                    </span>
+
+                    <span class="lesson-task__title">
+                        Trigger the TDZ
+                    </span>
+
                 </summary>
+
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>let city = &quot;jaipur&quot;
+
+                    <ul class="task-spec">
+
+                        <li>
+                            Access a
+                            <code>let</code>
+                            variable before declaration.
+                        </li>
+
+                        <li>
+                            Observe the TDZ behavior.
+                        </li>
+
+                        <li>
+                            Move the declaration above the log and verify.
+                        </li>
+
+                    </ul>
+
+<pre class="code-sample"><code>console.log(city);
+
+let city = "Jaipur";</code></pre>
+
+<pre class="code-sample"><code>// Error:
+//
+// ReferenceError:
+// Cannot access 'city'
+// before initialization
+//
+// TDZ stands for:
+//
+// Temporal Dead Zone
+//
+// let and const are hoisted
+// but remain inaccessible
+// until initialization.</code></pre>
+
+<pre class="code-sample"><code>// Fixed Version
+
+let city = "Jaipur";
+
 console.log(city);</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
+
+                    <p class="output-label">
+                        Try the steps, then compare with
+                        <code>../js/hands-on.js</code>.
+                    </p>
+
                 </div>
+
             </details>
 
+            <!-- Task 3 -->
             <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 3</span>
-                    <span class="lesson-task__title">Part 3</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>sayHi()</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
 
-            <details class="exercise">
                 <summary>
-                    <span class="lesson-task__tag">Section 4</span>
-                    <span class="lesson-task__title">Part 4</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>function sayHi() {
-    console.log(&quot;hi&quot;)
-}</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
 
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 5</span>
-                    <span class="lesson-task__title">Part 5</span>
+                    <span class="lesson-task__tag">
+                        Task 3
+                    </span>
+
+                    <span class="lesson-task__title">
+                        Function Declaration vs Expression
+                    </span>
+
                 </summary>
+
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>var greet =  function() {
-    console.log(&quot;greeet&quot;)
+
+                    <ul class="task-spec">
+
+                        <li>
+                            Compare hoisting behavior of function declarations and expressions.
+                        </li>
+
+                        <li>
+                            Predict which call succeeds and which fails.
+                        </li>
+
+                        <li>
+                            Observe runtime behavior.
+                        </li>
+
+                    </ul>
+
+<pre class="code-sample"><code>sayHi();
+
+greet();
+
+function sayHi() {
+
+  console.log("Hi");
 }
-greet()</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
+
+var greet = function () {
+
+  console.log("Hello");
+};</code></pre>
+
+<pre class="code-sample"><code>// Output:
+//
+// Hi
+//
+// TypeError:
+// greet is not a function
+//
+// Function declarations are
+// fully hoisted with their body.
+//
+// Function expressions only hoist
+// the variable as undefined.</code></pre>
+
+                    <p class="output-label">
+                        Try the steps, then compare with
+                        <code>../js/hands-on.js</code>.
+                    </p>
+
                 </div>
+
             </details>
 
+            <!-- Bonus -->
             <details class="exercise">
+
                 <summary>
-                    <span class="lesson-task__tag">Section 6</span>
-                    <span class="lesson-task__title">Part 6</span>
+
+                    <span class="lesson-task__tag">
+                        Bonus
+                    </span>
+
+                    <span class="lesson-task__title">
+                        Trace the Call Stack
+                    </span>
+
                 </summary>
+
                 <div class="lesson-task__body">
-                    <pre class="code-sample"><code>function mulitply(a,b) { 
-    return a*b 
-}</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
+
+                    <ul class="task-spec">
+
+                        <li>
+                            Build nested function calls.
+                        </li>
+
+                        <li>
+                            Trace the call stack manually.
+                        </li>
+
+                        <li>
+                            Compare with
+                            <code>console.trace()</code>.
+                        </li>
+
+                    </ul>
+
+<pre class="code-sample"><code>function multiply(a, b) {
+
+  console.trace();
+
+  return a * b;
+}
+
+function square(n) {
+
+  return multiply(n, n);
+}
+
+function printSquare(n) {
+
+  console.log(
+    square(n)
+  );
+}
+
+printSquare(5);</code></pre>
+
+<pre class="code-sample"><code>// Output:
+//
+// 25
+//
+// Call Stack:
+//
+// multiply(5, 5)
+//
+// square(5)
+//
+// printSquare(5)
+//
+// Global Execution Context
+//
+// console.trace()
+// shows the same stack flow
+// in DevTools.</code></pre>
+
+                    <p class="output-label">
+                        Try the steps, then compare with
+                        <code>../js/hands-on.js</code>.
+                    </p>
+
                 </div>
+
             </details>
 
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 7</span>
-                    <span class="lesson-task__title">Part 7</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>function square(n) {
-    return mulitply(n,n)
-}</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
-
-            <details class="exercise">
-                <summary>
-                    <span class="lesson-task__tag">Section 8</span>
-                    <span class="lesson-task__title">Part 8</span>
-                </summary>
-                <div class="lesson-task__body">
-                    <pre class="code-sample"><code>console.log(square(5))</code></pre>
-                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
-                </div>
-            </details>
         </main>
+
         <aside class="site-outline" aria-label="Curriculum outline">
-            <p class="site-outline-title">Curriculum</p>
-            <ul class="site-outline-tree">
+
+            <p class="site-outline-title">
+                Curriculum
+            </p>
+
+                        <ul class="site-outline-tree">
                 <li class="site-outline-item"><a href="../../index.html">Overview</a></li>
                 <li class="site-outline-day">
-                    <details class="site-outline-details">
-                        <summary>Day 1 — Introduction to JavaScript</summary>
+                    <details class="site-outline-details" open>
+                        <summary>Day 1 - Introduction to JavaScript</summary>
                         <ul>
                             <li><a href="../../day-1/html/lesson.html">Lesson</a></li>
                             <li><a href="../../day-1/html/hands-on.html">Hands-on</a></li>
@@ -130,8 +324,8 @@ greet()</code></pre>
                     </details>
                 </li>
                 <li class="site-outline-day">
-                    <details class="site-outline-details">
-                        <summary>Day 2 — Data Types & the Type System</summary>
+                    <details class="site-outline-details" open>
+                        <summary>Day 2 - Data Types &amp; the Type System</summary>
                         <ul>
                             <li><a href="../../day-2/html/lesson.html">Lesson</a></li>
                             <li><a href="../../day-2/html/hands-on.html">Hands-on</a></li>
@@ -140,8 +334,8 @@ greet()</code></pre>
                     </details>
                 </li>
                 <li class="site-outline-day">
-                    <details class="site-outline-details">
-                        <summary>Day 3 — Operators & Expressions</summary>
+                    <details class="site-outline-details" open>
+                        <summary>Day 3 - Operators &amp; Expressions</summary>
                         <ul>
                             <li><a href="../../day-3/html/lesson.html">Lesson</a></li>
                             <li><a href="../../day-3/html/hands-on.html">Hands-on</a></li>
@@ -150,8 +344,8 @@ greet()</code></pre>
                     </details>
                 </li>
                 <li class="site-outline-day">
-                    <details class="site-outline-details">
-                        <summary>Day 4 — Control Flow</summary>
+                    <details class="site-outline-details" open>
+                        <summary>Day 4 - Control Flow</summary>
                         <ul>
                             <li><a href="../../day-4/html/lesson.html">Lesson</a></li>
                             <li><a href="../../day-4/html/hands-on.html">Hands-on</a></li>
@@ -160,8 +354,8 @@ greet()</code></pre>
                     </details>
                 </li>
                 <li class="site-outline-day">
-                    <details class="site-outline-details">
-                        <summary>Day 5 — Loops & Iteration</summary>
+                    <details class="site-outline-details" open>
+                        <summary>Day 5 - Loops &amp; Iteration</summary>
                         <ul>
                             <li><a href="../../day-5/html/lesson.html">Lesson</a></li>
                             <li><a href="../../day-5/html/hands-on.html">Hands-on</a></li>
@@ -170,8 +364,8 @@ greet()</code></pre>
                     </details>
                 </li>
                 <li class="site-outline-day">
-                    <details class="site-outline-details">
-                        <summary>Day 6 — Functions</summary>
+                    <details class="site-outline-details" open>
+                        <summary>Day 6 - Functions</summary>
                         <ul>
                             <li><a href="../../day-6/html/lesson.html">Lesson</a></li>
                             <li><a href="../../day-6/html/hands-on.html">Hands-on</a></li>
@@ -181,7 +375,7 @@ greet()</code></pre>
                 </li>
                 <li class="site-outline-day">
                     <details class="site-outline-details">
-                        <summary>Day 7 — Arrays</summary>
+                        <summary>Day 7 - Arrays</summary>
                         <ul>
                             <li><a href="../../day-7/html/lesson.html">Lesson</a></li>
                             <li><a href="../../day-7/html/hands-on.html">Hands-on</a></li>
@@ -191,7 +385,7 @@ greet()</code></pre>
                 </li>
                 <li class="site-outline-day">
                     <details class="site-outline-details">
-                        <summary>Day 8 — Objects</summary>
+                        <summary>Day 8 - Objects</summary>
                         <ul>
                             <li><a href="../../day-8/html/lesson.html">Lesson</a></li>
                             <li><a href="../../day-8/html/hands-on.html">Hands-on</a></li>
@@ -201,7 +395,7 @@ greet()</code></pre>
                 </li>
                 <li class="site-outline-day">
                     <details class="site-outline-details">
-                        <summary>Day 9 — ES6+ Essentials</summary>
+                        <summary>Day 9 - ES6+ Essentials</summary>
                         <ul>
                             <li><a href="../../day-9/html/lesson.html">Lesson</a></li>
                             <li><a href="../../day-9/html/hands-on.html">Hands-on</a></li>
@@ -211,7 +405,7 @@ greet()</code></pre>
                 </li>
                 <li class="site-outline-day">
                     <details class="site-outline-details">
-                        <summary>Day 10 — DOM Manipulation Basics</summary>
+                        <summary>Day 10 - DOM Manipulation Basics</summary>
                         <ul>
                             <li><a href="../../day-10/html/lesson.html">Lesson</a></li>
                             <li><a href="../../day-10/html/hands-on.html">Hands-on</a></li>
@@ -221,7 +415,7 @@ greet()</code></pre>
                 </li>
                 <li class="site-outline-day">
                     <details class="site-outline-details">
-                        <summary>Day 11 — Events & Event Handling</summary>
+                        <summary>Day 11 - Events &amp; Event Handling</summary>
                         <ul>
                             <li><a href="../../day-11/html/lesson.html">Lesson</a></li>
                             <li><a href="../../day-11/html/hands-on.html">Hands-on</a></li>
@@ -231,7 +425,7 @@ greet()</code></pre>
                 </li>
                 <li class="site-outline-day">
                     <details class="site-outline-details">
-                        <summary>Day 12 — Error Handling & Module Basics</summary>
+                        <summary>Day 12 - Error Handling &amp; Module Basics</summary>
                         <ul>
                             <li><a href="../../day-12/html/lesson.html">Lesson</a></li>
                             <li><a href="../../day-12/html/hands-on.html">Hands-on</a></li>
@@ -241,7 +435,7 @@ greet()</code></pre>
                 </li>
                 <li class="site-outline-day">
                     <details class="site-outline-details" open>
-                        <summary>Day 13 — Execution context & hoisting</summary>
+                        <summary>Day 13 - Execution Context &amp; Hoisting</summary>
                         <ul>
                             <li><a href="lesson.html">Lesson</a></li>
                             <li><a href="hands-on.html" aria-current="page">Hands-on</a></li>
@@ -251,7 +445,7 @@ greet()</code></pre>
                 </li>
                 <li class="site-outline-day">
                     <details class="site-outline-details">
-                        <summary>Day 14 — Scope & closures</summary>
+                        <summary>Day 14 - Scope &amp; Closures</summary>
                         <ul>
                             <li><a href="../../day-14/html/lesson.html">Lesson</a></li>
                             <li><a href="../../day-14/html/hands-on.html">Hands-on</a></li>
@@ -261,7 +455,7 @@ greet()</code></pre>
                 </li>
                 <li class="site-outline-day">
                     <details class="site-outline-details">
-                        <summary>Day 15 — The this keyword</summary>
+                        <summary>Day 15 - The <code>this</code> Keyword</summary>
                         <ul>
                             <li><a href="../../day-15/html/lesson.html">Lesson</a></li>
                             <li><a href="../../day-15/html/hands-on.html">Hands-on</a></li>
@@ -271,7 +465,7 @@ greet()</code></pre>
                 </li>
                 <li class="site-outline-day">
                     <details class="site-outline-details">
-                        <summary>Day 16 — Prototypes & prototype chain</summary>
+                        <summary>Day 16 - Prototypes &amp; the Prototype Chain</summary>
                         <ul>
                             <li><a href="../../day-16/html/lesson.html">Lesson</a></li>
                             <li><a href="../../day-16/html/hands-on.html">Hands-on</a></li>
@@ -281,7 +475,7 @@ greet()</code></pre>
                 </li>
                 <li class="site-outline-day">
                     <details class="site-outline-details">
-                        <summary>Day 17 — ES6 classes</summary>
+                        <summary>Day 17 - Classes &amp; OOP</summary>
                         <ul>
                             <li><a href="../../day-17/html/lesson.html">Lesson</a></li>
                             <li><a href="../../day-17/html/hands-on.html">Hands-on</a></li>
@@ -291,7 +485,7 @@ greet()</code></pre>
                 </li>
                 <li class="site-outline-day">
                     <details class="site-outline-details">
-                        <summary>Day 18 — Promises & async/await</summary>
+                        <summary>Day 18 - Async: Callbacks &amp; Promises</summary>
                         <ul>
                             <li><a href="../../day-18/html/lesson.html">Lesson</a></li>
                             <li><a href="../../day-18/html/hands-on.html">Hands-on</a></li>
@@ -301,7 +495,7 @@ greet()</code></pre>
                 </li>
                 <li class="site-outline-day">
                     <details class="site-outline-details">
-                        <summary>Day 19 — Fetch & APIs</summary>
+                        <summary>Day 19 - Async / Await</summary>
                         <ul>
                             <li><a href="../../day-19/html/lesson.html">Lesson</a></li>
                             <li><a href="../../day-19/html/hands-on.html">Hands-on</a></li>
@@ -311,7 +505,7 @@ greet()</code></pre>
                 </li>
                 <li class="site-outline-day">
                     <details class="site-outline-details">
-                        <summary>Day 20 — Iterators & generators</summary>
+                        <summary>Day 20 - The Event Loop</summary>
                         <ul>
                             <li><a href="../../day-20/html/lesson.html">Lesson</a></li>
                             <li><a href="../../day-20/html/hands-on.html">Hands-on</a></li>
@@ -321,7 +515,7 @@ greet()</code></pre>
                 </li>
                 <li class="site-outline-day">
                     <details class="site-outline-details">
-                        <summary>Day 21 — Maps, Sets & structured data</summary>
+                        <summary>Day 21 - Advanced Array &amp; Object Patterns</summary>
                         <ul>
                             <li><a href="../../day-21/html/lesson.html">Lesson</a></li>
                             <li><a href="../../day-21/html/hands-on.html">Hands-on</a></li>
@@ -331,7 +525,7 @@ greet()</code></pre>
                 </li>
                 <li class="site-outline-day">
                     <details class="site-outline-details">
-                        <summary>Day 22 — Review & mini project</summary>
+                        <summary>Day 22 - Map / Set / WeakMap / WeakSet</summary>
                         <ul>
                             <li><a href="../../day-22/html/lesson.html">Lesson</a></li>
                             <li><a href="../../day-22/html/hands-on.html">Hands-on</a></li>
@@ -341,8 +535,12 @@ greet()</code></pre>
                 </li>
             </ul>
         </aside>
+
     </div>
+
     <script defer src="../js/hands-on.js"></script>
+
     <script src="../../shared/js/nav-lock.js"></script>
+
 </body>
 </html>

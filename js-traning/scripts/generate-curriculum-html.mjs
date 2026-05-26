@@ -22,16 +22,16 @@ const DAY_SUMMARIES = {
     10: "DOM Manipulation Basics",
     11: "Events & Event Handling",
     12: "Error Handling & Module Basics",
-    13: "Execution context & hoisting",
-    14: "Scope & closures",
-    15: "The this keyword",
-    16: "Prototypes & prototype chain",
-    17: "ES6 classes",
-    18: "Promises & async/await",
-    19: "Fetch & APIs",
-    20: "Iterators & generators",
-    21: "Maps, Sets & structured data",
-    22: "Review & mini project",
+    13: "Execution Context & Hoisting",
+    14: "Scope & Closures",
+    15: "The this Keyword",
+    16: "Prototypes & the Prototype Chain",
+    17: "Classes & OOP",
+    18: "Async: Callbacks & Promises",
+    19: "Async / Await",
+    20: "The Event Loop",
+    21: "Advanced Array & Object Patterns",
+    22: "Map / Set / WeakMap / WeakSet",
 };
 
 const DAY_HEADLINE = {
@@ -48,14 +48,14 @@ const DAY_HEADLINE = {
     12: "Errors and modules",
     13: "Execution context & hoisting",
     14: "Scope & closures",
-    15: "this, bind, call, apply",
-    16: "Object.create and the prototype chain",
-    17: "class syntax and inheritance",
-    18: "async control flow",
-    19: "HTTP from the browser",
-    20: "for..of and yield",
-    21: "beyond plain objects",
-    22: "tie it together",
+    15: "The this keyword, bind, call, apply",
+    16: "Prototypes & the prototype chain",
+    17: "Classes & OOP",
+    18: "Callbacks & Promises",
+    19: "Async / await",
+    20: "The event loop & task ordering",
+    21: "Advanced array & object patterns",
+    22: "Map, Set, WeakMap, WeakSet",
 };
 
 function escapeHtml(s) {
@@ -154,6 +154,13 @@ function renderSections(sections, pageKind, jsFileName) {
         .join("\n\n");
 }
 
+function daySummaryForSidebar(n) {
+    if (n === 15) return `Day 15 - The <code>this</code> Keyword`;
+    const summary = DAY_SUMMARIES[n];
+    if (!summary) return "";
+    return `Day ${n} - ${escapeHtml(summary)}`;
+}
+
 function sidebar(dayNum, current) {
     const pages = [
         ["lesson", "Lesson"],
@@ -165,14 +172,14 @@ function sidebar(dayNum, current) {
         '                <li class="site-outline-item"><a href="../../index.html">Overview</a></li>'
     );
     for (let n = 1; n <= 22; n++) {
-        const summary = DAY_SUMMARIES[n];
-        if (!summary) continue;
-        const open = n === dayNum ? " open" : "";
+        const summaryLine = daySummaryForSidebar(n);
+        if (!summaryLine) continue;
+        const open = n <= 6 || n === dayNum ? " open" : "";
         lines.push(`                <li class="site-outline-day">`);
         lines.push(
             `                    <details class="site-outline-details"${open}>`
         );
-        lines.push(`                        <summary>Day ${n} — ${escapeHtml(summary)}</summary>`);
+        lines.push(`                        <summary>${summaryLine}</summary>`);
         lines.push(`                        <ul>`);
         for (const [slug, label] of pages) {
             const isCurrent = n === dayNum && slug === current;
@@ -319,6 +326,10 @@ function main() {
             if (dayNum === 17 && page === "lesson") continue;
             if (dayNum === 18 && page === "lesson") continue;
             if (dayNum === 18 && page === "homework") continue;
+            if (dayNum === 19 && page === "lesson") continue;
+            if (dayNum === 20 && page === "lesson") continue;
+            if (dayNum === 21 && page === "lesson") continue;
+            if (dayNum === 22 && page === "lesson") continue;
 
             const baseName =
                 page === "lesson"

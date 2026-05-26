@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Day 18 — Promises &amp; async flow — Lesson</title>
+    <title>Day 18 — Async: Callbacks &amp; Promises — Lesson</title>
     <link rel="preload" href="../../shared/css/style.css" as="style">
     <link rel="stylesheet" href="../../shared/css/style.css">
 </head>
@@ -11,7 +11,7 @@
     <div class="page-shell">
         <main class="page-main" id="main-content">
             <header class="page-title">
-                <p class="lesson-label">Day 18 — Promises &amp; async flow</p>
+                <p class="lesson-label">Day 18 — Async: Callbacks &amp; Promises</p>
                 <h1>Lesson</h1>
             </header>
 
@@ -23,7 +23,21 @@
                     <span class="lesson-task__title">Sync vs async</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <p>Synchronous code runs top-to-bottom. <code>setTimeout(fn, 0)</code> still runs <strong>later</strong> on the event loop — so you often see <code>1, 3, 2</code> instead of <code>1, 2, 3</code>.</p>
+                    <p><strong>Topic 1 — Sync vs async.</strong> Synchronous code runs top to bottom. Asynchronous scheduling (for example <code>setTimeout</code>) does not pause the rest of the script — callbacks run later on the event loop.</p>
+                    <pre class="code-sample"><code>// SYNCHRONOUS — top to bottom, no surprises
+console.log("1");
+console.log("2");
+console.log("3");
+// Output: 1, 2, 3
+
+// ASYNCHRONOUS — setTimeout schedules; JS doesn't wait
+console.log("1");
+setTimeout(() => console.log("2"), 0); // scheduled — runs LATER
+console.log("3");
+// Output: 1, 3, 2
+//
+// Even with delay 0! "2" goes through the event loop.
+// JS keeps running synchronous code first; async callbacks wait their turn.</code></pre>
                     <p class="output-label"><code>../js/lesson.js</code> — Topic 1</p>
                 </div>
             </details>
@@ -34,7 +48,24 @@
                     <span class="lesson-task__title">Callbacks</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <p>Pass a function to be called “when done”. Node-style: <code>(err, data)</code> as the first arguments to the callback.</p>
+                    <p><strong>Topic 2 — Callbacks.</strong> Pass a function to be called when work finishes. Node-style APIs often use <code>(err, data)</code> as the callback arguments.</p>
+                    <pre class="code-sample"><code>// Simulate fetching a user from a server
+function fetchUser(id, callback) {
+  console.log(`Fetching user ${id}...`);
+  setTimeout(() => {
+    const user = { id, name: "Priya" };
+    callback(null, user); // Node-style: (err, data)
+  }, 1000);
+}
+
+fetchUser(7, (err, user) => {
+  if (err) {
+    console.error("Failed:", err);
+    return;
+  }
+  console.log("Got user:", user);
+});
+// Logs: Fetching user 7... then (after delay) Got user: { id: 7, name: "Priya" }</code></pre>
                     <p class="output-label"><code>../js/lesson.js</code> — Topic 2 (<code>fetchUserCb</code>)</p>
                 </div>
             </details>
@@ -45,7 +76,30 @@
                     <span class="lesson-task__title">Callback hell</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <p>Nested callbacks (“pyramid of doom”): hard to read, repeated error handling, hard to extend — this motivated Promises.</p>
+                    <p><strong>Topic 3 — Callback hell (pyramid of doom).</strong> Each step needs the previous result, so callbacks nest inward. That is why Promises (and later async/await) became central to modern JS.</p>
+                    <pre class="code-sample"><code>function fetchUser(id, callback) {
+  setTimeout(() => callback(null, { id, name: "Priya" }), 200);
+}
+function fetchOrders(userId, callback) {
+  setTimeout(() => callback(null, [{ id: 101, userId }]), 200);
+}
+function fetchItems(orderId, callback) {
+  setTimeout(() => callback(null, [{ sku: "A1", orderId }]), 200);
+}
+
+// The "pyramid of doom"
+fetchUser(7, (err, user) => {
+  if (err) { console.error(err); return; }
+  fetchOrders(user.id, (err, orders) => {
+    if (err) { console.error(err); return; }
+    fetchItems(orders[0].id, (err, items) => {
+      if (err) { console.error(err); return; }
+      console.log(items); // finally got there!
+    });
+  });
+});
+// Problems: indentation, repeated errors, hard to extend,
+// no clean "return" through async — only nest deeper.</code></pre>
                     <p class="output-label"><code>../js/lesson.js</code> — Topic 3</p>
                 </div>
             </details>
@@ -56,8 +110,44 @@
                     <span class="lesson-task__title">Promise states</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <p><strong>pending</strong> → work in progress; <strong>fulfilled</strong> / <strong>rejected</strong> → settled (terminal). <code>delay(ms)</code> wraps <code>setTimeout</code> in a Promise.</p>
-                    <p><strong>Follow-along:</strong> logging <code>p</code> right after <code>new Promise</code> shows a pending promise; <code>.then</code> runs when the executor calls <code>resolve(42)</code>.</p>
+                    <p><strong>Topic 4 — Promise states.</strong> A promise starts <strong>pending</strong>, then becomes <strong>fulfilled</strong> (value) or <strong>rejected</strong> (reason). Either outcome is <strong>settled</strong> (terminal).</p>
+                    <table style="width:100%; border-collapse:collapse; margin:0.75rem 0;">
+                        <thead>
+                            <tr>
+                                <th style="text-align:left; border:1px solid #ccc; padding:0.35rem 0.5rem;">State</th>
+                                <th style="text-align:left; border:1px solid #ccc; padding:0.35rem 0.5rem;">Meaning</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td style="border:1px solid #ccc; padding:0.35rem 0.5rem;"><code>pending</code></td><td style="border:1px solid #ccc; padding:0.35rem 0.5rem;">Work in progress</td></tr>
+                            <tr><td style="border:1px solid #ccc; padding:0.35rem 0.5rem;"><code>fulfilled</code></td><td style="border:1px solid #ccc; padding:0.35rem 0.5rem;">Done, has a result</td></tr>
+                            <tr><td style="border:1px solid #ccc; padding:0.35rem 0.5rem;"><code>rejected</code></td><td style="border:1px solid #ccc; padding:0.35rem 0.5rem;">Failed, has an error</td></tr>
+                            <tr><td style="border:1px solid #ccc; padding:0.35rem 0.5rem;"><code>settled</code></td><td style="border:1px solid #ccc; padding:0.35rem 0.5rem;">Either fulfilled or rejected (terminal)</td></tr>
+                        </tbody>
+                    </table>
+                    <pre class="code-sample"><code>// Create a promise
+const p = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    const success = true;
+    if (success) resolve("Done!"); // → fulfilled
+    else reject(new Error("Oops")); // → rejected
+  }, 1000);
+});
+// p is PENDING. After 1s, it settles.
+
+// Real-world: wrapping setTimeout
+function delay(ms) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}
+delay(500).then(() => console.log("half a second passed"));</code></pre>
+                    <p><strong>Follow along.</strong> If you log the promise immediately after <code>new Promise</code>, you still see a pending promise; <code>.then</code> runs after <code>resolve(42)</code>.</p>
+                    <pre class="code-sample"><code>const pFollow = new Promise((res) => {
+  setTimeout(() => res(42), 100);
+});
+console.log(pFollow); // Promise { &lt;pending&gt; } — exact string varies by engine
+pFollow.then((v) => console.log(v)); // 42 — after the timer</code></pre>
                     <p class="output-label"><code>../js/lesson.js</code> — Topic 4</p>
                 </div>
             </details>
@@ -68,7 +158,33 @@
                     <span class="lesson-task__title"><code>.then</code> / <code>.catch</code> / <code>.finally</code></span>
                 </summary>
                 <div class="lesson-task__body">
-                    <p>Chains stay flat. Returning a value passes it to the next <code>.then</code>; returning a Promise is awaited by the chain. <code>.finally</code> runs on both success and failure.</p>
+                    <p><strong>Topic 5 — Chaining.</strong> Return a plain value from <code>.then</code> to pass it forward; return another promise and the chain waits for it. <code>.catch</code> handles any rejection above it. <code>.finally</code> always runs.</p>
+                    <pre class="code-sample"><code>function fetchUser(id) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (id &lt; 0) reject(new Error("Bad id"));
+      else resolve({ id, name: "Priya" });
+    }, 500);
+  });
+}
+
+fetchUser(7)
+  .then((user) => {
+    console.log("got user:", user);
+    return user.id;
+  })
+  .then((id) => {
+    return fetchUser(id + 1); // returning a Promise — chain awaits it
+  })
+  .then((nextUser) => {
+    console.log("next user:", nextUser);
+  })
+  .catch((err) => {
+    console.error("any failure caught here:", err.message);
+  })
+  .finally(() => {
+    console.log("done — runs whether success or fail");
+  });</code></pre>
                     <p class="output-label"><code>../js/lesson.js</code> — Topic 5 (<code>fetchUserPromise</code>)</p>
                 </div>
             </details>
@@ -79,7 +195,48 @@
                     <span class="lesson-task__title">Promise combinators</span>
                 </summary>
                 <div class="lesson-task__body">
-                    <p><code>Promise.all</code> (fail-fast), <code>allSettled</code> (never rejects), <code>race</code> (first settled), <code>any</code> (first fulfilled). The runnable lesson uses <strong>mock timers</strong> instead of real <code>fetch</code> so it works offline in Node.</p>
+                    <p><strong>Topic 6 — Combine many promises.</strong> Use the right combinator when you care about all results, first finish, or first success. In the browser, <code>p1</code>–<code>p3</code> are often <code>fetch(...)</code> calls; the runnable <code>lesson.js</code> uses <strong>mock timers</strong> so the same ideas work in Node offline.</p>
+                    <table style="width:100%; border-collapse:collapse; margin:0.75rem 0;">
+                        <thead>
+                            <tr>
+                                <th style="text-align:left; border:1px solid #ccc; padding:0.35rem 0.5rem;">Combinator</th>
+                                <th style="text-align:left; border:1px solid #ccc; padding:0.35rem 0.5rem;">Resolves when</th>
+                                <th style="text-align:left; border:1px solid #ccc; padding:0.35rem 0.5rem;">Rejects when</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td style="border:1px solid #ccc; padding:0.35rem 0.5rem;"><code>Promise.all</code></td><td style="border:1px solid #ccc; padding:0.35rem 0.5rem;">ALL fulfill</td><td style="border:1px solid #ccc; padding:0.35rem 0.5rem;">ANY rejects (fail-fast)</td></tr>
+                            <tr><td style="border:1px solid #ccc; padding:0.35rem 0.5rem;"><code>Promise.allSettled</code></td><td style="border:1px solid #ccc; padding:0.35rem 0.5rem;">ALL settle</td><td style="border:1px solid #ccc; padding:0.35rem 0.5rem;">Never</td></tr>
+                            <tr><td style="border:1px solid #ccc; padding:0.35rem 0.5rem;"><code>Promise.race</code></td><td style="border:1px solid #ccc; padding:0.35rem 0.5rem;">FIRST settles</td><td style="border:1px solid #ccc; padding:0.35rem 0.5rem;">If the first to settle rejected</td></tr>
+                            <tr><td style="border:1px solid #ccc; padding:0.35rem 0.5rem;"><code>Promise.any</code></td><td style="border:1px solid #ccc; padding:0.35rem 0.5rem;">FIRST fulfills</td><td style="border:1px solid #ccc; padding:0.35rem 0.5rem;">ALL reject (<code>AggregateError</code>)</td></tr>
+                        </tbody>
+                    </table>
+                    <pre class="code-sample"><code>const p1 = fetch("/user");
+const p2 = fetch("/orders");
+const p3 = fetch("/items");
+// use delay(ms) from Topic 4, or: const delay = (ms) =&gt; new Promise((r) =&gt; setTimeout(r, ms));
+
+// 1. all — wait for everything; fail if any fails
+Promise.all([p1, p2, p3])
+  .then(([user, orders, items]) => console.log("all done"))
+  .catch((err) => console.error("at least one failed:", err));
+
+// 2. allSettled — wait for everything; never throws as a whole
+Promise.allSettled([p1, p2, p3]).then((results) => {
+  results.forEach((r) => {
+    if (r.status === "fulfilled") console.log("ok:", r.value);
+    else console.log("fail:", r.reason);
+  });
+});
+
+// 3. race — first to settle wins (success OR fail)
+Promise.race([p1, delay(5000)])
+  .then((winner) => console.log("first done:", winner));
+
+// 4. any — first to FULFILL wins; all-reject = AggregateError
+Promise.any([p1, p2, p3])
+  .then((firstSuccess) => console.log("got one:", firstSuccess))
+  .catch((err) => console.error("everyone failed"));</code></pre>
                     <p class="output-label"><code>../js/lesson.js</code> — Topic 6</p>
                 </div>
             </details>
@@ -90,18 +247,35 @@
                     <span class="lesson-task__title"><code>Promise.resolve</code> / <code>Promise.reject</code></span>
                 </summary>
                 <div class="lesson-task__body">
-                    <p>Shortcuts for already-settled values. Pattern: <code>getUser(id, cache)</code> returns <code>Promise.resolve(cache[id])</code> or a real async fetch — callers treat both the same.</p>
+                    <p><strong>Topic 7 — Already-settled shortcuts.</strong> Wrap values or errors in a promise so callers always get the same async shape.</p>
+                    <pre class="code-sample"><code>// assumes fetchUser(id) returns a Promise (see Topic 5 pattern)
+
+// Already-fulfilled promise
+const cached = Promise.resolve({ id: 1, name: "Priya" });
+cached.then((u) => console.log(u));
+
+// Already-rejected promise
+const failed = Promise.reject(new Error("nope"));
+failed.catch((e) => console.log("caught:", e.message));
+
+// Common pattern: cache or fetch
+function getUser(id, cache) {
+  if (cache[id]) return Promise.resolve(cache[id]); // instant
+  return fetchUser(id); // real async — must return a Promise
+}
+// Caller doesn't care which path — both return a Promise
+getUser(7, {}).then(console.log);</code></pre>
                     <p class="output-label"><code>../js/lesson.js</code> — Topic 7</p>
                 </div>
             </details>
         </main>
         <aside class="site-outline" aria-label="Curriculum outline">
             <p class="site-outline-title">Curriculum</p>
-            <ul class="site-outline-tree">
+                        <ul class="site-outline-tree">
                 <li class="site-outline-item"><a href="../../index.html">Overview</a></li>
                 <li class="site-outline-day">
-                    <details class="site-outline-details">
-                        <summary>Day 1 — Introduction to JavaScript</summary>
+                    <details class="site-outline-details" open>
+                        <summary>Day 1 - Introduction to JavaScript</summary>
                         <ul>
                             <li><a href="../../day-1/html/lesson.html">Lesson</a></li>
                             <li><a href="../../day-1/html/hands-on.html">Hands-on</a></li>
@@ -110,8 +284,8 @@
                     </details>
                 </li>
                 <li class="site-outline-day">
-                    <details class="site-outline-details">
-                        <summary>Day 2 — Data Types & the Type System</summary>
+                    <details class="site-outline-details" open>
+                        <summary>Day 2 - Data Types &amp; the Type System</summary>
                         <ul>
                             <li><a href="../../day-2/html/lesson.html">Lesson</a></li>
                             <li><a href="../../day-2/html/hands-on.html">Hands-on</a></li>
@@ -120,8 +294,8 @@
                     </details>
                 </li>
                 <li class="site-outline-day">
-                    <details class="site-outline-details">
-                        <summary>Day 3 — Operators & Expressions</summary>
+                    <details class="site-outline-details" open>
+                        <summary>Day 3 - Operators &amp; Expressions</summary>
                         <ul>
                             <li><a href="../../day-3/html/lesson.html">Lesson</a></li>
                             <li><a href="../../day-3/html/hands-on.html">Hands-on</a></li>
@@ -130,8 +304,8 @@
                     </details>
                 </li>
                 <li class="site-outline-day">
-                    <details class="site-outline-details">
-                        <summary>Day 4 — Control Flow</summary>
+                    <details class="site-outline-details" open>
+                        <summary>Day 4 - Control Flow</summary>
                         <ul>
                             <li><a href="../../day-4/html/lesson.html">Lesson</a></li>
                             <li><a href="../../day-4/html/hands-on.html">Hands-on</a></li>
@@ -140,8 +314,8 @@
                     </details>
                 </li>
                 <li class="site-outline-day">
-                    <details class="site-outline-details">
-                        <summary>Day 5 — Loops & Iteration</summary>
+                    <details class="site-outline-details" open>
+                        <summary>Day 5 - Loops &amp; Iteration</summary>
                         <ul>
                             <li><a href="../../day-5/html/lesson.html">Lesson</a></li>
                             <li><a href="../../day-5/html/hands-on.html">Hands-on</a></li>
@@ -150,8 +324,8 @@
                     </details>
                 </li>
                 <li class="site-outline-day">
-                    <details class="site-outline-details">
-                        <summary>Day 6 — Functions</summary>
+                    <details class="site-outline-details" open>
+                        <summary>Day 6 - Functions</summary>
                         <ul>
                             <li><a href="../../day-6/html/lesson.html">Lesson</a></li>
                             <li><a href="../../day-6/html/hands-on.html">Hands-on</a></li>
@@ -161,7 +335,7 @@
                 </li>
                 <li class="site-outline-day">
                     <details class="site-outline-details">
-                        <summary>Day 7 — Arrays</summary>
+                        <summary>Day 7 - Arrays</summary>
                         <ul>
                             <li><a href="../../day-7/html/lesson.html">Lesson</a></li>
                             <li><a href="../../day-7/html/hands-on.html">Hands-on</a></li>
@@ -171,7 +345,7 @@
                 </li>
                 <li class="site-outline-day">
                     <details class="site-outline-details">
-                        <summary>Day 8 — Objects</summary>
+                        <summary>Day 8 - Objects</summary>
                         <ul>
                             <li><a href="../../day-8/html/lesson.html">Lesson</a></li>
                             <li><a href="../../day-8/html/hands-on.html">Hands-on</a></li>
@@ -181,7 +355,7 @@
                 </li>
                 <li class="site-outline-day">
                     <details class="site-outline-details">
-                        <summary>Day 9 — ES6+ Essentials</summary>
+                        <summary>Day 9 - ES6+ Essentials</summary>
                         <ul>
                             <li><a href="../../day-9/html/lesson.html">Lesson</a></li>
                             <li><a href="../../day-9/html/hands-on.html">Hands-on</a></li>
@@ -191,7 +365,7 @@
                 </li>
                 <li class="site-outline-day">
                     <details class="site-outline-details">
-                        <summary>Day 10 — DOM Manipulation Basics</summary>
+                        <summary>Day 10 - DOM Manipulation Basics</summary>
                         <ul>
                             <li><a href="../../day-10/html/lesson.html">Lesson</a></li>
                             <li><a href="../../day-10/html/hands-on.html">Hands-on</a></li>
@@ -201,7 +375,7 @@
                 </li>
                 <li class="site-outline-day">
                     <details class="site-outline-details">
-                        <summary>Day 11 — Events & Event Handling</summary>
+                        <summary>Day 11 - Events &amp; Event Handling</summary>
                         <ul>
                             <li><a href="../../day-11/html/lesson.html">Lesson</a></li>
                             <li><a href="../../day-11/html/hands-on.html">Hands-on</a></li>
@@ -211,7 +385,7 @@
                 </li>
                 <li class="site-outline-day">
                     <details class="site-outline-details">
-                        <summary>Day 12 — Error Handling & Module Basics</summary>
+                        <summary>Day 12 - Error Handling &amp; Module Basics</summary>
                         <ul>
                             <li><a href="../../day-12/html/lesson.html">Lesson</a></li>
                             <li><a href="../../day-12/html/hands-on.html">Hands-on</a></li>
@@ -221,7 +395,7 @@
                 </li>
                 <li class="site-outline-day">
                     <details class="site-outline-details">
-                        <summary>Day 13 — Execution context & hoisting</summary>
+                        <summary>Day 13 - Execution Context &amp; Hoisting</summary>
                         <ul>
                             <li><a href="../../day-13/html/lesson.html">Lesson</a></li>
                             <li><a href="../../day-13/html/hands-on.html">Hands-on</a></li>
@@ -231,7 +405,7 @@
                 </li>
                 <li class="site-outline-day">
                     <details class="site-outline-details">
-                        <summary>Day 14 — Scope & closures</summary>
+                        <summary>Day 14 - Scope &amp; Closures</summary>
                         <ul>
                             <li><a href="../../day-14/html/lesson.html">Lesson</a></li>
                             <li><a href="../../day-14/html/hands-on.html">Hands-on</a></li>
@@ -241,7 +415,7 @@
                 </li>
                 <li class="site-outline-day">
                     <details class="site-outline-details">
-                        <summary>Day 15 — The this keyword</summary>
+                        <summary>Day 15 - The <code>this</code> Keyword</summary>
                         <ul>
                             <li><a href="../../day-15/html/lesson.html">Lesson</a></li>
                             <li><a href="../../day-15/html/hands-on.html">Hands-on</a></li>
@@ -251,7 +425,7 @@
                 </li>
                 <li class="site-outline-day">
                     <details class="site-outline-details">
-                        <summary>Day 16 — Prototypes & prototype chain</summary>
+                        <summary>Day 16 - Prototypes &amp; the Prototype Chain</summary>
                         <ul>
                             <li><a href="../../day-16/html/lesson.html">Lesson</a></li>
                             <li><a href="../../day-16/html/hands-on.html">Hands-on</a></li>
@@ -261,7 +435,7 @@
                 </li>
                 <li class="site-outline-day">
                     <details class="site-outline-details">
-                        <summary>Day 17 — ES6 classes</summary>
+                        <summary>Day 17 - Classes &amp; OOP</summary>
                         <ul>
                             <li><a href="../../day-17/html/lesson.html">Lesson</a></li>
                             <li><a href="../../day-17/html/hands-on.html">Hands-on</a></li>
@@ -271,7 +445,7 @@
                 </li>
                 <li class="site-outline-day">
                     <details class="site-outline-details" open>
-                        <summary>Day 18 — Promises &amp; async/await</summary>
+                        <summary>Day 18 - Async: Callbacks &amp; Promises</summary>
                         <ul>
                             <li><a href="lesson.html" aria-current="page">Lesson</a></li>
                             <li><a href="hands-on.html">Hands-on</a></li>
@@ -281,7 +455,7 @@
                 </li>
                 <li class="site-outline-day">
                     <details class="site-outline-details">
-                        <summary>Day 19 — Fetch & APIs</summary>
+                        <summary>Day 19 - Async / Await</summary>
                         <ul>
                             <li><a href="../../day-19/html/lesson.html">Lesson</a></li>
                             <li><a href="../../day-19/html/hands-on.html">Hands-on</a></li>
@@ -291,7 +465,7 @@
                 </li>
                 <li class="site-outline-day">
                     <details class="site-outline-details">
-                        <summary>Day 20 — Iterators & generators</summary>
+                        <summary>Day 20 - The Event Loop</summary>
                         <ul>
                             <li><a href="../../day-20/html/lesson.html">Lesson</a></li>
                             <li><a href="../../day-20/html/hands-on.html">Hands-on</a></li>
@@ -301,7 +475,7 @@
                 </li>
                 <li class="site-outline-day">
                     <details class="site-outline-details">
-                        <summary>Day 21 — Maps, Sets & structured data</summary>
+                        <summary>Day 21 - Advanced Array &amp; Object Patterns</summary>
                         <ul>
                             <li><a href="../../day-21/html/lesson.html">Lesson</a></li>
                             <li><a href="../../day-21/html/hands-on.html">Hands-on</a></li>
@@ -311,7 +485,7 @@
                 </li>
                 <li class="site-outline-day">
                     <details class="site-outline-details">
-                        <summary>Day 22 — Review & mini project</summary>
+                        <summary>Day 22 - Map / Set / WeakMap / WeakSet</summary>
                         <ul>
                             <li><a href="../../day-22/html/lesson.html">Lesson</a></li>
                             <li><a href="../../day-22/html/hands-on.html">Hands-on</a></li>
