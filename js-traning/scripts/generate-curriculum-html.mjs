@@ -32,6 +32,11 @@ const DAY_SUMMARIES = {
     20: "The Event Loop",
     21: "Advanced Array & Object Patterns",
     22: "Map / Set / WeakMap / WeakSet",
+    23: "Iterators & Generators",
+    24: "ES Modules in Depth",
+    25: "Functional Programming",
+    26: "Design Pattern",
+    27: "Performance & Best Practice",
 };
 
 const DAY_HEADLINE = {
@@ -56,6 +61,11 @@ const DAY_HEADLINE = {
     20: "The event loop & task ordering",
     21: "Advanced array & object patterns",
     22: "Map, Set, WeakMap, WeakSet",
+    23: "for…of, yield, and iterators",
+    24: "import / export and module graphs",
+    25: "pure functions, composition, immutability",
+    26: "common object-oriented patterns in JS",
+    27: "timing, memory, and maintainability",
 };
 
 function escapeHtml(s) {
@@ -171,7 +181,7 @@ function sidebar(dayNum, current) {
     lines.push(
         '                <li class="site-outline-item"><a href="../../index.html">Overview</a></li>'
     );
-    for (let n = 1; n <= 22; n++) {
+    for (let n = 1; n <= 27; n++) {
         const summaryLine = daySummaryForSidebar(n);
         if (!summaryLine) continue;
         const open = n <= 6 || n === dayNum ? " open" : "";
@@ -363,8 +373,8 @@ function main() {
         }
     }
 
-    // Scaffold days 17–22 so overview links resolve (fill JS later).
-    for (let dayNum = 17; dayNum <= 22; dayNum++) {
+    // Scaffold days 17–27 so overview links resolve (fill JS later).
+    for (let dayNum = 17; dayNum <= 27; dayNum++) {
         const summary = DAY_SUMMARIES[dayNum];
         const headline = `Day ${dayNum} — ${DAY_HEADLINE[dayNum] || summary}`;
         const jsDir = path.join(TRAINING, `day-${dayNum}`, "js");
@@ -403,7 +413,7 @@ function main() {
         }
     }
 
-    console.log("Wrote day-2 … day-14 pages; scaffolded day-17 … day-22 under each day-N/html/");
+    console.log("Wrote day-2 … day-14 pages; scaffolded day-17 … day-27 under each day-N/html/");
 }
 
 main();

@@ -4,419 +4,145 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Day 14 — Scope &amp; Closures — Hands-on</title>
-
     <link rel="preload" href="../../shared/css/style.css" as="style">
     <link rel="stylesheet" href="../../shared/css/style.css">
 </head>
-
 <body>
-
     <div class="page-shell">
-
         <main class="page-main" id="main-content">
-
             <header class="page-title">
-
                 <p class="lesson-label">Day 14 — Scope &amp; Closures</p>
-
                 <h1>Hands-on</h1>
-
             </header>
 
-            <!-- Task 1 -->
             <details class="exercise" open>
-
                 <summary>
-
-                    <span class="lesson-task__tag">
-                        Task 1
-                    </span>
-
-                    <span class="lesson-task__title">
-                        Build a Counter
-                    </span>
-
+                    <span class="lesson-task__tag">Topic 1</span>
+                    <span class="lesson-task__title">function makeCounter() {</span>
                 </summary>
-
                 <div class="lesson-task__body">
-
-                    <ul class="task-spec">
-
-                        <li>
-                            Create a closure-based counter.
-                        </li>
-
-                        <li>
-                            Build two independent counters.
-                        </li>
-
-                        <li>
-                            Verify each counter maintains its own state.
-                        </li>
-
-                    </ul>
-
-<pre class="code-sample"><code>function makeCounter() {
-
-  let count = 0;
-
-  return function () {
-
-    count++;
-
-    return count;
-  };
-}
-
-const counter1 =
-
-  makeCounter();
-
-const counter2 =
-
-  makeCounter();
-
-console.log(
-  counter1()
-);
-
-console.log(
-  counter1()
-);
-
-console.log(
-  counter2()
-);
-
-console.log(
-  counter2()
-);</code></pre>
-
-<pre class="code-sample"><code>// Output:
-//
-// 1
-// 2
-// 1
-// 2
-//
-// The count variable lives
-// inside the closure created
-// by makeCounter().
-//
-// Each counter gets its own
-// private memory.</code></pre>
-
-                    <p class="output-label">
-                        Try the steps, then compare with
-                        <code>../js/hands-on.js</code>.
-                    </p>
-
+                    <pre class="code-sample"><code>// function makeCounter() {
+//     let count = 0;
+//     return function () {
+//         count++;
+//         return count;
+//     }
+// }</code></pre>
+                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
                 </div>
-
             </details>
 
-            <!-- Task 2 -->
             <details class="exercise">
-
                 <summary>
-
-                    <span class="lesson-task__tag">
-                        Task 2
-                    </span>
-
-                    <span class="lesson-task__title">
-                        Fix the var-in-Loop Bug
-                    </span>
-
+                    <span class="lesson-task__tag">Section 2</span>
+                    <span class="lesson-task__title">const cnt1 = makeCounter();</span>
                 </summary>
-
                 <div class="lesson-task__body">
-
-                    <ul class="task-spec">
-
-                        <li>
-                            Observe the classic
-                            <code>var</code>
-                            loop issue.
-                        </li>
-
-                        <li>
-                            Fix it using
-                            <code>let</code>.
-                        </li>
-
-                        <li>
-                            Understand block scoping.
-                        </li>
-
-                    </ul>
-
-<pre class="code-sample"><code>// Problem
-
-for (
-
-  var i = 1;
-
-  i &lt;= 3;
-
-  i++
-) {
-
-  setTimeout(() =>
-
-    console.log(i),
-
-    100
-  );
-}</code></pre>
-
-<pre class="code-sample"><code>// Output:
-//
-// 4
-// 4
-// 4
-//
-// var uses function scope.
-//
-// All callbacks share
-// the same i variable.</code></pre>
-
-<pre class="code-sample"><code>// Fixed Version
-
-for (
-
-  let i = 1;
-
-  i &lt;= 3;
-
-  i++
-) {
-
-  setTimeout(() =>
-
-    console.log(i),
-
-    100
-  );
-}</code></pre>
-
-<pre class="code-sample"><code>// Output:
-//
-// 1
-// 2
-// 3
-//
-// let creates a new block-scoped
-// variable for every iteration.</code></pre>
-
-                    <p class="output-label">
-                        Try the steps, then compare with
-                        <code>../js/hands-on.js</code>.
-                    </p>
-
+                    <pre class="code-sample"><code>// const cnt1 = makeCounter();
+// const cnt2 = makeCounter();</code></pre>
+                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
                 </div>
-
             </details>
 
-            <!-- Task 3 -->
             <details class="exercise">
-
                 <summary>
-
-                    <span class="lesson-task__tag">
-                        Task 3
-                    </span>
-
-                    <span class="lesson-task__title">
-                        Private Bank Balance
-                    </span>
-
+                    <span class="lesson-task__tag">Section 3</span>
+                    <span class="lesson-task__title">console.log(cnt1());</span>
                 </summary>
-
                 <div class="lesson-task__body">
+                    <pre class="code-sample"><code>// console.log(cnt1());
+// console.log(cnt1());</code></pre>
+                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
+                </div>
+            </details>
 
-                    <ul class="task-spec">
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">Section 4</span>
+                    <span class="lesson-task__title">console.log(cnt2());</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <pre class="code-sample"><code>// console.log(cnt2());
+// console.log(cnt2());</code></pre>
+                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
+                </div>
+            </details>
 
-                        <li>
-                            Create a private balance using closures.
-                        </li>
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">Section 5</span>
+                    <span class="lesson-task__title">console.log(cnt1())</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <pre class="code-sample"><code>// console.log(cnt1())</code></pre>
+                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
+                </div>
+            </details>
 
-                        <li>
-                            Add deposit and withdraw methods.
-                        </li>
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">Section 6</span>
+                    <span class="lesson-task__title">for (let i = 1; i &lt;= 3; i++) {</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <pre class="code-sample"><code>// for (let i = 1; i &lt;= 3; i++) {
+//      setTimeout(() =&gt;
+//     console.log(i), 100); 
+// }</code></pre>
+                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
+                </div>
+            </details>
 
-                        <li>
-                            Prevent direct balance access.
-                        </li>
-
-                    </ul>
-
-<pre class="code-sample"><code>function createAccount(initial) {
-
-  let balance = initial;
-
-  return {
-
-    deposit(amount) {
-
-      balance += amount;
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">Section 7</span>
+                    <span class="lesson-task__title">Part 7</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <pre class="code-sample"><code>function createAccount(intial) {
+    let balance = intial;
+    return {
+     deposit(amount) {
+         balance += amount
     },
-
-    withdraw(amount) {
-
-      balance -= amount;
+     withdraw(amount) {
+         balance -= amount
     },
-
-    getBalance() {
-
-      return balance;
+     getBalance(amount) {
+       return balance
     }
-  };
 }
-
-const account =
-
-  createAccount(1000);
-
-account.deposit(500);
-
-account.withdraw(200);
-
-console.log(
-  account.getBalance()
-);
-
-console.log(
-  account.balance
-);</code></pre>
-
-<pre class="code-sample"><code>// Output:
-//
-// 1300
-// undefined
-//
-// balance remains private
-// inside the closure and
-// cannot be accessed directly.</code></pre>
-
-                    <p class="output-label">
-                        Try the steps, then compare with
-                        <code>../js/hands-on.js</code>.
-                    </p>
-
+}</code></pre>
+                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
                 </div>
-
             </details>
 
-            <!-- Bonus -->
             <details class="exercise">
-
                 <summary>
-
-                    <span class="lesson-task__tag">
-                        Bonus
-                    </span>
-
-                    <span class="lesson-task__title">
-                        Build a Memoizer
-                    </span>
-
+                    <span class="lesson-task__tag">Section 8</span>
+                    <span class="lesson-task__title">Part 8</span>
                 </summary>
-
                 <div class="lesson-task__body">
-
-                    <ul class="task-spec">
-
-                        <li>
-                            Cache function results using closures.
-                        </li>
-
-                        <li>
-                            Avoid repeated computations.
-                        </li>
-
-                        <li>
-                            Understand persistent closure memory.
-                        </li>
-
-                    </ul>
-
-<pre class="code-sample"><code>function memoize(fn) {
-
-  const cache = {};
-
-  return function (n) {
-
-    if (cache[n]) {
-
-      return cache[n];
-    }
-
-    const result = fn(n);
-
-    cache[n] = result;
-
-    return result;
-  };
-}
-
-function expensiveSquare(n) {
-
-  console.log("computing...");
-
-  return n * n;
-}
-
-const memoSquare =
-
-  memoize(expensiveSquare);
-
-console.log(
-  memoSquare(5)
-);
-
-console.log(
-  memoSquare(5)
-);
-
-console.log(
-  memoSquare(10)
-);
-
-console.log(
-  memoSquare(5)
-);</code></pre>
-
-<pre class="code-sample"><code>// Output:
-//
-// computing...
-// 25
-// 25
-// computing...
-// 100
-// 25
-//
-// The cache object lives
-// inside the closure created
-// by memoize().</code></pre>
-
-                    <p class="output-label">
-                        Try the steps, then compare with
-                        <code>../js/hands-on.js</code>.
-                    </p>
-
+                    <pre class="code-sample"><code>const acc = createAccount(1000)
+acc.deposit(500)
+acc.withdraw(200)</code></pre>
+                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
                 </div>
-
             </details>
 
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">Section 9</span>
+                    <span class="lesson-task__title">Part 9</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <pre class="code-sample"><code>console.log(acc.getBalance())</code></pre>
+                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
+                </div>
+            </details>
         </main>
-
         <aside class="site-outline" aria-label="Curriculum outline">
-
-            <p class="site-outline-title">
-                Curriculum
-            </p>
-
+            <p class="site-outline-title">Curriculum</p>
                         <ul class="site-outline-tree">
                 <li class="site-outline-item"><a href="../../index.html">Overview</a></li>
                 <li class="site-outline-day">
@@ -639,14 +365,60 @@ console.log(
                         </ul>
                     </details>
                 </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 23 - Iterators &amp; Generators</summary>
+                        <ul>
+                            <li><a href="../../day-23/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-23/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-23/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 24 - ES Modules in Depth</summary>
+                        <ul>
+                            <li><a href="../../day-24/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-24/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-24/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 25 - Functional Programming</summary>
+                        <ul>
+                            <li><a href="../../day-25/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-25/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-25/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 26 - Design Pattern</summary>
+                        <ul>
+                            <li><a href="../../day-26/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-26/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-26/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 27 - Performance &amp; Best Practice</summary>
+                        <ul>
+                            <li><a href="../../day-27/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-27/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-27/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
             </ul>
         </aside>
-
     </div>
-
     <script defer src="../js/hands-on.js"></script>
-
     <script src="../../shared/js/nav-lock.js"></script>
-
 </body>
 </html>

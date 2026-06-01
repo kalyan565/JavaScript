@@ -4,311 +4,81 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Day 13 — Execution Context &amp; Hoisting — Homework</title>
-
     <link rel="preload" href="../../shared/css/style.css" as="style">
     <link rel="stylesheet" href="../../shared/css/style.css">
 </head>
-
 <body>
-
     <div class="page-shell">
-
         <main class="page-main" id="main-content">
-
             <header class="page-title">
-
                 <p class="lesson-label">Day 13 — Execution Context &amp; Hoisting</p>
-
                 <h1>Homework</h1>
-
             </header>
 
-            <!-- Task 1 -->
             <details class="exercise" open>
-
                 <summary>
-
-                    <span class="lesson-task__tag">
-                        Task 1
-                    </span>
-
-                    <span class="lesson-task__title">
-                        Predict typeof with var Hoisting
-                    </span>
-
+                    <span class="lesson-task__tag">Problem 1</span>
+                    <span class="lesson-task__title">Part 1</span>
                 </summary>
-
                 <div class="lesson-task__body">
-
-                    <ul class="task-spec">
-
-                        <li>
-                            Predict the output before running the code.
-                        </li>
-
-                        <li>
-                            Observe how
-                            <code>typeof</code>
-                            behaves with hoisted variables.
-                        </li>
-
-                    </ul>
-
-<pre class="code-sample"><code>console.log(typeof age);
-
-var age = 25;</code></pre>
-
-<pre class="code-sample"><code>// Output:
-//
-// undefined
-//
-// var declarations are hoisted
-// and initialized as undefined.
-//
-// typeof undefined returns
-// the string "undefined".</code></pre>
-
-                    <p class="output-label">
-                        Try the steps, then compare with
-                        <code>../js/homework.js</code>.
-                    </p>
-
+                    <pre class="code-sample"><code>console.log(typeof age);
+var age = 25</code></pre>
+                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
                 </div>
-
             </details>
 
-            <!-- Task 2 -->
             <details class="exercise">
-
                 <summary>
-
-                    <span class="lesson-task__tag">
-                        Task 2
-                    </span>
-
-                    <span class="lesson-task__title">
-                        Access let Before Declaration
-                    </span>
-
+                    <span class="lesson-task__tag">Problem 2</span>
+                    <span class="lesson-task__title">Part 2</span>
                 </summary>
-
                 <div class="lesson-task__body">
-
-                    <ul class="task-spec">
-
-                        <li>
-                            Access a
-                            <code>let</code>
-                            variable before declaration.
-                        </li>
-
-                        <li>
-                            Observe the TDZ error.
-                        </li>
-
-                        <li>
-                            Identify the exact error type.
-                        </li>
-
-                    </ul>
-
-<pre class="code-sample"><code>console.log(city);
-
-let city = "Jaipur";</code></pre>
-
-<pre class="code-sample"><code>// Error:
-//
-// ReferenceError:
-// Cannot access 'city'
-// before initialization
-//
-// let variables stay inside
-// the Temporal Dead Zone (TDZ)
-// until initialized.</code></pre>
-
-                    <p class="output-label">
-                        Try the steps, then compare with
-                        <code>../js/homework.js</code>.
-                    </p>
-
+                    <pre class="code-sample"><code>sayHi()</code></pre>
+                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
                 </div>
-
             </details>
 
-            <!-- Task 3 -->
             <details class="exercise">
-
                 <summary>
-
-                    <span class="lesson-task__tag">
-                        Task 3
-                    </span>
-
-                    <span class="lesson-task__title">
-                        Function Declaration vs Expression vs Arrow
-                    </span>
-
+                    <span class="lesson-task__tag">Problem 3</span>
+                    <span class="lesson-task__title">Part 3</span>
                 </summary>
-
                 <div class="lesson-task__body">
-
-                    <ul class="task-spec">
-
-                        <li>
-                            Compare hoisting behavior of different function styles.
-                        </li>
-
-                        <li>
-                            Call each function before declaration.
-                        </li>
-
-                        <li>
-                            Observe TypeError and ReferenceError behavior.
-                        </li>
-
-                    </ul>
-
-<pre class="code-sample"><code>// Function Declaration
-
-sayHello();
-
-function sayHello() {
-
-  console.log("Hello");
-}
-
-
-// Function Expression
-
-greet();
-
-var greet = function () {
-
-  console.log("Hi");
-};
-
-
-// Arrow Function
-
-welcome();
-
-const welcome = () => {
-
-  console.log("Welcome");
-};</code></pre>
-
-<pre class="code-sample"><code>// Output:
-//
-// Hello
-//
-// TypeError:
-// greet is not a function
-//
-// ReferenceError:
-// Cannot access 'welcome'
-// before initialization
-//
-// Function declarations are
-// fully hoisted.
-//
-// var expressions are hoisted
-// as undefined.
-//
-// const arrow functions remain
-// in the TDZ until initialized.</code></pre>
-
-                    <p class="output-label">
-                        Try the steps, then compare with
-                        <code>../js/homework.js</code>.
-                    </p>
-
+                    <pre class="code-sample"><code>function sayHi() {
+    console.log(&quot;hi&quot;)
+}</code></pre>
+                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
                 </div>
-
             </details>
 
-            <!-- Task 4 -->
             <details class="exercise">
-
                 <summary>
-
-                    <span class="lesson-task__tag">
-                        Task 4
-                    </span>
-
-                    <span class="lesson-task__title">
-                        Read the Stack Trace
-                    </span>
-
+                    <span class="lesson-task__tag">Problem 4</span>
+                    <span class="lesson-task__title">Part 4</span>
                 </summary>
-
                 <div class="lesson-task__body">
-
-                    <ul class="task-spec">
-
-                        <li>
-                            Add
-                            <code>console.trace()</code>
-                            inside a function.
-                        </li>
-
-                        <li>
-                            Run the program and inspect the stack trace.
-                        </li>
-
-                        <li>
-                            Identify each Execution Context (EC).
-                        </li>
-
-                    </ul>
-
-<pre class="code-sample"><code>function third() {
-
-  console.trace();
+                    <pre class="code-sample"><code>var greet =  function() {
+    console.log(&quot;greeet&quot;)
 }
-
-function second() {
-
-  third();
-}
-
-function first() {
-
-  second();
-}
-
-first();</code></pre>
-
-<pre class="code-sample"><code>// Stack Trace:
-//
-// third()
-//
-// second()
-//
-// first()
-//
-// Global Execution Context
-//
-// Each function call creates
-// a new Execution Context (EC)
-// and pushes it onto the stack.</code></pre>
-
-                    <p class="output-label">
-                        Try the steps, then compare with
-                        <code>../js/homework.js</code>.
-                    </p>
-
+greet()</code></pre>
+                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
                 </div>
-
             </details>
 
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">Problem 5</span>
+                    <span class="lesson-task__title">Part 5</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <pre class="code-sample"><code>const test = () =&gt; console.log(&quot;const&quot;)
+test();</code></pre>
+                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
+                </div>
+            </details>
         </main>
-
         <aside class="site-outline" aria-label="Curriculum outline">
-
-            <p class="site-outline-title">
-                Curriculum
-            </p>
-
+            <p class="site-outline-title">Curriculum</p>
                         <ul class="site-outline-tree">
                 <li class="site-outline-item"><a href="../../index.html">Overview</a></li>
                 <li class="site-outline-day">
@@ -531,14 +301,60 @@ first();</code></pre>
                         </ul>
                     </details>
                 </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 23 - Iterators &amp; Generators</summary>
+                        <ul>
+                            <li><a href="../../day-23/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-23/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-23/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 24 - ES Modules in Depth</summary>
+                        <ul>
+                            <li><a href="../../day-24/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-24/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-24/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 25 - Functional Programming</summary>
+                        <ul>
+                            <li><a href="../../day-25/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-25/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-25/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 26 - Design Pattern</summary>
+                        <ul>
+                            <li><a href="../../day-26/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-26/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-26/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 27 - Performance &amp; Best Practice</summary>
+                        <ul>
+                            <li><a href="../../day-27/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-27/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-27/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
             </ul>
         </aside>
-
     </div>
-
     <script defer src="../js/homework.js"></script>
-
     <script src="../../shared/js/nav-lock.js"></script>
-
 </body>
 </html>

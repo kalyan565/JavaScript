@@ -4,313 +4,119 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Day 13 — Execution Context &amp; Hoisting — Hands-on</title>
-
     <link rel="preload" href="../../shared/css/style.css" as="style">
     <link rel="stylesheet" href="../../shared/css/style.css">
 </head>
-
 <body>
-
     <div class="page-shell">
-
         <main class="page-main" id="main-content">
-
             <header class="page-title">
-
                 <p class="lesson-label">Day 13 — Execution Context &amp; Hoisting</p>
-
                 <h1>Hands-on</h1>
-
             </header>
 
-            <!-- Task 1 -->
             <details class="exercise" open>
-
                 <summary>
-
-                    <span class="lesson-task__tag">
-                        Task 1
-                    </span>
-
-                    <span class="lesson-task__title">
-                        Predict the var Hoist
-                    </span>
-
+                    <span class="lesson-task__tag">Topic 1</span>
+                    <span class="lesson-task__title">Part 1</span>
                 </summary>
-
                 <div class="lesson-task__body">
-
-                    <ul class="task-spec">
-
-                        <li>
-                            Predict the output before running the code.
-                        </li>
-
-                        <li>
-                            Compare prediction with actual output.
-                        </li>
-
-                        <li>
-                            Understand how
-                            <code>var</code>
-                            hoisting works.
-                        </li>
-
-                    </ul>
-
-<pre class="code-sample"><code>console.log(name);
-
-var name = "Priya";
-
+                    <pre class="code-sample"><code>console.log(name); // this will print undefiend because var by defaults sets on the top 
+var name = &quot;priya&quot;;
 console.log(name);</code></pre>
-
-<pre class="code-sample"><code>// Output:
-//
-// undefined
-// Priya
-//
-// var declarations are hoisted
-// and initialized with undefined.
-//
-// That is why the first log
-// does not throw ReferenceError.</code></pre>
-
-                    <p class="output-label">
-                        Try the steps, then compare with
-                        <code>../js/hands-on.js</code>.
-                    </p>
-
+                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
                 </div>
-
             </details>
 
-            <!-- Task 2 -->
             <details class="exercise">
-
                 <summary>
-
-                    <span class="lesson-task__tag">
-                        Task 2
-                    </span>
-
-                    <span class="lesson-task__title">
-                        Trigger the TDZ
-                    </span>
-
+                    <span class="lesson-task__tag">Section 2</span>
+                    <span class="lesson-task__title">Part 2</span>
                 </summary>
-
                 <div class="lesson-task__body">
-
-                    <ul class="task-spec">
-
-                        <li>
-                            Access a
-                            <code>let</code>
-                            variable before declaration.
-                        </li>
-
-                        <li>
-                            Observe the TDZ behavior.
-                        </li>
-
-                        <li>
-                            Move the declaration above the log and verify.
-                        </li>
-
-                    </ul>
-
-<pre class="code-sample"><code>console.log(city);
-
-let city = "Jaipur";</code></pre>
-
-<pre class="code-sample"><code>// Error:
-//
-// ReferenceError:
-// Cannot access 'city'
-// before initialization
-//
-// TDZ stands for:
-//
-// Temporal Dead Zone
-//
-// let and const are hoisted
-// but remain inaccessible
-// until initialization.</code></pre>
-
-<pre class="code-sample"><code>// Fixed Version
-
-let city = "Jaipur";
-
+                    <pre class="code-sample"><code>let city = &quot;jaipur&quot;
 console.log(city);</code></pre>
-
-                    <p class="output-label">
-                        Try the steps, then compare with
-                        <code>../js/hands-on.js</code>.
-                    </p>
-
+                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
                 </div>
-
             </details>
 
-            <!-- Task 3 -->
             <details class="exercise">
-
                 <summary>
-
-                    <span class="lesson-task__tag">
-                        Task 3
-                    </span>
-
-                    <span class="lesson-task__title">
-                        Function Declaration vs Expression
-                    </span>
-
+                    <span class="lesson-task__tag">Section 3</span>
+                    <span class="lesson-task__title">Part 3</span>
                 </summary>
-
                 <div class="lesson-task__body">
-
-                    <ul class="task-spec">
-
-                        <li>
-                            Compare hoisting behavior of function declarations and expressions.
-                        </li>
-
-                        <li>
-                            Predict which call succeeds and which fails.
-                        </li>
-
-                        <li>
-                            Observe runtime behavior.
-                        </li>
-
-                    </ul>
-
-<pre class="code-sample"><code>sayHi();
-
-greet();
-
-function sayHi() {
-
-  console.log("Hi");
-}
-
-var greet = function () {
-
-  console.log("Hello");
-};</code></pre>
-
-<pre class="code-sample"><code>// Output:
-//
-// Hi
-//
-// TypeError:
-// greet is not a function
-//
-// Function declarations are
-// fully hoisted with their body.
-//
-// Function expressions only hoist
-// the variable as undefined.</code></pre>
-
-                    <p class="output-label">
-                        Try the steps, then compare with
-                        <code>../js/hands-on.js</code>.
-                    </p>
-
+                    <pre class="code-sample"><code>sayHi()</code></pre>
+                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
                 </div>
-
             </details>
 
-            <!-- Bonus -->
             <details class="exercise">
-
                 <summary>
-
-                    <span class="lesson-task__tag">
-                        Bonus
-                    </span>
-
-                    <span class="lesson-task__title">
-                        Trace the Call Stack
-                    </span>
-
+                    <span class="lesson-task__tag">Section 4</span>
+                    <span class="lesson-task__title">Part 4</span>
                 </summary>
-
                 <div class="lesson-task__body">
-
-                    <ul class="task-spec">
-
-                        <li>
-                            Build nested function calls.
-                        </li>
-
-                        <li>
-                            Trace the call stack manually.
-                        </li>
-
-                        <li>
-                            Compare with
-                            <code>console.trace()</code>.
-                        </li>
-
-                    </ul>
-
-<pre class="code-sample"><code>function multiply(a, b) {
-
-  console.trace();
-
-  return a * b;
-}
-
-function square(n) {
-
-  return multiply(n, n);
-}
-
-function printSquare(n) {
-
-  console.log(
-    square(n)
-  );
-}
-
-printSquare(5);</code></pre>
-
-<pre class="code-sample"><code>// Output:
-//
-// 25
-//
-// Call Stack:
-//
-// multiply(5, 5)
-//
-// square(5)
-//
-// printSquare(5)
-//
-// Global Execution Context
-//
-// console.trace()
-// shows the same stack flow
-// in DevTools.</code></pre>
-
-                    <p class="output-label">
-                        Try the steps, then compare with
-                        <code>../js/hands-on.js</code>.
-                    </p>
-
+                    <pre class="code-sample"><code>function sayHi() {
+    console.log(&quot;hi&quot;)
+}</code></pre>
+                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
                 </div>
-
             </details>
 
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">Section 5</span>
+                    <span class="lesson-task__title">Part 5</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <pre class="code-sample"><code>var greet =  function() {
+    console.log(&quot;greeet&quot;)
+}
+greet()</code></pre>
+                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
+                </div>
+            </details>
+
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">Section 6</span>
+                    <span class="lesson-task__title">Part 6</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <pre class="code-sample"><code>function mulitply(a,b) { 
+    return a*b 
+}</code></pre>
+                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
+                </div>
+            </details>
+
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">Section 7</span>
+                    <span class="lesson-task__title">Part 7</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <pre class="code-sample"><code>function square(n) {
+    return mulitply(n,n)
+}</code></pre>
+                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
+                </div>
+            </details>
+
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">Section 8</span>
+                    <span class="lesson-task__title">Part 8</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <pre class="code-sample"><code>console.log(square(5))</code></pre>
+                    <p class="output-label">Try the steps, then compare with <code>../js/hands-on.js</code> (loaded at the bottom of this page).</p>
+                </div>
+            </details>
         </main>
-
         <aside class="site-outline" aria-label="Curriculum outline">
-
-            <p class="site-outline-title">
-                Curriculum
-            </p>
-
+            <p class="site-outline-title">Curriculum</p>
                         <ul class="site-outline-tree">
                 <li class="site-outline-item"><a href="../../index.html">Overview</a></li>
                 <li class="site-outline-day">
@@ -533,14 +339,60 @@ printSquare(5);</code></pre>
                         </ul>
                     </details>
                 </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 23 - Iterators &amp; Generators</summary>
+                        <ul>
+                            <li><a href="../../day-23/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-23/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-23/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 24 - ES Modules in Depth</summary>
+                        <ul>
+                            <li><a href="../../day-24/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-24/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-24/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 25 - Functional Programming</summary>
+                        <ul>
+                            <li><a href="../../day-25/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-25/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-25/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 26 - Design Pattern</summary>
+                        <ul>
+                            <li><a href="../../day-26/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-26/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-26/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 27 - Performance &amp; Best Practice</summary>
+                        <ul>
+                            <li><a href="../../day-27/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-27/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-27/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
             </ul>
         </aside>
-
     </div>
-
     <script defer src="../js/hands-on.js"></script>
-
     <script src="../../shared/js/nav-lock.js"></script>
-
 </body>
 </html>

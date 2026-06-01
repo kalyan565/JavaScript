@@ -1,7 +1,7 @@
 /**
- * Rewrites the Curriculum aside on every day-N/html/*.html page to list all 22 days
+ * Rewrites the Curriculum aside on every day-N/html/*.html page to list all 27 days
  * with titles matching index.html. Sets details open for days 1–6 and the current day.
- * Fixes lesson title and lesson-label for days 13–22 to match canonical topic names.
+ * Fixes lesson title and lesson-label for days 13–27 to match canonical topic names.
  *
  * Run: node js-traning/scripts/sync-curriculum-outline.mjs
  */
@@ -36,6 +36,11 @@ const TOPIC = {
     20: "The Event Loop",
     21: "Advanced Array & Object Patterns",
     22: "Map / Set / WeakMap / WeakSet",
+    23: "Iterators & Generators",
+    24: "ES Modules in Depth",
+    25: "Functional Programming",
+    26: "Design Pattern",
+    27: "Performance & Best Practice",
 };
 
 function escapeHtml(s) {
@@ -73,7 +78,7 @@ function buildAsideUl(currentDay, currentPage, hrefPrefix) {
         `                <li class="site-outline-item"><a href="${overviewHref}"${overviewCurrent}>Overview</a></li>`
     );
 
-    for (let n = 1; n <= 22; n++) {
+    for (let n = 1; n <= 27; n++) {
         const open = detailsOpenAttr(currentDay, n);
         lines.push(`                <li class="site-outline-day">`);
         lines.push(
@@ -131,7 +136,7 @@ const pageKindTitle = {
 };
 
 function syncHeaders(html, dayNum, pageSlug) {
-    if (dayNum < 13 || dayNum > 22) return html;
+    if (dayNum < 13 || dayNum > 27) return html;
     const topicPlain = TOPIC[dayNum];
     const label =
         dayNum === 15
@@ -168,7 +173,7 @@ function main() {
     }
 
     let files = [];
-    for (let d = 1; d <= 22; d++) {
+    for (let d = 1; d <= 27; d++) {
         const dir = path.join(TRAINING, `day-${d}`, "html");
         files = files.concat(walkHtmlFiles(dir));
     }
@@ -193,7 +198,7 @@ function main() {
         nOk++;
     }
 
-    console.log("Updated curriculum aside + headers (days 13–22):", nOk, "files");
+    console.log("Updated curriculum aside + headers (days 13–27):", nOk, "files");
 }
 
 main();

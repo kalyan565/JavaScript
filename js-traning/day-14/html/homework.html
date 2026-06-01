@@ -4,384 +4,139 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Day 14 — Scope &amp; Closures — Homework</title>
-
     <link rel="preload" href="../../shared/css/style.css" as="style">
     <link rel="stylesheet" href="../../shared/css/style.css">
 </head>
-
 <body>
-
     <div class="page-shell">
-
         <main class="page-main" id="main-content">
-
             <header class="page-title">
-
                 <p class="lesson-label">Day 14 — Scope &amp; Closures</p>
-
                 <h1>Homework</h1>
-
             </header>
 
-            <!-- Task 1 -->
             <details class="exercise" open>
-
                 <summary>
-
-                    <span class="lesson-task__tag">
-                        Task 1
-                    </span>
-
-                    <span class="lesson-task__title">
-                        Build a Multiplier Closure
-                    </span>
-
+                    <span class="lesson-task__tag">Problem 1</span>
+                    <span class="lesson-task__title">Part 1</span>
                 </summary>
-
                 <div class="lesson-task__body">
-
-                    <ul class="task-spec">
-
-                        <li>
-                            Create a closure-based multiplier function.
-                        </li>
-
-                        <li>
-                            Build independent double and triple functions.
-                        </li>
-
-                        <li>
-                            Verify each closure stores its own factor.
-                        </li>
-
-                    </ul>
-
-<pre class="code-sample"><code>function multiplier(factor) {
-
-  return function (num) {
-
-    return num * factor;
-  };
-}
-
-const double =
-
-  multiplier(2);
-
-const triple =
-
-  multiplier(3);
-
-console.log(
-  double(5)
-);
-
-console.log(
-  triple(5)
-);
-
-console.log(
-  double(10)
-);
-
-console.log(
-  triple(10)
-);</code></pre>
-
-<pre class="code-sample"><code>// Output:
-//
-// 10
-// 15
-// 20
-// 30
-//
-// Each returned function
-// remembers its own factor
-// through closure.</code></pre>
-
-                    <p class="output-label">
-                        Try the steps, then compare with
-                        <code>../js/homework.js</code>.
-                    </p>
-
+                    <pre class="code-sample"><code>function multiplier(factor) {</code></pre>
+                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
                 </div>
-
             </details>
 
-            <!-- Task 2 -->
             <details class="exercise">
-
                 <summary>
-
-                    <span class="lesson-task__tag">
-                        Task 2
-                    </span>
-
-                    <span class="lesson-task__title">
-                        Fix the for...of Loop Bug
-                    </span>
-
+                    <span class="lesson-task__tag">Problem 2</span>
+                    <span class="lesson-task__title">Part 2</span>
                 </summary>
-
                 <div class="lesson-task__body">
+                    <pre class="code-sample"><code>return function(number) {
+        return number * factor;
+    };</code></pre>
+                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
+                </div>
+            </details>
 
-                    <ul class="task-spec">
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">Problem 3</span>
+                    <span class="lesson-task__title">Part 3</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <pre class="code-sample"><code>}</code></pre>
+                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
+                </div>
+            </details>
 
-                        <li>
-                            Use
-                            <code>for...of</code>
-                            with
-                            <code>setTimeout()</code>.
-                        </li>
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">Problem 4</span>
+                    <span class="lesson-task__title">Part 4</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <pre class="code-sample"><code>const double = multiplier(2);
+const triple = multiplier(3);</code></pre>
+                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
+                </div>
+            </details>
 
-                        <li>
-                            Use
-                            <code>let</code>
-                            for block scoping.
-                        </li>
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">Problem 5</span>
+                    <span class="lesson-task__title">Part 5</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <pre class="code-sample"><code>console.log((double(5)))
+console.log((triple(3)))</code></pre>
+                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
+                </div>
+            </details>
 
-                        <li>
-                            Predict and verify the output.
-                        </li>
-
-                    </ul>
-
-<pre class="code-sample"><code>for (
-
-  let value of [10, 20, 30]
-
-) {
-
-  setTimeout(() => {
-
-    console.log(value);
-
-  }, 100);
+            <details class="exercise">
+                <summary>
+                    <span class="lesson-task__tag">Problem 6</span>
+                    <span class="lesson-task__title">Part 6</span>
+                </summary>
+                <div class="lesson-task__body">
+                    <pre class="code-sample"><code>//2
+for(let v of [12,20,13]) {
+    setTimeout(() =&gt; {
+        console.log(v)
+    },1000)
 }</code></pre>
-
-<pre class="code-sample"><code>// Output:
-//
-// 10
-// 20
-// 30
-//
-// let creates a fresh
-// binding for every loop
-// iteration.</code></pre>
-
-                    <p class="output-label">
-                        Try the steps, then compare with
-                        <code>../js/homework.js</code>.
-                    </p>
-
+                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
                 </div>
-
             </details>
 
-            <!-- Task 3 -->
             <details class="exercise">
-
                 <summary>
-
-                    <span class="lesson-task__tag">
-                        Task 3
-                    </span>
-
-                    <span class="lesson-task__title">
-                        Add transactionCount to Bank Account
-                    </span>
-
+                    <span class="lesson-task__tag">Problem 7</span>
+                    <span class="lesson-task__title">Part 7</span>
                 </summary>
-
                 <div class="lesson-task__body">
-
-                    <ul class="task-spec">
-
-                        <li>
-                            Extend the bank-account closure.
-                        </li>
-
-                        <li>
-                            Track transaction count privately.
-                        </li>
-
-                        <li>
-                            Add a
-                            <code>getTransactionCount()</code>
-                            method.
-                        </li>
-
-                    </ul>
-
-<pre class="code-sample"><code>function createAccount(initial) {
-
-  let balance = initial;
-
-  let transactionCount = 0;
-
-  return {
-
-    deposit(amount) {
-
-      balance += amount;
-
-      transactionCount++;
-    },
-
-    withdraw(amount) {
-
-      balance -= amount;
-
-      transactionCount++;
-    },
-
-    getBalance() {
-
-      return balance;
-    },
-
-    getTransactionCount() {
-
-      return transactionCount;
+                    <pre class="code-sample"><code>function createAccount(intial) {
+    let bal = intial;
+    let transCount = 0;
+    return {
+        deposit(amt) {
+            bal += amt
+            transCount++;
+        },
+        withdraw(amt) {
+            bal -= amt
+            transCount++;
+        },
+        getBalance() {
+            return bal
+        },
+        getCount() {
+            return transCount
+        }
     }
-  };
-}
-
-const account =
-
-  createAccount(1000);
-
-account.deposit(500);
-
-account.withdraw(200);
-
-console.log(
-  account.getBalance()
-);
-
-console.log(
-  account.getTransactionCount()
-);</code></pre>
-
-<pre class="code-sample"><code>// Output:
-//
-// 1300
-// 2
-//
-// transactionCount remains
-// private inside the closure.</code></pre>
-
-                    <p class="output-label">
-                        Try the steps, then compare with
-                        <code>../js/homework.js</code>.
-                    </p>
-
+}</code></pre>
+                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
                 </div>
-
             </details>
 
-            <!-- Task 4 -->
             <details class="exercise">
-
                 <summary>
-
-                    <span class="lesson-task__tag">
-                        Task 4
-                    </span>
-
-                    <span class="lesson-task__title">
-                        Build once(fn)
-                    </span>
-
+                    <span class="lesson-task__tag">Problem 8</span>
+                    <span class="lesson-task__title">Part 8</span>
                 </summary>
-
                 <div class="lesson-task__body">
-
-                    <ul class="task-spec">
-
-                        <li>
-                            Create a wrapper that runs only once.
-                        </li>
-
-                        <li>
-                            Cache the first result.
-                        </li>
-
-                        <li>
-                            Return cached value on later calls.
-                        </li>
-
-                    </ul>
-
-<pre class="code-sample"><code>function once(fn) {
-
-  let called = false;
-
-  let result;
-
-  return function (...args) {
-
-    if (!called) {
-
-      result = fn(...args);
-
-      called = true;
-    }
-
-    return result;
-  };
-}
-
-const init = once(() => {
-
-  console.log("Running...");
-
-  return "Done";
-});
-
-console.log(
-  init()
-);
-
-console.log(
-  init()
-);
-
-console.log(
-  init()
-);</code></pre>
-
-<pre class="code-sample"><code>// Output:
-//
-// Running...
-// Done
-// Done
-// Done
-//
-// The wrapped function
-// executes only once.
-//
-// Later calls reuse the
-// cached result stored
-// in the closure.</code></pre>
-
-                    <p class="output-label">
-                        Try the steps, then compare with
-                        <code>../js/homework.js</code>.
-                    </p>
-
+                    <pre class="code-sample"><code>const acc = createAccount(1000)
+acc.deposit(500)
+acc.withdraw(300)
+console.log(acc.getBalance())
+console.log(acc.transCount())</code></pre>
+                    <p class="output-label">Reference solution lives in <code>../js/homework.js</code> (loaded at the bottom of this page).</p>
                 </div>
-
             </details>
-
         </main>
-
         <aside class="site-outline" aria-label="Curriculum outline">
-
-            <p class="site-outline-title">
-                Curriculum
-            </p>
-
+            <p class="site-outline-title">Curriculum</p>
                         <ul class="site-outline-tree">
                 <li class="site-outline-item"><a href="../../index.html">Overview</a></li>
                 <li class="site-outline-day">
@@ -604,14 +359,60 @@ console.log(
                         </ul>
                     </details>
                 </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 23 - Iterators &amp; Generators</summary>
+                        <ul>
+                            <li><a href="../../day-23/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-23/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-23/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 24 - ES Modules in Depth</summary>
+                        <ul>
+                            <li><a href="../../day-24/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-24/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-24/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 25 - Functional Programming</summary>
+                        <ul>
+                            <li><a href="../../day-25/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-25/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-25/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 26 - Design Pattern</summary>
+                        <ul>
+                            <li><a href="../../day-26/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-26/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-26/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li class="site-outline-day">
+                    <details class="site-outline-details">
+                        <summary>Day 27 - Performance &amp; Best Practice</summary>
+                        <ul>
+                            <li><a href="../../day-27/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-27/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-27/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </li>
             </ul>
         </aside>
-
     </div>
-
     <script defer src="../js/homework.js"></script>
-
     <script src="../../shared/js/nav-lock.js"></script>
-
 </body>
 </html>
